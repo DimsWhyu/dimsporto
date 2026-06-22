@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import dimasAsset from "@/assets/dimas.png.asset.json";
+import dimasPhoto from "@/assets/Foto Formal_Dimas_Putih.png";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -463,7 +463,7 @@ function Hero() {
             <div className="absolute -right-4 -top-4 rounded-full border border-border glass px-3 py-1.5 font-mono text-xs animate-float-slow">
               data-driven ✦
             </div>
-            <img src={dimasAsset.url} alt="Dimas Wahyu Saputra" className="h-full w-full rounded-[1.5rem] object-cover object-top" loading="eager" />
+            <img src={dimasPhoto} alt="Dimas Wahyu Saputra" className="h-full w-full rounded-[1.5rem] object-cover object-top" loading="eager" />
             <div className="absolute -bottom-4 -left-4 rounded-2xl border border-border glass p-3 font-mono text-xs">
               <div className="text-muted-foreground">status</div>
               <div className="text-foreground">Final-year @ ITS · Open 2026</div>

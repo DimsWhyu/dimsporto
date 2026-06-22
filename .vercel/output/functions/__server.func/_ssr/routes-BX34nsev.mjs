@@ -1,19 +1,9 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-DhWkKBHB.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-BX34nsev.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
-var dimas_png_asset_default = {
-	version: 1,
-	asset_id: "f0177626-2429-4c35-93bc-b5eed81dc863",
-	project_id: "9663da14-bd7d-4ce5-bbb4-96b4eb96180a",
-	url: "/__l5e/assets-v1/f0177626-2429-4c35-93bc-b5eed81dc863/dimas.png",
-	r2_key: "a/v1/9663da14-bd7d-4ce5-bbb4-96b4eb96180a/f0177626-2429-4c35-93bc-b5eed81dc863/dimas.png",
-	original_filename: "dimas.png",
-	size: 955134,
-	content_type: "image/png",
-	created_at: "2026-06-22T15:22:28Z"
-};
+var Foto_Formal_Dimas_Putih_default = "/assets/Foto%20Formal_Dimas_Putih-D5kYmjN1.png";
 var CV_URL = "https://drive.google.com/file/d/1mzAsEG_2YFVSqtDOvY_E7tsW3vvR-Dw4/view?usp=sharing";
 var SOCIALS = {
 	instagram: "https://www.instagram.com/dwhyu.s_/",
@@ -787,7 +777,7 @@ function Hero() {
 								children: "data-driven ✦"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-								src: dimas_png_asset_default.url,
+								src: Foto_Formal_Dimas_Putih_default,
 								alt: "Dimas Wahyu Saputra",
 								className: "h-full w-full rounded-[1.5rem] object-cover object-top",
 								loading: "eager"
