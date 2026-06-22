@@ -419,8 +419,8 @@ function Hero() {
           </div>
           <h1 className="mt-5 font-display text-5xl font-semibold leading-[1.1] md:text-7xl">
             <span className="block">Turning complex</span>
+            <span className="block">data into</span>
             <span className="block">
-              data into{" "}
               <span className="rainbow-text">{typed}</span>
               <span className="caret" aria-hidden />
             </span>

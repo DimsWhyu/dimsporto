@@ -1,6 +1,6 @@
 import { r as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-v4unzXXT.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-DHe8DxIr.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var Foto_Formal_Dimas_Putih_default = "/assets/Foto%20Formal_Dimas_Putih-D5kYmjN1.png";
@@ -672,20 +672,19 @@ function Hero() {
 									className: "block",
 									children: "Turning complex"
 								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "block",
+									children: "data into"
+								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
 									className: "block",
-									children: [
-										"data into",
-										" ",
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "rainbow-text",
-											children: typed
-										}),
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "caret",
-											"aria-hidden": true
-										})
-									]
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "rainbow-text",
+										children: typed
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "caret",
+										"aria-hidden": true
+									})]
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 									className: "block text-foreground/90",
