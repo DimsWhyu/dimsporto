@@ -417,9 +417,10 @@ function Hero() {
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
             Open to Internship & Full-time roles
           </div>
-          <h1 className="mt-5 font-display text-5xl font-semibold leading-[1.05] md:text-7xl">
-            <span className="block whitespace-nowrap">
-              Turning complex data into{" "}
+          <h1 className="mt-5 font-display text-5xl font-semibold leading-[1.1] md:text-7xl">
+            <span className="block">Turning complex</span>
+            <span className="block">
+              data into{" "}
               <span className="rainbow-text">{typed}</span>
               <span className="caret" aria-hidden />
             </span>
