@@ -4,9 +4,9 @@ import { g as require_react_dom } from "../_libs/@tanstack/react-router+[...].mj
 import { a as Instagram, i as Linkedin, n as Moon, o as Github, r as Mail, t as Sun } from "../_libs/lucide-react.mjs";
 import { n as clsx, t as cva } from "../_libs/class-variance-authority+clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
-import { a as useScroll, i as useMotionValue, n as useTransform, r as useMotionTemplate, s as AnimatePresence, t as useSpring } from "../_libs/framer-motion.mjs";
+import { i as useScroll, n as useTransform, o as AnimatePresence, r as useMotionValue, t as useSpring } from "../_libs/framer-motion.mjs";
 import { t as motion } from "../_libs/motion.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-BFcspkOJ.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-BF9ntJiJ.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var import_react_dom = require_react_dom();
@@ -382,111 +382,6 @@ function InteractiveGridPattern({ width = 40, height = 40, squares = [24, 24], c
 				onMouseEnter: () => setHoveredSquare(index),
 				onMouseLeave: () => setHoveredSquare(null)
 			}, index);
-		})
-	});
-}
-function Tilt({ children, className, style, rotationFactor = 15, isReverse = false, springOptions }) {
-	const ref = import_react.useRef(null);
-	const x = useMotionValue(0);
-	const y = useMotionValue(0);
-	const xSpring = useSpring(x, springOptions);
-	const transform = useMotionTemplate`perspective(1000px) rotateX(${useTransform(useSpring(y, springOptions), [-.5, .5], isReverse ? [rotationFactor, -rotationFactor] : [-rotationFactor, rotationFactor])}deg) rotateY(${useTransform(xSpring, [-.5, .5], isReverse ? [-rotationFactor, rotationFactor] : [rotationFactor, -rotationFactor])}deg)`;
-	const handleMouseMove = (e) => {
-		if (!ref.current) return;
-		const rect = ref.current.getBoundingClientRect();
-		x.set((e.clientX - rect.left) / rect.width - .5);
-		y.set((e.clientY - rect.top) / rect.height - .5);
-	};
-	const handleMouseLeave = () => {
-		x.set(0);
-		y.set(0);
-	};
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
-		ref,
-		className,
-		style: {
-			transformStyle: "preserve-3d",
-			...style,
-			transform
-		},
-		onMouseMove: handleMouseMove,
-		onMouseLeave: handleMouseLeave,
-		children
-	});
-}
-function ClippedCircle({ className, circleClassName = "bg-white/20", circleSize = 400 }) {
-	const containerRef = import_react.useRef(null);
-	const [isHovered, setIsHovered] = import_react.useState(false);
-	const [position, setPosition] = import_react.useState({
-		x: "50%",
-		y: "50%"
-	});
-	import_react.useEffect(() => {
-		const container = containerRef.current;
-		if (!container || !container.parentElement) return;
-		const parent = container.parentElement;
-		const handleMouseEnter = (e) => {
-			const rect = parent.getBoundingClientRect();
-			const x = (e.clientX - rect.left) / rect.width * 100;
-			const y = (e.clientY - rect.top) / rect.height * 100;
-			setPosition({
-				x: `${x}%`,
-				y: `${y}%`
-			});
-			setIsHovered(true);
-		};
-		const handleMouseMove = (e) => {
-			const rect = parent.getBoundingClientRect();
-			const x = (e.clientX - rect.left) / rect.width * 100;
-			const y = (e.clientY - rect.top) / rect.height * 100;
-			setPosition({
-				x: `${x}%`,
-				y: `${y}%`
-			});
-		};
-		const handleMouseLeave = () => {
-			setIsHovered(false);
-		};
-		parent.addEventListener("mouseenter", handleMouseEnter);
-		parent.addEventListener("mousemove", handleMouseMove);
-		parent.addEventListener("mouseleave", handleMouseLeave);
-		return () => {
-			parent.removeEventListener("mouseenter", handleMouseEnter);
-			parent.removeEventListener("mousemove", handleMouseMove);
-			parent.removeEventListener("mouseleave", handleMouseLeave);
-		};
-	}, []);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		ref: containerRef,
-		className: cn("absolute inset-0 overflow-hidden pointer-events-none", className),
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
-			className: cn("pointer-events-none absolute rounded-full", circleClassName),
-			style: {
-				left: position.x,
-				top: position.y,
-				width: circleSize,
-				height: circleSize,
-				mixBlendMode: "difference"
-			},
-			initial: {
-				scale: 0,
-				x: "-50%",
-				y: "-50%"
-			},
-			animate: {
-				scale: isHovered ? 1 : 0,
-				x: "-50%",
-				y: "-50%"
-			},
-			transition: {
-				duration: .5,
-				ease: [
-					.19,
-					1,
-					.22,
-					1
-				]
-			}
 		})
 	});
 }
@@ -1519,12 +1414,11 @@ function Experience() {
 			children: EXPERIENCE.map((e, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
 				className: `reveal ${i % 2 === 0 ? "reveal-left" : "reveal-right"} relative`,
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					className: "absolute -left-[33px] top-5 z-20 grid h-4 w-4 place-items-center rounded-full bg-background md:-left-[45px]",
+					className: "absolute -left-[33px] top-2 grid h-4 w-4 place-items-center rounded-full bg-background md:-left-[45px]",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "h-2.5 w-2.5 rounded-full bg-gradient-to-br from-primary via-secondary-1 to-accent animate-pulse-glow" })
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Tilt, {
-					rotationFactor: 6,
-					className: "relative group overflow-hidden rounded-2xl border border-border bg-card p-6 hover:border-primary/50 hover:shadow-[0_20px_60px_-30px] hover:shadow-primary/40 w-full",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "relative rounded-2xl border border-border bg-card p-6 transition hover:border-primary/50 hover:shadow-[0_20px_60px_-30px] hover:shadow-primary/40 w-full",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "flex flex-col md:flex-row md:items-start justify-between gap-4",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex-1",
@@ -1552,17 +1446,14 @@ function Experience() {
 								})
 							]
 						}), e.logo && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "relative shrink-0 w-12 h-12 rounded-xl border border-border bg-surface flex items-center justify-center overflow-hidden p-1.5 group-hover:scale-110 transition-transform duration-300",
+							className: "relative shrink-0 w-12 h-12 rounded-xl border border-border bg-surface flex items-center justify-center overflow-hidden p-1.5 hover:scale-105 transition-transform duration-300",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 								src: e.logo,
 								alt: e.org,
 								className: "w-full h-full object-contain"
 							})
 						})]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ClippedCircle, {
-						circleClassName: "bg-primary/5",
-						circleSize: 400
-					})]
+					})
 				})]
 			}, i))
 		})

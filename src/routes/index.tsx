@@ -932,13 +932,10 @@ function Experience() {
       <ol className="relative space-y-6 border-l border-border pl-6 md:pl-10">
         {EXPERIENCE.map((e, i) => (
           <li key={i} className={`reveal ${i % 2 === 0 ? "reveal-left" : "reveal-right"} relative`}>
-            <span className="absolute -left-[33px] top-5 z-20 grid h-4 w-4 place-items-center rounded-full bg-background md:-left-[45px]">
+            <span className="absolute -left-[33px] top-2 grid h-4 w-4 place-items-center rounded-full bg-background md:-left-[45px]">
               <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-br from-primary via-secondary-1 to-accent animate-pulse-glow" />
             </span>
-            <Tilt
-              rotationFactor={6}
-              className="relative group overflow-hidden rounded-2xl border border-border bg-card p-6 hover:border-primary/50 hover:shadow-[0_20px_60px_-30px] hover:shadow-primary/40 w-full"
-            >
+            <div className="relative rounded-2xl border border-border bg-card p-6 transition hover:border-primary/50 hover:shadow-[0_20px_60px_-30px] hover:shadow-primary/40 w-full">
               <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                 <div className="flex-1">
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
@@ -957,14 +954,12 @@ function Experience() {
                 </div>
 
                 {e.logo && (
-                  <div className="relative shrink-0 w-12 h-12 rounded-xl border border-border bg-surface flex items-center justify-center overflow-hidden p-1.5 group-hover:scale-110 transition-transform duration-300">
+                  <div className="relative shrink-0 w-12 h-12 rounded-xl border border-border bg-surface flex items-center justify-center overflow-hidden p-1.5 hover:scale-105 transition-transform duration-300">
                     <img src={e.logo} alt={e.org} className="w-full h-full object-contain" />
                   </div>
                 )}
               </div>
-
-              <ClippedCircle circleClassName="bg-primary/5" circleSize={400} />
-            </Tilt>
+            </div>
           </li>
         ))}
       </ol>
