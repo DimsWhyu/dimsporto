@@ -1,14 +1,501 @@
-import { r as __toESM } from "../_runtime.mjs";
+import { o as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-DHe8DxIr.js
+import { g as require_react_dom } from "../_libs/@tanstack/react-router+[...].mjs";
+import { a as Instagram, i as Linkedin, n as Moon, o as Github, r as Mail, t as Sun } from "../_libs/lucide-react.mjs";
+import { n as clsx, t as cva } from "../_libs/class-variance-authority+clsx.mjs";
+import { t as twMerge } from "../_libs/tailwind-merge.mjs";
+import { a as useScroll, i as useMotionValue, n as useTransform, r as useMotionTemplate, s as AnimatePresence, t as useSpring } from "../_libs/framer-motion.mjs";
+import { t as motion } from "../_libs/motion.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-BFcspkOJ.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
+var import_react_dom = require_react_dom();
 var Foto_Formal_Dimas_Putih_default = "/assets/Foto%20Formal_Dimas_Putih-D5kYmjN1.png";
+var ojk_logo_default = "/assets/ojk_logo-Cs-uygCR.jpg";
+var id_x_logo_default = "/assets/id_x_logo-BVitZ7Pg.png";
+var pkuy_logo_default = "/assets/pkuy_logo-Dw50WDZ8.jpg";
+var fsad_logo_default = "/assets/fsad_logo-DYZrpq_Y.png";
+function cn(...inputs) {
+	return twMerge(clsx(inputs));
+}
+function polygonCollapsed(cx, cy, vertexCount) {
+	return `polygon(${Array.from({ length: vertexCount }, () => `${cx}px ${cy}px`).join(", ")})`;
+}
+function getThemeTransitionClipPaths(variant, cx, cy, maxRadius, viewportWidth, viewportHeight) {
+	switch (variant) {
+		case "circle": return [`circle(0px at ${cx}px ${cy}px)`, `circle(${maxRadius}px at ${cx}px ${cy}px)`];
+		case "square": {
+			const halfW = Math.max(cx, viewportWidth - cx);
+			const halfH = Math.max(cy, viewportHeight - cy);
+			const halfSide = Math.max(halfW, halfH) * 1.05;
+			const end = [
+				`${cx - halfSide}px ${cy - halfSide}px`,
+				`${cx + halfSide}px ${cy - halfSide}px`,
+				`${cx + halfSide}px ${cy + halfSide}px`,
+				`${cx - halfSide}px ${cy + halfSide}px`
+			].join(", ");
+			return [polygonCollapsed(cx, cy, 4), `polygon(${end})`];
+		}
+		case "triangle": {
+			const scale = maxRadius * 2.2;
+			const dx = Math.sqrt(3) / 2 * scale;
+			const verts = [
+				`${cx}px ${cy - scale}px`,
+				`${cx + dx}px ${cy + .5 * scale}px`,
+				`${cx - dx}px ${cy + .5 * scale}px`
+			].join(", ");
+			return [polygonCollapsed(cx, cy, 3), `polygon(${verts})`];
+		}
+		case "diamond": {
+			const R = maxRadius * Math.SQRT2;
+			const end = [
+				`${cx}px ${cy - R}px`,
+				`${cx + R}px ${cy}px`,
+				`${cx}px ${cy + R}px`,
+				`${cx - R}px ${cy}px`
+			].join(", ");
+			return [polygonCollapsed(cx, cy, 4), `polygon(${end})`];
+		}
+		case "hexagon": {
+			const R = maxRadius * Math.SQRT2;
+			const verts = [];
+			for (let i = 0; i < 6; i++) {
+				const a = -Math.PI / 2 + i * Math.PI / 3;
+				verts.push(`${cx + R * Math.cos(a)}px ${cy + R * Math.sin(a)}px`);
+			}
+			return [polygonCollapsed(cx, cy, 6), `polygon(${verts.join(", ")})`];
+		}
+		case "rectangle": {
+			const halfW = Math.max(cx, viewportWidth - cx);
+			const halfH = Math.max(cy, viewportHeight - cy);
+			const end = [
+				`${cx - halfW}px ${cy - halfH}px`,
+				`${cx + halfW}px ${cy - halfH}px`,
+				`${cx + halfW}px ${cy + halfH}px`,
+				`${cx - halfW}px ${cy + halfH}px`
+			].join(", ");
+			return [polygonCollapsed(cx, cy, 4), `polygon(${end})`];
+		}
+		case "star": {
+			const R = maxRadius * Math.SQRT2 * 1.03;
+			const innerRatio = .42;
+			const starPolygon = (radius) => {
+				const verts = [];
+				for (let i = 0; i < 5; i++) {
+					const outerA = -Math.PI / 2 + i * 2 * Math.PI / 5;
+					verts.push(`${cx + radius * Math.cos(outerA)}px ${cy + radius * Math.sin(outerA)}px`);
+					const innerA = outerA + Math.PI / 5;
+					verts.push(`${cx + radius * innerRatio * Math.cos(innerA)}px ${cy + radius * innerRatio * Math.sin(innerA)}px`);
+				}
+				return `polygon(${verts.join(", ")})`;
+			};
+			return [starPolygon(Math.max(2, R * .025)), starPolygon(R)];
+		}
+		default: return [`circle(0px at ${cx}px ${cy}px)`, `circle(${maxRadius}px at ${cx}px ${cy}px)`];
+	}
+}
+var AnimatedThemeToggler = ({ className, duration = 400, variant, fromCenter = false, theme, onThemeChange, ...props }) => {
+	const shape = variant ?? "circle";
+	const isControlled = theme !== void 0;
+	const [internalIsDark, setInternalIsDark] = (0, import_react.useState)(false);
+	const isDark = isControlled ? theme === "dark" : internalIsDark;
+	const buttonRef = (0, import_react.useRef)(null);
+	(0, import_react.useEffect)(() => {
+		if (isControlled) return;
+		const updateTheme = () => {
+			setInternalIsDark(document.documentElement.classList.contains("dark"));
+		};
+		updateTheme();
+		const observer = new MutationObserver(updateTheme);
+		observer.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ["class"]
+		});
+		return () => observer.disconnect();
+	}, [isControlled]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+		type: "button",
+		ref: buttonRef,
+		onClick: (0, import_react.useCallback)(() => {
+			const button = buttonRef.current;
+			if (!button) return;
+			const viewportWidth = window.visualViewport?.width ?? window.innerWidth;
+			const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+			let x;
+			let y;
+			if (fromCenter) {
+				x = viewportWidth / 2;
+				y = viewportHeight / 2;
+			} else {
+				const { top, left, width, height } = button.getBoundingClientRect();
+				x = left + width / 2;
+				y = top + height / 2;
+			}
+			const maxRadius = Math.hypot(Math.max(x, viewportWidth - x), Math.max(y, viewportHeight - y));
+			const applyTheme = () => {
+				const newTheme = !isDark;
+				document.documentElement.classList.toggle("dark");
+				if (isControlled) onThemeChange?.(newTheme ? "dark" : "light");
+				else {
+					setInternalIsDark(newTheme);
+					localStorage.setItem("theme", newTheme ? "dark" : "light");
+				}
+			};
+			if (typeof document.startViewTransition !== "function") {
+				applyTheme();
+				return;
+			}
+			const clipPath = getThemeTransitionClipPaths(shape, x, y, maxRadius, viewportWidth, viewportHeight);
+			const root = document.documentElement;
+			root.dataset.magicuiThemeVt = "active";
+			root.style.setProperty("--magicui-theme-toggle-vt-duration", `${duration}ms`);
+			root.style.setProperty("--magicui-theme-vt-clip-from", clipPath[0]);
+			const cleanup = () => {
+				delete root.dataset.magicuiThemeVt;
+				root.style.removeProperty("--magicui-theme-toggle-vt-duration");
+				root.style.removeProperty("--magicui-theme-vt-clip-from");
+			};
+			const transition = document.startViewTransition(() => {
+				(0, import_react_dom.flushSync)(applyTheme);
+			});
+			if (typeof transition?.finished?.finally === "function") transition.finished.finally(cleanup);
+			else cleanup();
+			const ready = transition?.ready;
+			if (ready && typeof ready.then === "function") ready.then(() => {
+				document.documentElement.animate({ clipPath }, {
+					duration,
+					easing: shape === "star" ? "linear" : "ease-in-out",
+					fill: "forwards",
+					pseudoElement: "::view-transition-new(root)"
+				});
+			});
+		}, [
+			shape,
+			fromCenter,
+			duration,
+			isDark,
+			isControlled,
+			onThemeChange
+		]),
+		className: cn(className),
+		...props,
+		children: [isDark ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sun, {}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Moon, {}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+			className: "sr-only",
+			children: "Toggle theme"
+		})]
+	});
+};
+var DEFAULT_SIZE = 40;
+var DEFAULT_MAGNIFICATION = 60;
+var DEFAULT_DISTANCE = 140;
+var DEFAULT_DISABLEMAGNIFICATION = false;
+var dockVariants = cva("supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 mx-auto flex items-center justify-center gap-2 rounded-2xl border p-2 backdrop-blur-md");
+var Dock = import_react.forwardRef(({ className, children, iconSize = DEFAULT_SIZE, iconMagnification = DEFAULT_MAGNIFICATION, disableMagnification = DEFAULT_DISABLEMAGNIFICATION, iconDistance = DEFAULT_DISTANCE, direction = "middle", orientation = "horizontal", ...props }, ref) => {
+	const mouseValue = useMotionValue(Infinity);
+	const renderChildren = () => {
+		return import_react.Children.map(children, (child) => {
+			if (import_react.isValidElement(child) && child.type === DockIcon) return import_react.cloneElement(child, {
+				...child.props,
+				mouseValue,
+				size: iconSize,
+				magnification: iconMagnification,
+				disableMagnification,
+				distance: iconDistance,
+				orientation
+			});
+			return child;
+		});
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+		ref,
+		onMouseMove: (e) => mouseValue.set(orientation === "horizontal" ? e.pageX : e.pageY),
+		onMouseLeave: () => mouseValue.set(Infinity),
+		...props,
+		className: cn(dockVariants({ className }), orientation === "horizontal" ? "h-[58px] w-max flex-row" : "w-[58px] h-max flex-col", {
+			"items-start": direction === "top" && orientation === "horizontal",
+			"items-center": direction === "middle",
+			"items-end": direction === "bottom" && orientation === "horizontal"
+		}),
+		children: renderChildren()
+	});
+});
+Dock.displayName = "Dock";
+var DockIcon = ({ size = DEFAULT_SIZE, magnification = DEFAULT_MAGNIFICATION, disableMagnification, distance = DEFAULT_DISTANCE, mouseValue, orientation = "horizontal", className, children, ...props }) => {
+	const ref = (0, import_react.useRef)(null);
+	const padding = Math.max(6, size * .2);
+	const defaultMouseValue = useMotionValue(Infinity);
+	const distanceCalc = useTransform(mouseValue ?? defaultMouseValue, (val) => {
+		const bounds = ref.current?.getBoundingClientRect() ?? {
+			x: 0,
+			y: 0,
+			width: 0,
+			height: 0
+		};
+		if (orientation === "horizontal") return val - (bounds.left + window.scrollX + bounds.width / 2);
+		else return val - (bounds.top + window.scrollY + bounds.height / 2);
+	});
+	const targetSize = disableMagnification ? size : magnification;
+	const scaleSize = useSpring(useTransform(distanceCalc, [
+		-distance,
+		0,
+		distance
+	], [
+		size,
+		targetSize,
+		size
+	]), {
+		mass: .1,
+		stiffness: 150,
+		damping: 12
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+		ref,
+		style: {
+			width: scaleSize,
+			height: scaleSize,
+			padding
+		},
+		className: cn("flex aspect-square cursor-pointer items-center justify-center rounded-full", disableMagnification && "hover:bg-muted-foreground transition-colors", className),
+		...props,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { children })
+	});
+};
+DockIcon.displayName = "DockIcon";
+function AnimatedListItem({ children }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+		initial: {
+			height: 0,
+			opacity: 0,
+			scale: .95
+		},
+		animate: {
+			height: "auto",
+			opacity: 1,
+			scale: 1
+		},
+		exit: {
+			height: 0,
+			opacity: 0,
+			scale: .95
+		},
+		transition: {
+			type: "spring",
+			stiffness: 220,
+			damping: 26
+		},
+		layout: true,
+		className: "mx-auto w-full overflow-hidden",
+		children
+	});
+}
+var AnimatedList = import_react.memo(({ children, className, delay = 2e3, ...props }) => {
+	const childrenArray = (0, import_react.useMemo)(() => import_react.Children.toArray(children), [children]);
+	const [items, setItems] = (0, import_react.useState)([]);
+	const currentIndexRef = (0, import_react.useRef)(0);
+	(0, import_react.useEffect)(() => {
+		if (childrenArray.length === 0) return;
+		setItems([{
+			id: `init-0`,
+			element: childrenArray[0]
+		}]);
+		currentIndexRef.current = 1;
+		const interval = setInterval(() => {
+			setItems((prev) => {
+				const nextIndex = currentIndexRef.current % childrenArray.length;
+				currentIndexRef.current++;
+				const updated = [{
+					id: `${currentIndexRef.current}-${nextIndex}`,
+					element: childrenArray[nextIndex]
+				}, ...prev];
+				if (updated.length > childrenArray.length) return updated.slice(0, childrenArray.length);
+				return updated;
+			});
+		}, delay);
+		return () => clearInterval(interval);
+	}, [childrenArray, delay]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: cn(`flex flex-col items-center gap-4`, className),
+		...props,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatedListItem, { children: item.element }, item.id)) })
+	});
+});
+AnimatedList.displayName = "AnimatedList";
+var TextReveal = ({ children, className }) => {
+	const sectionRef = (0, import_react.useRef)(null);
+	const { scrollYProgress } = useScroll({ target: sectionRef });
+	if (typeof children !== "string") throw new Error("TextReveal: children must be a string");
+	const words = children.split(" ");
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		ref: sectionRef,
+		className: cn("relative z-0 h-[200vh]", className),
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "sticky top-0 mx-auto flex h-[50%] max-w-4xl items-center bg-transparent px-4 py-20",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				className: "flex flex-wrap p-5 text-3xl font-extrabold text-black/20 md:p-8 md:text-5xl lg:p-10 lg:text-6xl xl:text-7xl tracking-tight dark:text-white/20",
+				children: words.map((word, i) => {
+					const start = i / words.length;
+					return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Word, {
+						progress: scrollYProgress,
+						range: [start, start + 1 / words.length],
+						children: word
+					}, i);
+				})
+			})
+		})
+	});
+};
+var Word = ({ children, progress, range }) => {
+	const opacity = useTransform(progress, range, [0, 1]);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+		className: "xl:lg-3 relative mx-1 lg:mx-1.5",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+			className: "absolute opacity-30",
+			children
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
+			style: { opacity },
+			className: "text-black dark:text-white",
+			children
+		})]
+	});
+};
+/**
+* The InteractiveGridPattern component.
+*
+* @see InteractiveGridPatternProps for the props interface.
+* @returns A React component.
+*/
+function InteractiveGridPattern({ width = 40, height = 40, squares = [24, 24], className, squaresClassName, ...props }) {
+	const [horizontal, vertical] = squares;
+	const [hoveredSquare, setHoveredSquare] = (0, import_react.useState)(null);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
+		width: width * horizontal,
+		height: height * vertical,
+		className: cn("absolute inset-0 h-full w-full border border-border/30", className),
+		...props,
+		children: Array.from({ length: horizontal * vertical }).map((_, index) => {
+			return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", {
+				x: index % horizontal * width,
+				y: Math.floor(index / horizontal) * height,
+				width,
+				height,
+				className: cn("stroke-border/40 transition-all duration-100 ease-in-out not-[&:hover]:duration-1000", hoveredSquare === index ? "fill-primary/10 dark:fill-primary/20" : "fill-transparent", squaresClassName),
+				onMouseEnter: () => setHoveredSquare(index),
+				onMouseLeave: () => setHoveredSquare(null)
+			}, index);
+		})
+	});
+}
+function Tilt({ children, className, style, rotationFactor = 15, isReverse = false, springOptions }) {
+	const ref = import_react.useRef(null);
+	const x = useMotionValue(0);
+	const y = useMotionValue(0);
+	const xSpring = useSpring(x, springOptions);
+	const transform = useMotionTemplate`perspective(1000px) rotateX(${useTransform(useSpring(y, springOptions), [-.5, .5], isReverse ? [rotationFactor, -rotationFactor] : [-rotationFactor, rotationFactor])}deg) rotateY(${useTransform(xSpring, [-.5, .5], isReverse ? [-rotationFactor, rotationFactor] : [rotationFactor, -rotationFactor])}deg)`;
+	const handleMouseMove = (e) => {
+		if (!ref.current) return;
+		const rect = ref.current.getBoundingClientRect();
+		x.set((e.clientX - rect.left) / rect.width - .5);
+		y.set((e.clientY - rect.top) / rect.height - .5);
+	};
+	const handleMouseLeave = () => {
+		x.set(0);
+		y.set(0);
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+		ref,
+		className,
+		style: {
+			transformStyle: "preserve-3d",
+			...style,
+			transform
+		},
+		onMouseMove: handleMouseMove,
+		onMouseLeave: handleMouseLeave,
+		children
+	});
+}
+function ClippedCircle({ className, circleClassName = "bg-white/20", circleSize = 400 }) {
+	const containerRef = import_react.useRef(null);
+	const [isHovered, setIsHovered] = import_react.useState(false);
+	const [position, setPosition] = import_react.useState({
+		x: "50%",
+		y: "50%"
+	});
+	import_react.useEffect(() => {
+		const container = containerRef.current;
+		if (!container || !container.parentElement) return;
+		const parent = container.parentElement;
+		const handleMouseEnter = (e) => {
+			const rect = parent.getBoundingClientRect();
+			const x = (e.clientX - rect.left) / rect.width * 100;
+			const y = (e.clientY - rect.top) / rect.height * 100;
+			setPosition({
+				x: `${x}%`,
+				y: `${y}%`
+			});
+			setIsHovered(true);
+		};
+		const handleMouseMove = (e) => {
+			const rect = parent.getBoundingClientRect();
+			const x = (e.clientX - rect.left) / rect.width * 100;
+			const y = (e.clientY - rect.top) / rect.height * 100;
+			setPosition({
+				x: `${x}%`,
+				y: `${y}%`
+			});
+		};
+		const handleMouseLeave = () => {
+			setIsHovered(false);
+		};
+		parent.addEventListener("mouseenter", handleMouseEnter);
+		parent.addEventListener("mousemove", handleMouseMove);
+		parent.addEventListener("mouseleave", handleMouseLeave);
+		return () => {
+			parent.removeEventListener("mouseenter", handleMouseEnter);
+			parent.removeEventListener("mousemove", handleMouseMove);
+			parent.removeEventListener("mouseleave", handleMouseLeave);
+		};
+	}, []);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		ref: containerRef,
+		className: cn("absolute inset-0 overflow-hidden pointer-events-none", className),
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+			className: cn("pointer-events-none absolute rounded-full", circleClassName),
+			style: {
+				left: position.x,
+				top: position.y,
+				width: circleSize,
+				height: circleSize,
+				mixBlendMode: "difference"
+			},
+			initial: {
+				scale: 0,
+				x: "-50%",
+				y: "-50%"
+			},
+			animate: {
+				scale: isHovered ? 1 : 0,
+				x: "-50%",
+				y: "-50%"
+			},
+			transition: {
+				duration: .5,
+				ease: [
+					.19,
+					1,
+					.22,
+					1
+				]
+			}
+		})
+	});
+}
 var CV_URL = "https://drive.google.com/file/d/1mzAsEG_2YFVSqtDOvY_E7tsW3vvR-Dw4/view?usp=sharing";
 var SOCIALS = {
 	instagram: "https://www.instagram.com/dwhyu.s_/",
 	linkedin: "https://www.linkedin.com/in/dimaswahyusaputra111/",
 	email: "dimswahyus@gmail.com",
+	github: "https://github.com/DimsWhyu",
 	phone: "+6281311211367"
 };
 var NAV = [
@@ -40,7 +527,7 @@ var ICONS = {
 	Pandas: "pandas/150458",
 	NumPy: "numpy/013243",
 	"Scikit-learn": "scikitlearn/F7931E",
-	Matplotlib: "python/11557C",
+	Matplotlib: "matplotlib/11557C",
 	Seaborn: "python/4C72B0",
 	"Power BI": "powerbi/F2C811",
 	"Looker Studio": "looker/4285F4",
@@ -118,24 +605,28 @@ var EXPERIENCE = [
 		role: "Data Analyst Intern",
 		org: "Otoritas Jasa Keuangan (OJK) — East Java",
 		period: "Feb 2026 – Mar 2026",
+		logo: ojk_logo_default,
 		points: ["Built SPLOG, a web-based logistics system managing 315+ items and centralizing stock monitoring.", "Automated reporting pipelines that cut report preparation time by ~60%."]
 	},
 	{
 		role: "Data Scientist Intern",
 		org: "id/x partners × Rakamin Academy",
 		period: "Aug 2025 – Sep 2025",
+		logo: id_x_logo_default,
 		points: ["Delivered an end-to-end ML capstone with measurable accuracy benchmarks using Python & Scikit-learn.", "Collaborated with Business Analysts, Data Engineers, and PMs to ship data-driven IT solutions."]
 	},
 	{
 		role: "CEO Analyst",
 		org: "Produktifkuy",
 		period: "Jan 2025 – Jul 2025",
+		logo: pkuy_logo_default,
 		points: ["Selected as 1 of 53 from 1,500+ applicants; led analysis across 6 divisions resulting in 6 org-wide improvements.", "Authored 20+ strategic proposals and data-driven decks supporting executive decisions."]
 	},
 	{
 		role: "Vice Project Officer — FSAD FAIR 2025",
 		org: "Organizational",
 		period: "May 2025 – Jul 2025",
+		logo: fsad_logo_default,
 		points: ["Coordinated 70+ committee members; engaged 160+ high school students nationwide."]
 	}
 ];
@@ -370,6 +861,98 @@ function BackToTop() {
 		})
 	});
 }
+function SocialDock() {
+	const [show, setShow] = (0, import_react.useState)(false);
+	(0, import_react.useEffect)(() => {
+		const onScroll = () => setShow(window.scrollY > 300);
+		onScroll();
+		window.addEventListener("scroll", onScroll, { passive: true });
+		return () => window.removeEventListener("scroll", onScroll);
+	}, []);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: show && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.div, {
+		initial: {
+			opacity: 0,
+			x: 50,
+			y: "-50%",
+			scale: .8
+		},
+		animate: {
+			opacity: 1,
+			x: 0,
+			y: "-50%",
+			scale: 1
+		},
+		exit: {
+			opacity: 0,
+			x: 50,
+			y: "-50%",
+			scale: .8
+		},
+		transition: {
+			type: "spring",
+			stiffness: 300,
+			damping: 25
+		},
+		className: "fixed right-6 top-1/2 z-50 -translate-y-1/2 hidden md:block",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Dock, {
+			orientation: "vertical",
+			className: "bg-surface/80 border-border shadow-lg",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DockIcon, {
+					className: "hover:bg-primary/20 hover:text-primary transition-colors",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+						href: `mailto:${SOCIALS.email}`,
+						"aria-label": "Email",
+						className: "flex items-center justify-center w-full h-full text-foreground hover:text-primary",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { className: "w-5 h-5" })
+					})
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DockIcon, {
+					className: "hover:bg-primary/20 hover:text-primary transition-colors",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+						href: SOCIALS.linkedin,
+						target: "_blank",
+						rel: "noreferrer",
+						"aria-label": "LinkedIn",
+						className: "flex items-center justify-center w-full h-full text-foreground hover:text-primary",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Linkedin, { className: "w-5 h-5" })
+					})
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DockIcon, {
+					className: "hover:bg-primary/20 hover:text-primary transition-colors",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+						href: SOCIALS.instagram,
+						target: "_blank",
+						rel: "noreferrer",
+						"aria-label": "Instagram",
+						className: "flex items-center justify-center w-full h-full text-foreground hover:text-primary",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Instagram, { className: "w-5 h-5" })
+					})
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DockIcon, {
+					className: "hover:bg-primary/20 hover:text-primary transition-colors",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+						href: SOCIALS.github,
+						target: "_blank",
+						rel: "noreferrer",
+						"aria-label": "GitHub",
+						className: "flex items-center justify-center w-full h-full text-foreground hover:text-primary",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Github, { className: "w-5 h-5" })
+					})
+				})
+			]
+		})
+	}) });
+}
+function TextRevealSection() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+		className: "bg-background relative border-y border-border/50",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TextReveal, {
+			className: "max-w-4xl mx-auto px-6",
+			children: "Building high-performance data pipelines, training machine learning models, and delivering interactive dashboards that drive growth."
+		})
+	});
+}
 function useTypewriter(words, { typeMs = 90, holdMs = 1400, eraseMs = 45 } = {}) {
 	const [text, setText] = (0, import_react.useState)("");
 	const [i, setI] = (0, import_react.useState)(0);
@@ -398,44 +981,7 @@ function useTypewriter(words, { typeMs = 90, holdMs = 1400, eraseMs = 45 } = {})
 	return text;
 }
 function ThemeToggle() {
-	const [dark, setDark] = (0, import_react.useState)(false);
-	(0, import_react.useEffect)(() => {
-		setDark(document.documentElement.classList.contains("dark"));
-	}, []);
-	const toggle = () => {
-		const next = !dark;
-		setDark(next);
-		document.documentElement.classList.toggle("dark", next);
-		try {
-			localStorage.setItem("theme", next ? "dark" : "light");
-		} catch {}
-	};
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-		onClick: toggle,
-		"aria-label": "Toggle theme",
-		className: "relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-foreground transition hover:scale-105 hover:border-primary",
-		children: dark ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
-			width: "16",
-			height: "16",
-			viewBox: "0 0 24 24",
-			fill: "none",
-			stroke: "currentColor",
-			strokeWidth: "2",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", {
-				cx: "12",
-				cy: "12",
-				r: "4"
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" })]
-		}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
-			width: "16",
-			height: "16",
-			viewBox: "0 0 24 24",
-			fill: "none",
-			stroke: "currentColor",
-			strokeWidth: "2",
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" })
-		})
-	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatedThemeToggler, { className: "relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-foreground transition hover:scale-105 hover:border-primary [&_svg]:w-4 [&_svg]:h-4" });
 }
 function SocialIcons({ size = 16, className = "" }) {
 	const cls = "grid place-items-center rounded-full border border-border bg-surface text-foreground transition hover:scale-110 hover:border-primary hover:text-primary";
@@ -646,7 +1192,13 @@ function Hero() {
 		ref,
 		className: "relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28",
 		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-grid" }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InteractiveGridPattern, {
+				className: "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
+				width: 40,
+				height: 40,
+				squares: [24, 24],
+				squaresClassName: "hover:fill-primary/10 stroke-border/40"
+			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute left-1/4 top-1/3 -z-10 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-primary/25 blur-3xl animate-blob" }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "absolute right-1/4 top-1/2 -z-10 h-[360px] w-[360px] translate-x-1/2 rounded-full bg-secondary-1/25 blur-3xl animate-blob",
@@ -899,17 +1451,21 @@ function About() {
 				className: "reveal reveal-left space-y-4 text-base leading-relaxed text-muted-foreground",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-						"I study ",
+						"I study",
+						" ",
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 							className: "text-foreground",
 							children: "Data Science at Institut Teknologi Sepuluh Nopember (ITS)"
 						}),
-						" and was named ",
+						" ",
+						"and was named",
+						" ",
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 							className: "text-foreground",
 							children: "3rd Most Outstanding Student of ITS 2026"
 						}),
-						". I'm an awardee of the ",
+						". I'm an awardee of the",
+						" ",
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 							className: "text-foreground",
 							children: "Beasiswa Indonesia Maju (BIM) DN"
@@ -920,23 +1476,27 @@ function About() {
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Outside coursework, I lead student initiatives, compete in international analytics competitions, and consistently turn raw datasets into stories teams can actually act on." })
 				]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "reveal reveal-right grid gap-3",
-				children: Object.entries(SKILLS).map(([cat, items], idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: `rounded-2xl border border-border bg-gradient-to-br ${SKILL_ACCENTS[idx % SKILL_ACCENTS.length]} bg-card p-5 tilt-on-hover`,
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "font-mono text-[11px] uppercase tracking-widest text-muted-foreground",
-						children: cat
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "mt-3 flex flex-wrap gap-1.5",
-						children: items.map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-							className: "inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-2.5 py-1 text-xs",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Logo, {
-								name: s,
-								size: 12
-							}), s]
-						}, s))
-					})]
-				}, cat))
+				className: "reveal reveal-right min-h-[480px] md:min-h-[510px]",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatedList, {
+					delay: 2500,
+					className: "w-full gap-3 items-stretch",
+					children: Object.entries(SKILLS).map(([cat, items], idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: `rounded-2xl border border-border bg-gradient-to-br ${SKILL_ACCENTS[idx % SKILL_ACCENTS.length]} bg-card p-5 tilt-on-hover w-full`,
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "font-mono text-[11px] uppercase tracking-widest text-muted-foreground",
+							children: cat
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "mt-3 flex flex-wrap gap-1.5",
+							children: items.map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+								className: "inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-2.5 py-1 text-xs",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Logo, {
+									name: s,
+									size: 12
+								}), s]
+							}, s))
+						})]
+					}, cat))
+				})
 			})]
 		})
 	});
@@ -959,33 +1519,50 @@ function Experience() {
 			children: EXPERIENCE.map((e, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
 				className: `reveal ${i % 2 === 0 ? "reveal-left" : "reveal-right"} relative`,
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					className: "absolute -left-[33px] top-2 grid h-4 w-4 place-items-center rounded-full bg-background md:-left-[45px]",
+					className: "absolute -left-[33px] top-5 z-20 grid h-4 w-4 place-items-center rounded-full bg-background md:-left-[45px]",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "h-2.5 w-2.5 rounded-full bg-gradient-to-br from-primary via-secondary-1 to-accent animate-pulse-glow" })
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "rounded-2xl border border-border bg-card p-6 transition hover:border-primary/50 hover:shadow-[0_20px_60px_-30px] hover:shadow-primary/40",
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex flex-wrap items-baseline justify-between gap-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-								className: "font-display text-lg font-semibold",
-								children: e.role
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "font-mono text-xs text-muted-foreground",
-								children: e.period
-							})]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "mt-1 text-sm text-primary",
-							children: e.org
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
-							className: "mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground",
-							children: e.points.map((p, j) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
-								className: "flex gap-2",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "mt-2 h-1 w-1 shrink-0 rounded-full bg-primary" }), p]
-							}, j))
-						})
-					]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Tilt, {
+					rotationFactor: 6,
+					className: "relative group overflow-hidden rounded-2xl border border-border bg-card p-6 hover:border-primary/50 hover:shadow-[0_20px_60px_-30px] hover:shadow-primary/40 w-full",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex flex-col md:flex-row md:items-start justify-between gap-4",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex-1",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex flex-wrap items-baseline justify-between gap-2",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+										className: "font-display text-lg font-semibold",
+										children: e.role
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "font-mono text-xs text-muted-foreground",
+										children: e.period
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "mt-1 text-sm text-primary font-medium",
+									children: e.org
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+									className: "mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground",
+									children: e.points.map((p, j) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
+										className: "flex gap-2",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "mt-2 h-1 w-1 shrink-0 rounded-full bg-primary" }), p]
+									}, j))
+								})
+							]
+						}), e.logo && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "relative shrink-0 w-12 h-12 rounded-xl border border-border bg-surface flex items-center justify-center overflow-hidden p-1.5 group-hover:scale-110 transition-transform duration-300",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: e.logo,
+								alt: e.org,
+								className: "w-full h-full object-contain"
+							})
+						})]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ClippedCircle, {
+						circleClassName: "bg-primary/5",
+						circleSize: 400
+					})]
 				})]
 			}, i))
 		})
@@ -1244,13 +1821,15 @@ function Portfolio() {
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Hero, {}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Marquee, {}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(About, {}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TextRevealSection, {}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Experience, {}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Projects, {}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Achievements, {}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Contact, {})
 			] }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Footer, {}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BackToTop, {})
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BackToTop, {}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SocialDock, {})
 		]
 	});
 }
