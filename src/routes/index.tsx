@@ -14,6 +14,8 @@ import { TextReveal } from "@/components/ui/text-reveal";
 import { InteractiveGridPattern } from "@/components/ui/interactive-grid-pattern";
 import { Tilt } from "@/components/unlumen-ui/tilt";
 import { ClippedCircle } from "@/components/unlumen-ui/clipped-circle";
+import { GitHubContributions } from "@/components/github-contributions";
+import { InitialLoader } from "@/components/initial-loader";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -280,13 +282,33 @@ function CustomCursor() {
     const ring = document.createElement("div");
     dot.className = "cursor-dot";
     ring.className = "cursor-ring";
+
+    const corners = document.createElement("div");
+    corners.className = "cursor-corners";
+
+    const tl = document.createElement("span");
+    const tr = document.createElement("span");
+    const bl = document.createElement("span");
+    const br = document.createElement("span");
+    tl.className = "corner-tl";
+    tr.className = "corner-tr";
+    bl.className = "corner-bl";
+    br.className = "corner-br";
+
+    corners.appendChild(tl);
+    corners.appendChild(tr);
+    corners.appendChild(bl);
+    corners.appendChild(br);
+    ring.appendChild(corners);
+
     document.body.appendChild(dot);
     document.body.appendChild(ring);
 
-    let mx = window.innerWidth / 2,
-      my = window.innerHeight / 2;
-    let rx = mx,
-      ry = my;
+    let mx = window.innerWidth / 2;
+    let my = window.innerHeight / 2;
+    let rx = mx;
+    let ry = my;
+    let currentTarget: HTMLElement | null = null;
     let raf = 0;
 
     const onMove = (e: MouseEvent) => {
@@ -295,21 +317,56 @@ function CustomCursor() {
       dot.style.left = mx + "px";
       dot.style.top = my + "px";
     };
-    const tick = () => {
-      rx += (mx - rx) * 0.18;
-      ry += (my - ry) * 0.18;
-      ring.style.left = rx + "px";
-      ring.style.top = ry + "px";
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
 
     const onOver = (e: MouseEvent) => {
       const t = e.target as HTMLElement | null;
-      const hov = !!t?.closest('a, button, [role="button"], input, textarea, select, label');
-      ring.classList.toggle("hover", hov);
-      dot.classList.toggle("hover", hov);
+      const clickable = t?.closest<HTMLElement>(
+        'a, button, [role="button"], input, textarea, select, label, .cursor-pointer'
+      );
+      if (clickable) {
+        currentTarget = clickable;
+        ring.classList.add("hover");
+        dot.classList.add("hover");
+      } else {
+        currentTarget = null;
+        ring.classList.remove("hover");
+        dot.classList.remove("hover");
+      }
     };
+
+    const tick = () => {
+      if (currentTarget && document.body.contains(currentTarget)) {
+        const rect = currentTarget.getBoundingClientRect();
+        const targetX = rect.left + rect.width / 2;
+        const targetY = rect.top + rect.height / 2;
+        const targetW = rect.width + 16;
+        const targetH = rect.height + 16;
+
+        rx += (targetX - rx) * 0.2;
+        ry += (targetY - ry) * 0.2;
+
+        ring.style.width = `${targetW}px`;
+        ring.style.height = `${targetH}px`;
+      } else {
+        if (currentTarget) {
+          currentTarget = null;
+          ring.classList.remove("hover");
+          dot.classList.remove("hover");
+        }
+        rx += (mx - rx) * 0.2;
+        ry += (my - ry) * 0.2;
+
+        ring.style.width = "";
+        ring.style.height = "";
+      }
+
+      ring.style.left = `${rx}px`;
+      ring.style.top = `${ry}px`;
+
+      raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
 
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseover", onOver);
@@ -752,13 +809,13 @@ function Hero() {
         </div>
         <div className="reveal relative mx-auto w-full max-w-sm">
           <div
-            className="relative aspect-square rounded-[2rem] border border-border bg-gradient-to-br from-primary/25 via-secondary-1/15 to-accent/25 p-4 glow-ring"
+            className="relative aspect-square rounded-[2rem] border-2 border-border/90 bg-gradient-to-br from-primary/25 via-secondary-1/15 to-accent/25 p-4 glow-ring shadow-lg"
             style={{
               transform:
                 "perspective(900px) rotateX(calc(var(--my,0)*-6deg)) rotateY(calc(var(--mx,0)*8deg))",
             }}
           >
-            <div className="absolute -right-4 -top-4 rounded-full border border-border glass px-3 py-1.5 font-mono text-xs animate-float-slow">
+            <div className="absolute -right-4 -top-4 rounded-full border border-border/90 glass px-3 py-1.5 font-mono text-xs font-semibold animate-float-slow shadow-xs">
               data-driven ✦
             </div>
             <img
@@ -767,18 +824,18 @@ function Hero() {
               className="h-full w-full rounded-[1.5rem] object-cover object-top"
               loading="eager"
             />
-            <div className="absolute -bottom-4 -left-4 rounded-2xl border border-border glass p-3 font-mono text-xs">
-              <div className="text-muted-foreground">status</div>
-              <div className="text-foreground">Final-year @ ITS · Open 2026</div>
+            <div className="absolute -bottom-4 -left-4 rounded-2xl border border-border/90 glass p-3 font-mono text-xs shadow-sm">
+              <div className="text-muted-foreground font-semibold">status</div>
+              <div className="text-foreground font-medium">Final-year @ ITS · Open 2026</div>
             </div>
             <div
-              className="absolute -left-6 top-1/3 grid h-12 w-12 place-items-center rounded-2xl border border-border bg-card shadow-lg animate-float-slow"
+              className="absolute -left-6 top-1/3 grid h-12 w-12 place-items-center rounded-2xl border-1.5 border-border bg-card shadow-md animate-float-slow"
               style={{ animationDelay: "-2s" }}
             >
               <img src="https://cdn.simpleicons.org/python/3776AB" alt="" width={24} height={24} />
             </div>
             <div
-              className="absolute -right-6 top-2/3 grid h-12 w-12 place-items-center rounded-2xl border border-border bg-card shadow-lg animate-float-slow"
+              className="absolute -right-6 top-2/3 grid h-12 w-12 place-items-center rounded-2xl border-1.5 border-border bg-card shadow-md animate-float-slow"
               style={{ animationDelay: "-4s" }}
             >
               <img src="https://cdn.simpleicons.org/powerbi/F2C811" alt="" width={24} height={24} />
@@ -845,10 +902,10 @@ function Section({
 }
 
 const SKILL_ACCENTS = [
-  "from-primary/15 to-secondary-1/15",
-  "from-secondary-2/15 to-accent/15",
-  "from-secondary-3/15 to-primary/15",
-  "from-secondary-4/15 to-secondary-1/15",
+  "from-primary/25 via-surface/60 to-secondary-1/25",
+  "from-secondary-2/25 via-surface/60 to-accent/25",
+  "from-secondary-3/25 via-surface/60 to-primary/25",
+  "from-secondary-4/25 via-surface/60 to-secondary-1/25",
 ];
 
 function About() {
@@ -886,22 +943,23 @@ function About() {
             Outside coursework, I lead student initiatives, compete in international analytics
             competitions, and consistently turn raw datasets into stories teams can actually act on.
           </p>
+          <GitHubContributions />
         </div>
         <div className="reveal reveal-right min-h-[480px] md:min-h-[510px]">
           <AnimatedList delay={2500} className="w-full gap-3 items-stretch">
             {Object.entries(SKILLS).map(([cat, items], idx) => (
               <div
                 key={cat}
-                className={`rounded-2xl border border-border bg-gradient-to-br ${SKILL_ACCENTS[idx % SKILL_ACCENTS.length]} bg-card p-5 tilt-on-hover w-full`}
+                className={`rounded-2xl border-2 border-border/90 bg-gradient-to-br ${SKILL_ACCENTS[idx % SKILL_ACCENTS.length]} bg-card p-5 shadow-sm tilt-on-hover w-full`}
               >
-                <div className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+                <div className="font-mono text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
                   {cat}
                 </div>
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {items.map((s) => (
                     <span
                       key={s}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-2.5 py-1 text-xs"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-border/90 bg-surface-2/90 px-3 py-1 text-xs font-medium text-foreground shadow-2xs hover:border-primary/60 hover:scale-105 transition-all"
                     >
                       <Logo name={s} size={12} />
                       {s}
@@ -929,24 +987,24 @@ function Experience() {
       }
       reveal="reveal-left"
     >
-      <ol className="relative space-y-6 border-l border-border pl-6 md:pl-10">
+      <ol className="relative space-y-6 border-l-2 border-border/80 pl-6 md:pl-10">
         {EXPERIENCE.map((e, i) => (
           <li key={i} className={`reveal ${i % 2 === 0 ? "reveal-left" : "reveal-right"} relative`}>
-            <span className="absolute -left-[33px] top-2 grid h-4 w-4 place-items-center rounded-full bg-background md:-left-[45px]">
+            <span className="absolute -left-[33px] top-2 grid h-4 w-4 place-items-center rounded-full bg-background border-2 border-border md:-left-[45px]">
               <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-br from-primary via-secondary-1 to-accent animate-pulse-glow" />
             </span>
-            <div className="relative rounded-2xl border border-border bg-card p-6 transition hover:border-primary/50 hover:shadow-[0_20px_60px_-30px] hover:shadow-primary/40 w-full">
+            <div className="relative rounded-2xl border-2 border-border/90 bg-card p-6 md:p-7 shadow-md transition-all duration-300 hover:border-primary/60 hover:shadow-xl w-full">
               <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                 <div className="flex-1">
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
                     <h3 className="font-display text-lg font-semibold">{e.role}</h3>
-                    <span className="font-mono text-xs text-muted-foreground">{e.period}</span>
+                    <span className="font-mono text-xs font-semibold text-muted-foreground">{e.period}</span>
                   </div>
                   <div className="mt-1 text-sm text-primary font-medium">{e.org}</div>
                   <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
                     {e.points.map((p, j) => (
                       <li key={j} className="flex gap-2">
-                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary" />
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                         {p}
                       </li>
                     ))}
@@ -954,7 +1012,7 @@ function Experience() {
                 </div>
 
                 {e.logo && (
-                  <div className="relative shrink-0 w-12 h-12 rounded-xl border border-border bg-surface flex items-center justify-center overflow-hidden p-1.5 hover:scale-105 transition-transform duration-300">
+                  <div className="relative shrink-0 w-12 h-12 rounded-xl border-1.5 border-border/90 bg-surface-2 flex items-center justify-center overflow-hidden p-1.5 shadow-sm hover:scale-105 transition-transform duration-300">
                     <img src={e.logo} alt={e.org} className="w-full h-full object-contain" />
                   </div>
                 )}
@@ -968,12 +1026,12 @@ function Experience() {
 }
 
 const PROJECT_ACCENTS = [
-  "from-primary/10 via-transparent to-secondary-1/10",
-  "from-secondary-2/10 via-transparent to-accent/10",
-  "from-secondary-3/10 via-transparent to-primary/10",
-  "from-secondary-4/10 via-transparent to-secondary-1/10",
-  "from-accent/10 via-transparent to-secondary-3/10",
-  "from-secondary-1/10 via-transparent to-secondary-2/10",
+  "from-primary/20 via-card to-secondary-1/20",
+  "from-secondary-2/20 via-card to-accent/20",
+  "from-secondary-3/20 via-card to-primary/20",
+  "from-secondary-4/20 via-card to-secondary-1/20",
+  "from-accent/20 via-card to-secondary-3/20",
+  "from-secondary-1/20 via-card to-secondary-2/20",
 ];
 
 function Projects() {
@@ -992,14 +1050,14 @@ function Projects() {
         {PROJECTS.map((p, i) => (
           <article
             key={i}
-            className={`reveal reveal-zoom group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-gradient-to-br ${PROJECT_ACCENTS[i % PROJECT_ACCENTS.length]} bg-card p-6 transition hover:-translate-y-1 hover:border-primary/60`}
+            className={`reveal reveal-zoom group relative flex flex-col overflow-hidden rounded-3xl border-2 border-border/90 bg-gradient-to-br ${PROJECT_ACCENTS[i % PROJECT_ACCENTS.length]} bg-card p-6 md:p-7 shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-primary/70 hover:shadow-2xl`}
           >
             <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-primary/10 blur-2xl transition group-hover:bg-primary/30" />
             <div className="flex items-center justify-between">
-              <span className="rounded-full border border-border bg-surface px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+              <span className="rounded-full border-1.5 border-border/90 bg-surface-2/90 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-foreground shadow-2xs">
                 {p.tag}
               </span>
-              <span className="font-mono text-xs text-muted-foreground">0{i + 1}</span>
+              <span className="font-mono text-xs font-semibold text-muted-foreground">0{i + 1}</span>
             </div>
             <h3 className="mt-5 font-display text-xl font-semibold">{p.name}</h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
@@ -1007,7 +1065,7 @@ function Projects() {
               {p.tech.map((t) => (
                 <span
                   key={t}
-                  className="inline-flex items-center gap-1.5 rounded-md bg-surface-2 px-2 py-0.5 font-mono text-[11px] text-muted-foreground"
+                  className="inline-flex items-center gap-1.5 rounded-md border border-border/80 bg-surface-2/90 px-2.5 py-1 font-mono text-[11px] font-medium text-foreground shadow-2xs hover:border-primary/50 transition-colors"
                 >
                   <Logo name={t} size={12} />
                   {t}
@@ -1020,7 +1078,7 @@ function Projects() {
                   href={p.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="group/btn inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 text-xs font-medium text-foreground transition hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                  className="group/btn inline-flex items-center gap-2 rounded-full border-1.5 border-border/90 bg-surface px-4 py-2 text-xs font-semibold text-foreground shadow-2xs transition-all hover:border-primary hover:bg-primary hover:text-primary-foreground hover:shadow-md"
                 >
                   View project
                   <svg
@@ -1056,17 +1114,19 @@ function Achievements() {
         {ACHIEVEMENTS.map((a, i) => (
           <div
             key={i}
-            className={`reveal ${i % 2 === 0 ? "reveal-left" : "reveal-right"} group flex items-center gap-4 rounded-2xl border border-border bg-card px-5 py-4 transition hover:border-primary/50 hover:bg-gradient-to-r hover:from-primary/5 hover:to-secondary-1/5`}
+            className={`reveal ${i % 2 === 0 ? "reveal-left" : "reveal-right"} group flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 rounded-2xl border-1.5 border-border/90 bg-card/95 px-5 py-4 shadow-sm transition-all hover:border-primary/60 hover:shadow-md hover:scale-[1.008]`}
           >
-            <span className="font-display text-xl font-semibold text-muted-foreground group-hover:text-foreground">
-              {a.year}
-            </span>
-            <span
-              className={`rounded-full px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider ${a.scope === "International" ? "bg-primary/15 text-primary" : "bg-accent/20 text-accent-foreground"}`}
-            >
-              {a.scope}
-            </span>
-            <span className="text-sm md:text-base">{a.title}</span>
+            <div className="flex items-center gap-3 shrink-0">
+              <span className="font-display text-lg sm:text-xl font-semibold text-muted-foreground group-hover:text-foreground">
+                {a.year}
+              </span>
+              <span
+                className={`rounded-full border px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider shadow-2xs ${a.scope === "International" ? "bg-primary/20 text-primary border-primary/30" : "bg-accent/25 text-accent-foreground border-accent/40"}`}
+              >
+                {a.scope}
+              </span>
+            </div>
+            <span className="text-sm md:text-base font-medium">{a.title}</span>
           </div>
         ))}
       </div>
@@ -1086,43 +1146,43 @@ function Contact() {
       }
       reveal="reveal-flip"
     >
-      <div className="reveal reveal-flip grid gap-8 rounded-3xl border border-border bg-card p-8 md:grid-cols-[1.2fr_1fr] md:p-12">
+      <div className="reveal reveal-flip grid gap-8 rounded-3xl border-2 border-border/90 bg-card p-6 sm:p-8 md:grid-cols-[1.2fr_1fr] md:p-12 shadow-xl">
         <div>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-sm sm:text-base">
             I'm currently open to internships and entry-level roles in data analytics, data science,
             and business intelligence. Reach out — I usually reply within a day.
           </p>
           <div className="mt-8 space-y-3 font-mono text-sm">
             <a
               href={`mailto:${SOCIALS.email}`}
-              className="flex items-center gap-3 text-foreground hover:text-primary"
+              className="flex items-center gap-3 text-foreground hover:text-primary break-all"
             >
-              <span className="text-muted-foreground">email</span>→ {SOCIALS.email}
+              <span className="text-muted-foreground shrink-0 font-semibold">email</span>→ {SOCIALS.email}
             </a>
             <a
               href={SOCIALS.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-3 text-foreground hover:text-primary"
+              className="flex items-center gap-3 text-foreground hover:text-primary break-all"
             >
-              <span className="text-muted-foreground">linkedin</span>→ /in/dimaswahyusaputra111
+              <span className="text-muted-foreground shrink-0 font-semibold">linkedin</span>→ /in/dimaswahyusaputra111
             </a>
             <a
               href={SOCIALS.instagram}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-3 text-foreground hover:text-primary"
+              className="flex items-center gap-3 text-foreground hover:text-primary break-all"
             >
-              <span className="text-muted-foreground">instagram</span>→ @dwhyu.s_
+              <span className="text-muted-foreground shrink-0 font-semibold">instagram</span>→ @dwhyu.s_
             </a>
             <a
               href={`tel:${SOCIALS.phone}`}
               className="flex items-center gap-3 text-foreground hover:text-primary"
             >
-              <span className="text-muted-foreground">phone</span>→ +62 813 1121 1367
+              <span className="text-muted-foreground shrink-0 font-semibold">phone</span>→ +62 813 1121 1367
             </a>
             <div className="flex items-center gap-3">
-              <span className="text-muted-foreground">based</span>→ Surabaya, East Java
+              <span className="text-muted-foreground shrink-0 font-semibold">based</span>→ Surabaya, East Java
             </div>
           </div>
           <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -1181,6 +1241,7 @@ function Portfolio() {
   useReveal();
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <InitialLoader />
       <CustomCursor />
       <Nav />
       <main>
