@@ -6,11 +6,13 @@ import { n as clsx, t as cva } from "../_libs/class-variance-authority+clsx.mjs"
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
 import { a as motion, i as useScroll, n as useTransform, o as AnimatePresence, r as useMotionValue, t as useSpring } from "../_libs/framer-motion.mjs";
 import { t as motion$1 } from "../_libs/motion.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-B1e18JQO.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-bBDbk1Gf.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var import_react_dom = require_react_dom();
 var Foto_Formal_Dimas_Putih_default = "/assets/Foto%20Formal_Dimas_Putih-D5kYmjN1.png";
+var Logo_Nav_default = "/assets/Logo_Nav-B4PF436_.png";
+var Logo_Nav_Wht_default = "/assets/Logo_Nav_Wht-BOVcUqNG.png";
 var ojk_logo_default = "/assets/ojk_logo-Cs-uygCR.jpg";
 var id_x_logo_default = "/assets/id_x_logo-BVitZ7Pg.png";
 var pkuy_logo_default = "/assets/pkuy_logo-Dw50WDZ8.jpg";
@@ -322,16 +324,19 @@ var AnimatedList = import_react.memo(({ children, className, delay = 2e3, ...pro
 AnimatedList.displayName = "AnimatedList";
 var TextReveal = ({ children, className }) => {
 	const sectionRef = (0, import_react.useRef)(null);
-	const { scrollYProgress } = useScroll({ target: sectionRef });
+	const { scrollYProgress } = useScroll({
+		target: sectionRef,
+		offset: ["start 0.75", "end 0.45"]
+	});
 	if (typeof children !== "string") throw new Error("TextReveal: children must be a string");
 	const words = children.split(" ");
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		ref: sectionRef,
-		className: cn("relative z-0 h-[200vh]", className),
+		className: cn("relative z-0 h-[150vh]", className),
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			className: "sticky top-0 mx-auto flex h-[50%] max-w-4xl items-center bg-transparent px-4 py-20",
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-				className: "flex flex-wrap p-5 text-3xl font-extrabold text-black/20 md:p-8 md:text-5xl lg:p-10 lg:text-6xl xl:text-7xl tracking-tight dark:text-white/20",
+			className: "sticky top-0 mx-auto flex h-screen max-w-5xl items-center justify-start px-6 py-12",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				className: "flex flex-wrap justify-start text-3xl font-extrabold md:text-5xl lg:text-6xl xl:text-7xl tracking-tight leading-tight text-left",
 				children: words.map((word, i) => {
 					const start = i / words.length;
 					return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Word, {
@@ -347,13 +352,13 @@ var TextReveal = ({ children, className }) => {
 var Word = ({ children, progress, range }) => {
 	const opacity = useTransform(progress, range, [0, 1]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-		className: "xl:lg-3 relative mx-1 lg:mx-1.5",
+		className: "relative inline-block mx-[0.18em] my-[0.08em] select-none",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-			className: "absolute opacity-30",
+			className: "text-foreground/20 dark:text-foreground/20",
 			children
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion$1.span, {
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion.span, {
 			style: { opacity },
-			className: "text-black dark:text-white",
+			className: "absolute inset-0 text-foreground font-extrabold",
 			children
 		})]
 	});
@@ -682,7 +687,14 @@ var ICONS = {
 	"Data Warehousing": "snowflake/29B5E8",
 	"Statistical Analysis": "r/276DC3"
 };
+var CUSTOM_ICONS = {
+	Tableau: "https://freepnglogo.com/images/all_img/tableau-software-logo-b762.png",
+	"Power BI": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/New_Power_BI_Logo.svg/3840px-New_Power_BI_Logo.svg.png",
+	"Excel / VBA": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Microsoft_Office_Excel_%282025%E2%80%93present%29.svg/500px-Microsoft_Office_Excel_%282025%E2%80%93present%29.svg.png",
+	Matplotlib: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Matplotlib_icon.svg/1280px-Matplotlib_icon.svg.png"
+};
 function iconUrl(name) {
+	if (CUSTOM_ICONS[name]) return CUSTOM_ICONS[name];
 	const slug = ICONS[name];
 	return slug ? `https://cdn.simpleicons.org/${slug}` : null;
 }
@@ -1252,53 +1264,71 @@ function Nav() {
 	const active = useActiveSection((0, import_react.useMemo)(() => ["top", ...NAV.map((n) => n.id)], []));
 	const accent = SECTION_ACCENTS[active] ?? "var(--primary)";
 	(0, import_react.useEffect)(() => {
-		const onScroll = () => setScrolled(window.scrollY > 20);
+		const onScroll = () => setScrolled(window.scrollY > 10);
 		onScroll();
 		window.addEventListener("scroll", onScroll, { passive: true });
 		return () => window.removeEventListener("scroll", onScroll);
 	}, []);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
-		className: `fixed inset-x-0 top-0 z-50 transition-all ${scrolled ? "py-3" : "py-5"}`,
+	(0, import_react.useEffect)(() => {
+		if (open) document.body.style.overflow = "hidden";
+		else document.body.style.overflow = "";
+		return () => {
+			document.body.style.overflow = "";
+		};
+	}, [open]);
+	const navMenuItems = [{
+		id: "top",
+		label: "Home"
+	}, ...NAV];
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("header", {
+		className: `fixed inset-x-0 top-0 z-50 transition-all duration-300 border-b ${scrolled ? "border-border/90 bg-background/90 backdrop-blur-xl shadow-xs py-3.5" : "border-transparent bg-background/60 backdrop-blur-md py-4"}`,
 		style: { ["--accent-c"]: accent },
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: `mx-auto flex max-w-6xl items-center justify-between rounded-full border px-4 py-2 transition-all md:px-6 ${scrolled ? "glass border-border nav-shell-accent" : "border-transparent"}`,
-			style: { width: "calc(100% - 2rem)" },
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 md:px-10",
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
 					href: "#top",
-					className: "flex items-center gap-2 font-display text-sm font-semibold",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						className: "grid h-7 w-7 place-items-center rounded-full text-primary-foreground text-xs transition-colors",
-						style: { background: `linear-gradient(135deg, ${accent}, var(--secondary-1))` },
-						children: "DW"
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						className: "hidden sm:inline",
-						children: "Dimas Wahyu"
-					})]
+					className: "flex items-center gap-3 transition-transform hover:scale-102",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+							src: Logo_Nav_default,
+							alt: "Dimas Wahyu Logo",
+							className: "h-8 sm:h-9 md:h-10 w-auto object-contain dark:hidden"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+							src: Logo_Nav_Wht_default,
+							alt: "Dimas Wahyu Logo",
+							className: "h-8 sm:h-9 md:h-10 w-auto object-contain hidden dark:block"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "font-display font-bold text-base md:text-lg tracking-tight hidden sm:inline-block",
+							children: "Dimas Wahyu"
+						})
+					]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
-					className: "hidden items-center gap-1 md:flex",
+					className: "hidden items-center gap-1.5 md:flex rounded-full border border-border/80 bg-surface/70 px-4 py-1.5 backdrop-blur-md shadow-2xs",
 					children: NAV.map((n) => {
 						const isActive = active === n.id;
 						return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
 							href: `#${n.id}`,
-							className: `rounded-full px-3 py-1.5 text-sm transition ${isActive ? "nav-pill-active" : "text-muted-foreground hover:bg-surface hover:text-foreground"}`,
+							className: `rounded-full px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all ${isActive ? "nav-pill-active text-primary-foreground shadow-xs" : "text-muted-foreground hover:bg-surface-2 hover:text-foreground"}`,
 							children: n.label
 						}, n.id);
 					})
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "flex items-center gap-2",
+					className: "flex items-center gap-2.5",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
 							href: CV_URL,
 							target: "_blank",
 							rel: "noreferrer",
-							className: "hidden md:inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-primary-foreground transition hover:scale-105",
+							className: "hidden sm:inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold text-primary-foreground transition-all hover:scale-105 shadow-xs",
 							style: { background: `linear-gradient(90deg, ${accent}, var(--secondary-1))` },
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
-								width: "12",
-								height: "12",
+								width: "13",
+								height: "13",
 								viewBox: "0 0 24 24",
 								fill: "none",
 								stroke: "currentColor",
@@ -1307,40 +1337,118 @@ function Nav() {
 							}), "Download CV"]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeToggle, {}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 							onClick: () => setOpen((v) => !v),
-							className: "grid h-9 w-9 place-items-center rounded-full border border-border md:hidden",
-							"aria-label": "Menu",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
-								width: "16",
-								height: "16",
-								viewBox: "0 0 24 24",
-								fill: "none",
-								stroke: "currentColor",
-								strokeWidth: "2",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: open ? "M6 6l12 12M18 6L6 18" : "M3 6h18M3 12h18M3 18h18" })
-							})
+							className: "md:hidden inline-flex items-center gap-1.5 rounded-xl border-2 border-border/90 bg-card px-3.5 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-foreground shadow-2xs hover:border-primary/80 active:scale-95 transition-all",
+							"aria-label": "Toggle Navigation Menu",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: open ? "CLOSE" : "MENU" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "text-primary font-bold text-sm leading-none",
+								children: open ? "✕" : "+"
+							})]
 						})
 					]
 				})
 			]
-		}), open && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "mx-4 mt-2 rounded-2xl border border-border glass p-3 md:hidden",
-			children: [NAV.map((n) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-				href: `#${n.id}`,
-				onClick: () => setOpen(false),
-				className: `block rounded-lg px-3 py-2 text-sm hover:bg-surface ${active === n.id ? "nav-pill-active" : "text-foreground"}`,
-				children: n.label
-			}, n.id)), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-				href: CV_URL,
-				target: "_blank",
-				rel: "noreferrer",
-				className: "mt-2 block rounded-lg px-3 py-2 text-center text-sm font-medium text-primary-foreground",
-				style: { background: `linear-gradient(90deg, ${accent}, var(--secondary-1))` },
-				children: "Download CV"
-			})]
-		})]
-	});
+		})
+	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: open && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion$1.div, {
+		initial: {
+			opacity: 0,
+			y: "-100%"
+		},
+		animate: {
+			opacity: 1,
+			y: 0
+		},
+		exit: {
+			opacity: 0,
+			y: "-100%"
+		},
+		transition: {
+			duration: .42,
+			ease: [
+				.76,
+				0,
+				.24,
+				1
+			]
+		},
+		className: "fixed inset-0 z-[100] flex flex-col justify-between bg-background p-6 sm:p-8 md:hidden overflow-y-auto select-none",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "w-full flex items-center justify-between border-b border-border/70 pb-4 font-mono text-xs text-muted-foreground uppercase tracking-widest",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-center gap-2.5",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+							src: "/assets/Logo_Nav-B4PF436_.png",
+							alt: "Logo",
+							className: "h-7 w-auto object-contain dark:hidden"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+							src: "/assets/Logo_Nav_Wht-BOVcUqNG.png",
+							alt: "Logo",
+							className: "h-7 w-auto object-contain hidden dark:block"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "font-bold text-foreground",
+							children: "DIMAS WAHYU / 2026"
+						})
+					]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+					onClick: () => setOpen(false),
+					className: "inline-flex items-center gap-1.5 rounded-xl border-2 border-border/90 bg-card px-3.5 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-foreground shadow-xs active:scale-95 transition-all",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "CLOSE" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "text-primary font-bold text-sm",
+						children: "✕"
+					})]
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
+				className: "my-auto py-8 flex flex-col gap-5 sm:gap-6",
+				children: navMenuItems.map((n, idx) => {
+					const isActive = active === n.id;
+					const numStr = `0${idx + 1}`;
+					return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+						href: `#${n.id}`,
+						onClick: () => setOpen(false),
+						className: "group flex items-baseline gap-4 text-left transition-all",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "font-mono text-sm sm:text-base font-semibold text-muted-foreground group-hover:text-primary transition-colors",
+							children: numStr
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: `font-display text-4xl sm:text-5xl font-extrabold tracking-tight transition-all duration-200 group-hover:translate-x-2 ${isActive ? "gradient-text" : "text-foreground group-hover:text-primary"}`,
+							children: n.label
+						})]
+					}, n.id);
+				})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "w-full pt-4 border-t border-border/70 flex flex-col gap-3",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+					href: CV_URL,
+					target: "_blank",
+					rel: "noreferrer",
+					className: "w-full py-3 rounded-xl bg-gradient-to-r from-primary via-secondary-1 to-accent text-center font-mono text-xs font-bold uppercase tracking-wider text-primary-foreground shadow-md active:scale-98 transition-all",
+					children: "Download CV ✦"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-center justify-between gap-3 font-mono text-xs text-muted-foreground",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+						href: SOCIALS.github,
+						target: "_blank",
+						rel: "noreferrer",
+						className: "flex-1 py-2.5 rounded-xl border-1.5 border-border bg-card text-center font-semibold text-foreground hover:border-primary transition-colors",
+						children: "GitHub ↗"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+						href: SOCIALS.linkedin,
+						target: "_blank",
+						rel: "noreferrer",
+						className: "flex-1 py-2.5 rounded-xl border-1.5 border-border bg-card text-center font-semibold text-foreground hover:border-primary transition-colors",
+						children: "LinkedIn ↗"
+					})]
+				})]
+			})
+		]
+	}) })] });
 }
 function Hero() {
 	const ref = (0, import_react.useRef)(null);
@@ -1542,10 +1650,11 @@ function Hero() {
 								className: "absolute -right-6 top-2/3 grid h-12 w-12 place-items-center rounded-2xl border-1.5 border-border bg-card shadow-md animate-float-slow",
 								style: { animationDelay: "-4s" },
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-									src: "https://cdn.simpleicons.org/powerbi/F2C811",
-									alt: "",
+									src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/New_Power_BI_Logo.svg/3840px-New_Power_BI_Logo.svg.png",
+									alt: "Power BI",
 									width: 24,
-									height: 24
+									height: 24,
+									className: "h-6 w-6 object-contain"
 								})
 							})
 						]

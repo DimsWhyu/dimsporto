@@ -10,6 +10,7 @@ import {
 import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import logoBrow from "../assets/Logo_Brow.png?url";
 
 function NotFoundComponent() {
   return (
@@ -73,14 +74,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Dimas Wahyu Saputra — Data Analyst & Data Scientist" },
+      { title: "Dimas Wahyu | Portofolio" },
       {
         name: "description",
         content:
           "Portfolio of Dimas Wahyu Saputra — Data Science student at ITS specializing in analytics, BI dashboards, and machine learning.",
       },
       { name: "author", content: "Dimas Wahyu Saputra" },
-      { property: "og:title", content: "Dimas Wahyu Saputra — Data Analyst & Data Scientist" },
+      { property: "og:title", content: "Dimas Wahyu | Portofolio" },
       {
         property: "og:description",
         content:
@@ -90,6 +91,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
+      { rel: "icon", type: "image/png", href: logoBrow },
+      { rel: "shortcut icon", type: "image/png", href: logoBrow },
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },

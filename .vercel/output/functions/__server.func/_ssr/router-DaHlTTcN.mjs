@@ -1,9 +1,10 @@
 import { n as require_jsx_runtime, t as QueryClientProvider } from "../_libs/react+tanstack__react-query.mjs";
 import { _ as useRouter, c as HeadContent, d as Outlet, f as lazyRouteComponent, h as Link, m as createRootRouteWithContext, p as createFileRoute, s as Scripts, u as createRouter } from "../_libs/@tanstack/react-router+[...].mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-CiIH3Doa.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-DaHlTTcN.js
 var import_jsx_runtime = require_jsx_runtime();
-var styles_default = "/assets/styles-BSvnt9qi.css";
+var styles_default = "/assets/styles-CEj-4nMz.css";
+var Logo_Brow_default = "/assets/Logo_Brow-C0X2FjXL.png";
 function NotFoundComponent() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		className: "flex min-h-screen items-center justify-center bg-background px-4",
@@ -77,7 +78,7 @@ var Route$1 = createRootRouteWithContext()({
 				name: "viewport",
 				content: "width=device-width, initial-scale=1"
 			},
-			{ title: "Dimas Wahyu Saputra — Data Analyst & Data Scientist" },
+			{ title: "Dimas Wahyu | Portofolio" },
 			{
 				name: "description",
 				content: "Portfolio of Dimas Wahyu Saputra — Data Science student at ITS specializing in analytics, BI dashboards, and machine learning."
@@ -88,7 +89,7 @@ var Route$1 = createRootRouteWithContext()({
 			},
 			{
 				property: "og:title",
-				content: "Dimas Wahyu Saputra — Data Analyst & Data Scientist"
+				content: "Dimas Wahyu | Portofolio"
 			},
 			{
 				property: "og:description",
@@ -104,6 +105,16 @@ var Route$1 = createRootRouteWithContext()({
 			}
 		],
 		links: [
+			{
+				rel: "icon",
+				type: "image/png",
+				href: Logo_Brow_default
+			},
+			{
+				rel: "shortcut icon",
+				type: "image/png",
+				href: Logo_Brow_default
+			},
 			{
 				rel: "stylesheet",
 				href: styles_default
@@ -142,7 +153,7 @@ function RootComponent() {
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outlet, {})
 	});
 }
-var $$splitComponentImporter = () => import("./routes-B1e18JQO.mjs");
+var $$splitComponentImporter = () => import("./routes-bBDbk1Gf.mjs");
 var rootRouteChildren = { IndexRoute: createFileRoute("/")({ component: lazyRouteComponent($$splitComponentImporter, "component") }).update({
 	id: "/",
 	path: "/",

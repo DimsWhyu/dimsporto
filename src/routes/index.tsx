@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import dimasPhoto from "@/assets/Foto Formal_Dimas_Putih.png";
+import logoNav from "@/assets/Logo_Nav.png";
+import logoNavWht from "@/assets/Logo_Nav_Wht.png";
 import ojkLogo from "@/assets/ojk_logo.jpg";
 import idxLogo from "@/assets/id:x_logo.png";
 import pkuyLogo from "@/assets/pkuy_logo.jpg";
@@ -68,7 +70,15 @@ const ICONS: Record<string, string> = {
   "Statistical Analysis": "r/276DC3",
 };
 
+const CUSTOM_ICONS: Record<string, string> = {
+  Tableau: "https://freepnglogo.com/images/all_img/tableau-software-logo-b762.png",
+  "Power BI": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/New_Power_BI_Logo.svg/3840px-New_Power_BI_Logo.svg.png",
+  "Excel / VBA": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Microsoft_Office_Excel_%282025%E2%80%93present%29.svg/500px-Microsoft_Office_Excel_%282025%E2%80%93present%29.svg.png",
+  Matplotlib: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Matplotlib_icon.svg/1280px-Matplotlib_icon.svg.png",
+};
+
 function iconUrl(name: string) {
+  if (CUSTOM_ICONS[name]) return CUSTOM_ICONS[name];
   const slug = ICONS[name];
   return slug ? `https://cdn.simpleicons.org/${slug}` : null;
 }
@@ -585,107 +595,206 @@ function Nav() {
   const ids = useMemo(() => ["top", ...NAV.map((n) => n.id)], []);
   const active = useActiveSection(ids);
   const accent = SECTION_ACCENTS[active] ?? "var(--primary)";
+
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 10);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  const navMenuItems = [
+    { id: "top", label: "Home" },
+    ...NAV,
+  ];
+
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all ${scrolled ? "py-3" : "py-5"}`}
-      style={{ ["--accent-c" as never]: accent }}
-    >
-      <div
-        className={`mx-auto flex max-w-6xl items-center justify-between rounded-full border px-4 py-2 transition-all md:px-6 ${scrolled ? "glass border-border nav-shell-accent" : "border-transparent"}`}
-        style={{ width: "calc(100% - 2rem)" }}
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 border-b ${
+          scrolled
+            ? "border-border/90 bg-background/90 backdrop-blur-xl shadow-xs py-3.5"
+            : "border-transparent bg-background/60 backdrop-blur-md py-4"
+        }`}
+        style={{ ["--accent-c" as never]: accent }}
       >
-        <a href="#top" className="flex items-center gap-2 font-display text-sm font-semibold">
-          <span
-            className="grid h-7 w-7 place-items-center rounded-full text-primary-foreground text-xs transition-colors"
-            style={{ background: `linear-gradient(135deg, ${accent}, var(--secondary-1))` }}
-          >
-            DW
-          </span>
-          <span className="hidden sm:inline">Dimas Wahyu</span>
-        </a>
-        <nav className="hidden items-center gap-1 md:flex">
-          {NAV.map((n) => {
-            const isActive = active === n.id;
-            return (
-              <a
-                key={n.id}
-                href={`#${n.id}`}
-                className={`rounded-full px-3 py-1.5 text-sm transition ${isActive ? "nav-pill-active" : "text-muted-foreground hover:bg-surface hover:text-foreground"}`}
-              >
-                {n.label}
-              </a>
-            );
-          })}
-        </nav>
-        <div className="flex items-center gap-2">
-          <a
-            href={CV_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="hidden md:inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium text-primary-foreground transition hover:scale-105"
-            style={{ background: `linear-gradient(90deg, ${accent}, var(--secondary-1))` }}
-          >
-            <svg
-              width="12"
-              height="12"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.4"
-            >
-              <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
-            </svg>
-            Download CV
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 md:px-10">
+          {/* Left Brand Logo */}
+          <a href="#top" className="flex items-center gap-3 transition-transform hover:scale-102">
+            <img
+              src={logoNav}
+              alt="Dimas Wahyu Logo"
+              className="h-8 sm:h-9 md:h-10 w-auto object-contain dark:hidden"
+            />
+            <img
+              src={logoNavWht}
+              alt="Dimas Wahyu Logo"
+              className="h-8 sm:h-9 md:h-10 w-auto object-contain hidden dark:block"
+            />
+            <span className="font-display font-bold text-base md:text-lg tracking-tight hidden sm:inline-block">
+              Dimas Wahyu
+            </span>
           </a>
-          <ThemeToggle />
-          <button
-            onClick={() => setOpen((v) => !v)}
-            className="grid h-9 w-9 place-items-center rounded-full border border-border md:hidden"
-            aria-label="Menu"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d={open ? "M6 6l12 12M18 6L6 18" : "M3 6h18M3 12h18M3 18h18"} />
-            </svg>
-          </button>
-        </div>
-      </div>
-      {open && (
-        <div className="mx-4 mt-2 rounded-2xl border border-border glass p-3 md:hidden">
-          {NAV.map((n) => (
+
+          {/* Center Navigation Links (Desktop) */}
+          <nav className="hidden items-center gap-1.5 md:flex rounded-full border border-border/80 bg-surface/70 px-4 py-1.5 backdrop-blur-md shadow-2xs">
+            {NAV.map((n) => {
+              const isActive = active === n.id;
+              return (
+                <a
+                  key={n.id}
+                  href={`#${n.id}`}
+                  className={`rounded-full px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all ${
+                    isActive
+                      ? "nav-pill-active text-primary-foreground shadow-xs"
+                      : "text-muted-foreground hover:bg-surface-2 hover:text-foreground"
+                  }`}
+                >
+                  {n.label}
+                </a>
+              );
+            })}
+          </nav>
+
+          {/* Right Actions */}
+          <div className="flex items-center gap-2.5">
             <a
-              key={n.id}
-              href={`#${n.id}`}
-              onClick={() => setOpen(false)}
-              className={`block rounded-lg px-3 py-2 text-sm hover:bg-surface ${active === n.id ? "nav-pill-active" : "text-foreground"}`}
+              href={CV_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold text-primary-foreground transition-all hover:scale-105 shadow-xs"
+              style={{ background: `linear-gradient(90deg, ${accent}, var(--secondary-1))` }}
             >
-              {n.label}
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+              >
+                <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+              </svg>
+              Download CV
             </a>
-          ))}
-          <a
-            href={CV_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-2 block rounded-lg px-3 py-2 text-center text-sm font-medium text-primary-foreground"
-            style={{ background: `linear-gradient(90deg, ${accent}, var(--secondary-1))` }}
-          >
-            Download CV
-          </a>
+            <ThemeToggle />
+            <button
+              onClick={() => setOpen((v) => !v)}
+              className="md:hidden inline-flex items-center gap-1.5 rounded-xl border-2 border-border/90 bg-card px-3.5 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-foreground shadow-2xs hover:border-primary/80 active:scale-95 transition-all"
+              aria-label="Toggle Navigation Menu"
+            >
+              <span>{open ? "CLOSE" : "MENU"}</span>
+              <span className="text-primary font-bold text-sm leading-none">{open ? "✕" : "+"}</span>
+            </button>
+          </div>
         </div>
-      )}
-    </header>
+      </header>
+
+      {/* Fullscreen Mobile Drawer Menu (Reference: irfansabrian.vercel.app) */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: "-100%" }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: "-100%" }}
+            transition={{ duration: 0.42, ease: [0.76, 0, 0.24, 1] }}
+            className="fixed inset-0 z-[100] flex flex-col justify-between bg-background p-6 sm:p-8 md:hidden overflow-y-auto select-none"
+          >
+            {/* Top Bar Header */}
+            <div className="w-full flex items-center justify-between border-b border-border/70 pb-4 font-mono text-xs text-muted-foreground uppercase tracking-widest">
+              <div className="flex items-center gap-2.5">
+                <img
+                  src={logoNav}
+                  alt="Logo"
+                  className="h-7 w-auto object-contain dark:hidden"
+                />
+                <img
+                  src={logoNavWht}
+                  alt="Logo"
+                  className="h-7 w-auto object-contain hidden dark:block"
+                />
+                <span className="font-bold text-foreground">DIMAS WAHYU / 2026</span>
+              </div>
+              <button
+                onClick={() => setOpen(false)}
+                className="inline-flex items-center gap-1.5 rounded-xl border-2 border-border/90 bg-card px-3.5 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-foreground shadow-xs active:scale-95 transition-all"
+              >
+                <span>CLOSE</span>
+                <span className="text-primary font-bold text-sm">✕</span>
+              </button>
+            </div>
+
+            {/* Center List of Numbered Nav Links */}
+            <nav className="my-auto py-8 flex flex-col gap-5 sm:gap-6">
+              {navMenuItems.map((n, idx) => {
+                const isActive = active === n.id;
+                const numStr = `0${idx + 1}`;
+                return (
+                  <a
+                    key={n.id}
+                    href={`#${n.id}`}
+                    onClick={() => setOpen(false)}
+                    className="group flex items-baseline gap-4 text-left transition-all"
+                  >
+                    <span className="font-mono text-sm sm:text-base font-semibold text-muted-foreground group-hover:text-primary transition-colors">
+                      {numStr}
+                    </span>
+                    <span
+                      className={`font-display text-4xl sm:text-5xl font-extrabold tracking-tight transition-all duration-200 group-hover:translate-x-2 ${
+                        isActive ? "gradient-text" : "text-foreground group-hover:text-primary"
+                      }`}
+                    >
+                      {n.label}
+                    </span>
+                  </a>
+                );
+              })}
+            </nav>
+
+            {/* Bottom Footer Actions */}
+            <div className="w-full pt-4 border-t border-border/70 flex flex-col gap-3">
+              <a
+                href={CV_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-primary via-secondary-1 to-accent text-center font-mono text-xs font-bold uppercase tracking-wider text-primary-foreground shadow-md active:scale-98 transition-all"
+              >
+                Download CV ✦
+              </a>
+              <div className="flex items-center justify-between gap-3 font-mono text-xs text-muted-foreground">
+                <a
+                  href={SOCIALS.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex-1 py-2.5 rounded-xl border-1.5 border-border bg-card text-center font-semibold text-foreground hover:border-primary transition-colors"
+                >
+                  GitHub ↗
+                </a>
+                <a
+                  href={SOCIALS.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex-1 py-2.5 rounded-xl border-1.5 border-border bg-card text-center font-semibold text-foreground hover:border-primary transition-colors"
+                >
+                  LinkedIn ↗
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
@@ -838,7 +947,7 @@ function Hero() {
               className="absolute -right-6 top-2/3 grid h-12 w-12 place-items-center rounded-2xl border-1.5 border-border bg-card shadow-md animate-float-slow"
               style={{ animationDelay: "-4s" }}
             >
-              <img src="https://cdn.simpleicons.org/powerbi/F2C811" alt="" width={24} height={24} />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/New_Power_BI_Logo.svg/3840px-New_Power_BI_Logo.svg.png" alt="Power BI" width={24} height={24} className="h-6 w-6 object-contain" />
             </div>
           </div>
         </div>

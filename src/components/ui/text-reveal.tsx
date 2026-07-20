@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type ComponentPropsWithoutRef, type FC, type ReactNode } from "react";
-import { motion, MotionValue, useScroll, useTransform } from "motion/react";
+import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 
@@ -11,8 +11,10 @@ export interface TextRevealProps extends ComponentPropsWithoutRef<"div"> {
 
 export const TextReveal: FC<TextRevealProps> = ({ children, className }) => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
+    offset: ["start 0.75", "end 0.45"],
   });
 
   if (typeof children !== "string") {
@@ -22,17 +24,9 @@ export const TextReveal: FC<TextRevealProps> = ({ children, className }) => {
   const words = children.split(" ");
 
   return (
-    <div ref={sectionRef} className={cn("relative z-0 h-[200vh]", className)}>
-      <div
-        className={
-          "sticky top-0 mx-auto flex h-[50%] max-w-4xl items-center bg-transparent px-4 py-20"
-        }
-      >
-        <span
-          className={
-            "flex flex-wrap p-5 text-3xl font-extrabold text-black/20 md:p-8 md:text-5xl lg:p-10 lg:text-6xl xl:text-7xl tracking-tight dark:text-white/20"
-          }
-        >
+    <div ref={sectionRef} className={cn("relative z-0 h-[150vh]", className)}>
+      <div className="sticky top-0 mx-auto flex h-screen max-w-5xl items-center justify-start px-6 py-12">
+        <p className="flex flex-wrap justify-start text-3xl font-extrabold md:text-5xl lg:text-6xl xl:text-7xl tracking-tight leading-tight text-left">
           {words.map((word, i) => {
             const start = i / words.length;
             const end = start + 1 / words.length;
@@ -42,7 +36,7 @@ export const TextReveal: FC<TextRevealProps> = ({ children, className }) => {
               </Word>
             );
           })}
-        </span>
+        </p>
       </div>
     </div>
   );
@@ -56,10 +50,16 @@ interface WordProps {
 
 const Word: FC<WordProps> = ({ children, progress, range }) => {
   const opacity = useTransform(progress, range, [0, 1]);
+
   return (
-    <span className="xl:lg-3 relative mx-1 lg:mx-1.5">
-      <span className="absolute opacity-30">{children}</span>
-      <motion.span style={{ opacity: opacity }} className={"text-black dark:text-white"}>
+    <span className="relative inline-block mx-[0.18em] my-[0.08em] select-none">
+      {/* Background Dimmed Text (Establishes exact layout flow) */}
+      <span className="text-foreground/20 dark:text-foreground/20">{children}</span>
+      {/* Foreground Highlighted Text (Pinned exactly on top) */}
+      <motion.span
+        style={{ opacity }}
+        className="absolute inset-0 text-foreground font-extrabold"
+      >
         {children}
       </motion.span>
     </span>
