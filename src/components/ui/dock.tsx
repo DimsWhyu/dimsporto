@@ -116,7 +116,7 @@ const DockIcon = ({
   const defaultMouseValue = useMotionValue(Infinity);
 
   const distanceCalc = useTransform(mouseValue ?? defaultMouseValue, (val: number) => {
-    const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, y: 0, width: 0, height: 0 };
+    const bounds = ref.current?.getBoundingClientRect() ?? { left: 0, top: 0, width: 0, height: 0 };
     if (orientation === "horizontal") {
       const centerX = bounds.left + window.scrollX + bounds.width / 2;
       return val - centerX;

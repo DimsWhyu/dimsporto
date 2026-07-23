@@ -56,10 +56,7 @@ const Word: FC<WordProps> = ({ children, progress, range }) => {
       {/* Background Dimmed Text (Establishes exact layout flow) */}
       <span className="text-foreground/20 dark:text-foreground/20">{children}</span>
       {/* Foreground Highlighted Text (Pinned exactly on top) */}
-      <motion.span
-        style={{ opacity }}
-        className="absolute inset-0 text-foreground font-extrabold"
-      >
+      <motion.span style={{ opacity }} className="absolute inset-0 text-foreground font-extrabold">
         {children}
       </motion.span>
     </span>

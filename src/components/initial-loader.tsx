@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const GREETINGS = [
-  "Halo",         // Indonesia
-  "Hello",        // Inggris
-  "你好",         // Mandarin (Nǐ hǎo)
-  "Hola",         // Spanyol
-  "مرحبًا",       // Arab (Marhaban)
-  "Bonjour",      // Prancis
-  "こんにちは",     // Jepang (Konnichiwa)
+  "Halo", // Indonesia
+  "Hello", // Inggris
+  "你好", // Mandarin (Nǐ hǎo)
+  "Hola", // Spanyol
+  "مرحبًا", // Arab (Marhaban)
+  "Bonjour", // Prancis
+  "こんにちは", // Jepang (Konnichiwa)
 ];
 
 export function InitialLoader({ onComplete }: { onComplete?: () => void }) {

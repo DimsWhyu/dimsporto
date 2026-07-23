@@ -25,12 +25,15 @@ export function GitHubContributions() {
     let isMounted = true;
     async function fetchContributions() {
       try {
-        const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=last`);
+        const res = await fetch(
+          `https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=last`,
+        );
         if (!res.ok) throw new Error("Failed to fetch github contributions");
         const json: ApiResponse = await res.json();
         if (isMounted) {
           setData(json.contributions || []);
-          const total = json.total?.lastYear ?? json.contributions.reduce((acc, c) => acc + c.count, 0);
+          const total =
+            json.total?.lastYear ?? json.contributions.reduce((acc, c) => acc + c.count, 0);
           setTotalCount(total);
         }
       } catch (err) {
@@ -150,7 +153,7 @@ export function GitHubContributions() {
                       onMouseEnter={() => setHoveredDay(day)}
                       onMouseLeave={() => setHoveredDay(null)}
                       className={`size-2.5 rounded-[2.5px] border transition-all duration-150 ${getLevelColor(
-                        day.level
+                        day.level,
                       )} hover:scale-130 hover:z-10 shadow-2xs`}
                       title={`${day.count} contributions on ${day.date}`}
                     />
@@ -167,11 +170,15 @@ export function GitHubContributions() {
         <div className="font-mono text-xs text-muted-foreground">
           {hoveredDay ? (
             <span>
-              <strong className="text-foreground font-semibold">{hoveredDay.count}</strong> contributions on {hoveredDay.date}
+              <strong className="text-foreground font-semibold">{hoveredDay.count}</strong>{" "}
+              contributions on {hoveredDay.date}
             </span>
           ) : (
             <span>
-              <strong className="text-foreground font-semibold">{totalCount !== null ? totalCount : 0}</strong> CONTRIBUTIONS
+              <strong className="text-foreground font-semibold">
+                {totalCount !== null ? totalCount : 0}
+              </strong>{" "}
+              CONTRIBUTIONS
             </span>
           )}
         </div>

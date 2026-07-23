@@ -24,7 +24,7 @@ export function LanyardCard({ className = "" }: LanyardCardProps) {
       42,
       container.clientWidth / container.clientHeight,
       0.1,
-      100
+      100,
     );
     camera.position.set(0, 0, 8.5);
 
@@ -159,7 +159,7 @@ export function LanyardCard({ className = "" }: LanyardCardProps) {
       // Simulated Barcode
       ctx.fillStyle = "#ffffff";
       for (let i = 0; i < 42; i++) {
-        const w = (i % 3 === 0 ? 6 : 3);
+        const w = i % 3 === 0 ? 6 : 3;
         ctx.fillRect(80 + i * 10, 840, w, 40);
       }
 
@@ -336,7 +336,7 @@ export function LanyardCard({ className = "" }: LanyardCardProps) {
       const rect = canvas.getBoundingClientRect();
       return new THREE.Vector2(
         ((e.clientX - rect.left) / rect.width) * 2 - 1,
-        -((e.clientY - rect.top) / rect.height) * 2 + 1
+        -((e.clientY - rect.top) / rect.height) * 2 + 1,
       );
     };
 

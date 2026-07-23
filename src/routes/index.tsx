@@ -18,6 +18,7 @@ import { Tilt } from "@/components/unlumen-ui/tilt";
 import { ClippedCircle } from "@/components/unlumen-ui/clipped-circle";
 import { GitHubContributions } from "@/components/github-contributions";
 import { InitialLoader } from "@/components/initial-loader";
+import { SkillsBeamShowcase } from "@/components/skills-beam-showcase";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -72,9 +73,12 @@ const ICONS: Record<string, string> = {
 
 const CUSTOM_ICONS: Record<string, string> = {
   Tableau: "https://freepnglogo.com/images/all_img/tableau-software-logo-b762.png",
-  "Power BI": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/New_Power_BI_Logo.svg/3840px-New_Power_BI_Logo.svg.png",
-  "Excel / VBA": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Microsoft_Office_Excel_%282025%E2%80%93present%29.svg/500px-Microsoft_Office_Excel_%282025%E2%80%93present%29.svg.png",
-  Matplotlib: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Matplotlib_icon.svg/1280px-Matplotlib_icon.svg.png",
+  "Power BI":
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/New_Power_BI_Logo.svg/3840px-New_Power_BI_Logo.svg.png",
+  "Excel / VBA":
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Microsoft_Office_Excel_%282025%E2%80%93present%29.svg/500px-Microsoft_Office_Excel_%282025%E2%80%93present%29.svg.png",
+  Matplotlib:
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Matplotlib_icon.svg/1280px-Matplotlib_icon.svg.png",
 };
 
 function iconUrl(name: string) {
@@ -331,7 +335,7 @@ function CustomCursor() {
     const onOver = (e: MouseEvent) => {
       const t = e.target as HTMLElement | null;
       const clickable = t?.closest<HTMLElement>(
-        'a, button, [role="button"], input, textarea, select, label, .cursor-pointer'
+        'a, button, [role="button"], input, textarea, select, label, .cursor-pointer',
       );
       if (clickable) {
         currentTarget = clickable;
@@ -404,7 +408,7 @@ function BackToTop() {
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
-      className="back-to-top-enter fixed bottom-6 right-6 z-40 grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-primary via-secondary-1 to-accent text-primary-foreground shadow-[0_10px_40px_-10px] shadow-primary/60 transition hover:scale-110"
+      className="back-to-top-enter fixed bottom-6 right-6 z-40 grid h-12 w-12 place-items-center rounded-full bg-[#0066cc] hover:bg-[#0071e3] text-white shadow-lg shadow-[#0066cc]/30 transition hover:scale-110 active:scale-95"
     >
       <svg
         width="18"
@@ -597,7 +601,7 @@ function Nav() {
   const accent = SECTION_ACCENTS[active] ?? "var(--primary)";
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -614,22 +618,19 @@ function Nav() {
     };
   }, [open]);
 
-  const navMenuItems = [
-    { id: "top", label: "Home" },
-    ...NAV,
-  ];
+  const navMenuItems = [{ id: "top", label: "Home" }, ...NAV];
 
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 border-b ${
+        className={`fixed inset-x-0 z-50 mx-auto transition-all duration-[1200ms] [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] will-change-[width,max-width,top,padding,border-radius] ${
           scrolled
-            ? "border-border/90 bg-background/90 backdrop-blur-xl shadow-xs py-3.5"
-            : "border-transparent bg-background/60 backdrop-blur-md py-4"
+            ? "top-0 w-full max-w-[100vw] rounded-none border-b border-border/80 bg-background/90 backdrop-blur-xl shadow-xs py-3.5 px-6 sm:px-10 md:px-14"
+            : "top-4 w-[calc(100%-2rem)] max-w-[64rem] rounded-full border border-border/80 bg-card/95 backdrop-blur-xl shadow-lg py-2.5 px-5 sm:px-6 md:px-8"
         }`}
         style={{ ["--accent-c" as never]: accent }}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 md:px-10">
+        <div className="flex items-center justify-between w-full">
           {/* Left Brand Logo */}
           <a href="#top" className="flex items-center gap-3 transition-transform hover:scale-102">
             <img
@@ -642,23 +643,23 @@ function Nav() {
               alt="Dimas Wahyu Logo"
               className="h-8 sm:h-9 md:h-10 w-auto object-contain hidden dark:block"
             />
-            <span className="font-display font-bold text-base md:text-lg tracking-tight hidden sm:inline-block">
+            <span className="font-display font-bold text-base md:text-lg tracking-tight">
               Dimas Wahyu
             </span>
           </a>
 
           {/* Center Navigation Links (Desktop) */}
-          <nav className="hidden items-center gap-1.5 md:flex rounded-full border border-border/80 bg-surface/70 px-4 py-1.5 backdrop-blur-md shadow-2xs">
+          <nav className="hidden items-center gap-6 lg:gap-8 md:flex">
             {NAV.map((n) => {
               const isActive = active === n.id;
               return (
                 <a
                   key={n.id}
                   href={`#${n.id}`}
-                  className={`rounded-full px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider transition-all ${
+                  className={`text-sm font-medium transition-colors ${
                     isActive
-                      ? "nav-pill-active text-primary-foreground shadow-xs"
-                      : "text-muted-foreground hover:bg-surface-2 hover:text-foreground"
+                      ? "text-foreground font-semibold"
+                      : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {n.label}
@@ -668,13 +669,12 @@ function Nav() {
           </nav>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3">
             <a
               href={CV_URL}
               target="_blank"
               rel="noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold text-primary-foreground transition-all hover:scale-105 shadow-xs"
-              style={{ background: `linear-gradient(90deg, ${accent}, var(--secondary-1))` }}
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-[#0066cc] hover:bg-[#0071e3] px-4 py-2 text-xs font-semibold text-white transition-all hover:scale-105 active:scale-95 shadow-2xs"
             >
               <svg
                 width="13"
@@ -691,11 +691,13 @@ function Nav() {
             <ThemeToggle />
             <button
               onClick={() => setOpen((v) => !v)}
-              className="md:hidden inline-flex items-center gap-1.5 rounded-xl border-2 border-border/90 bg-card px-3.5 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-foreground shadow-2xs hover:border-primary/80 active:scale-95 transition-all"
+              className="md:hidden inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3.5 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-foreground shadow-2xs hover:border-primary/80 active:scale-95 transition-all"
               aria-label="Toggle Navigation Menu"
             >
               <span>{open ? "CLOSE" : "MENU"}</span>
-              <span className="text-primary font-bold text-sm leading-none">{open ? "✕" : "+"}</span>
+              <span className="text-primary font-bold text-sm leading-none">
+                {open ? "✕" : "+"}
+              </span>
             </button>
           </div>
         </div>
@@ -714,11 +716,7 @@ function Nav() {
             {/* Top Bar Header */}
             <div className="w-full flex items-center justify-between border-b border-border/70 pb-4 font-mono text-xs text-muted-foreground uppercase tracking-widest">
               <div className="flex items-center gap-2.5">
-                <img
-                  src={logoNav}
-                  alt="Logo"
-                  className="h-7 w-auto object-contain dark:hidden"
-                />
+                <img src={logoNav} alt="Logo" className="h-7 w-auto object-contain dark:hidden" />
                 <img
                   src={logoNavWht}
                   alt="Logo"
@@ -768,7 +766,7 @@ function Nav() {
                 href={CV_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-primary via-secondary-1 to-accent text-center font-mono text-xs font-bold uppercase tracking-wider text-primary-foreground shadow-md active:scale-98 transition-all"
+                className="w-full py-3 rounded-full bg-[#0066cc] hover:bg-[#0071e3] text-center font-mono text-xs font-bold uppercase tracking-wider text-white shadow-md active:scale-98 transition-all"
               >
                 Download CV ✦
               </a>
@@ -842,7 +840,7 @@ function Hero() {
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
             Open to Internship & Full-time roles
           </div>
-          <h1 className="mt-5 font-display text-5xl font-semibold leading-[1.1] md:text-7xl">
+          <h1 className="mt-4 sm:mt-5 font-display text-3xl sm:text-5xl md:text-7xl font-semibold leading-[1.1] tracking-tight">
             <span className="block">Turning complex</span>
             <span className="block">data into</span>
             <span className="block">
@@ -860,7 +858,7 @@ function Hero() {
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
               href="#projects"
-              className="group inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background transition hover:opacity-90"
+              className="group inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background transition hover:opacity-90 active:scale-95"
             >
               View my work
               <svg
@@ -879,7 +877,7 @@ function Hero() {
               href={CV_URL}
               target="_blank"
               rel="noreferrer"
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary via-secondary-1 to-accent px-5 py-3 text-sm font-medium text-primary-foreground shadow-lg transition hover:scale-[1.03]"
+              className="group inline-flex items-center gap-2 rounded-full bg-[#0066cc] hover:bg-[#0071e3] px-5 py-3 text-sm font-medium text-white shadow-md transition hover:scale-[1.03] active:scale-95"
             >
               <svg
                 width="14"
@@ -895,7 +893,7 @@ function Hero() {
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium hover:bg-surface"
+              className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium hover:bg-surface active:scale-95"
             >
               Get in touch
             </a>
@@ -947,7 +945,13 @@ function Hero() {
               className="absolute -right-6 top-2/3 grid h-12 w-12 place-items-center rounded-2xl border-1.5 border-border bg-card shadow-md animate-float-slow"
               style={{ animationDelay: "-4s" }}
             >
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/New_Power_BI_Logo.svg/3840px-New_Power_BI_Logo.svg.png" alt="Power BI" width={24} height={24} className="h-6 w-6 object-contain" />
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/New_Power_BI_Logo.svg/3840px-New_Power_BI_Logo.svg.png"
+                alt="Power BI"
+                width={24}
+                height={24}
+                className="h-6 w-6 object-contain"
+              />
             </div>
           </div>
         </div>
@@ -1030,18 +1034,20 @@ function About() {
       }
       reveal="reveal-blur"
     >
-      <div className="grid gap-10 md:grid-cols-[1.3fr_1fr]">
+      <div className="grid gap-10 lg:grid-cols-[1fr_1.15fr] items-start">
         <div className="reveal reveal-left space-y-4 text-base leading-relaxed text-muted-foreground">
           <p>
             I study{" "}
-            <span className="text-foreground">
+            <span className="text-foreground font-medium">
               Data Science at Institut Teknologi Sepuluh Nopember (ITS)
             </span>{" "}
             and was named{" "}
-            <span className="text-foreground">3rd Most Outstanding Student of ITS 2026</span>. I'm
-            an awardee of the{" "}
-            <span className="text-foreground">Beasiswa Indonesia Maju (BIM) DN</span> scholarship
-            from Kemdiktisaintek RI.
+            <span className="text-foreground font-medium">
+              3rd Most Outstanding Student of ITS 2026
+            </span>
+            . I'm an awardee of the{" "}
+            <span className="text-foreground font-medium">Beasiswa Indonesia Maju (BIM) DN</span>{" "}
+            scholarship from Kemdiktisaintek RI.
           </p>
           <p>
             My work spans the full analytics stack — from collecting and modeling messy data, to
@@ -1054,30 +1060,8 @@ function About() {
           </p>
           <GitHubContributions />
         </div>
-        <div className="reveal reveal-right min-h-[480px] md:min-h-[510px]">
-          <AnimatedList delay={2500} className="w-full gap-3 items-stretch">
-            {Object.entries(SKILLS).map(([cat, items], idx) => (
-              <div
-                key={cat}
-                className={`rounded-2xl border-2 border-border/90 bg-gradient-to-br ${SKILL_ACCENTS[idx % SKILL_ACCENTS.length]} bg-card p-5 shadow-sm tilt-on-hover w-full`}
-              >
-                <div className="font-mono text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
-                  {cat}
-                </div>
-                <div className="mt-3 flex flex-wrap gap-1.5">
-                  {items.map((s) => (
-                    <span
-                      key={s}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-border/90 bg-surface-2/90 px-3 py-1 text-xs font-medium text-foreground shadow-2xs hover:border-primary/60 hover:scale-105 transition-all"
-                    >
-                      <Logo name={s} size={12} />
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </AnimatedList>
+        <div className="reveal reveal-right w-full">
+          <SkillsBeamShowcase />
         </div>
       </div>
     </Section>
@@ -1107,7 +1091,9 @@ function Experience() {
                 <div className="flex-1">
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
                     <h3 className="font-display text-lg font-semibold">{e.role}</h3>
-                    <span className="font-mono text-xs font-semibold text-muted-foreground">{e.period}</span>
+                    <span className="font-mono text-xs font-semibold text-muted-foreground">
+                      {e.period}
+                    </span>
                   </div>
                   <div className="mt-1 text-sm text-primary font-medium">{e.org}</div>
                   <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
@@ -1166,7 +1152,9 @@ function Projects() {
               <span className="rounded-full border-1.5 border-border/90 bg-surface-2/90 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-foreground shadow-2xs">
                 {p.tag}
               </span>
-              <span className="font-mono text-xs font-semibold text-muted-foreground">0{i + 1}</span>
+              <span className="font-mono text-xs font-semibold text-muted-foreground">
+                0{i + 1}
+              </span>
             </div>
             <h3 className="mt-5 font-display text-xl font-semibold">{p.name}</h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
@@ -1266,7 +1254,8 @@ function Contact() {
               href={`mailto:${SOCIALS.email}`}
               className="flex items-center gap-3 text-foreground hover:text-primary break-all"
             >
-              <span className="text-muted-foreground shrink-0 font-semibold">email</span>→ {SOCIALS.email}
+              <span className="text-muted-foreground shrink-0 font-semibold">email</span>→{" "}
+              {SOCIALS.email}
             </a>
             <a
               href={SOCIALS.linkedin}
@@ -1274,7 +1263,8 @@ function Contact() {
               rel="noreferrer"
               className="flex items-center gap-3 text-foreground hover:text-primary break-all"
             >
-              <span className="text-muted-foreground shrink-0 font-semibold">linkedin</span>→ /in/dimaswahyusaputra111
+              <span className="text-muted-foreground shrink-0 font-semibold">linkedin</span>→
+              /in/dimaswahyusaputra111
             </a>
             <a
               href={SOCIALS.instagram}
@@ -1282,16 +1272,19 @@ function Contact() {
               rel="noreferrer"
               className="flex items-center gap-3 text-foreground hover:text-primary break-all"
             >
-              <span className="text-muted-foreground shrink-0 font-semibold">instagram</span>→ @dwhyu.s_
+              <span className="text-muted-foreground shrink-0 font-semibold">instagram</span>→
+              @dwhyu.s_
             </a>
             <a
               href={`tel:${SOCIALS.phone}`}
               className="flex items-center gap-3 text-foreground hover:text-primary"
             >
-              <span className="text-muted-foreground shrink-0 font-semibold">phone</span>→ +62 813 1121 1367
+              <span className="text-muted-foreground shrink-0 font-semibold">phone</span>→ +62 813
+              1121 1367
             </a>
             <div className="flex items-center gap-3">
-              <span className="text-muted-foreground shrink-0 font-semibold">based</span>→ Surabaya, East Java
+              <span className="text-muted-foreground shrink-0 font-semibold">based</span>→ Surabaya,
+              East Java
             </div>
           </div>
           <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -1299,7 +1292,7 @@ function Contact() {
               href={CV_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary via-secondary-1 to-accent px-4 py-2 text-sm font-medium text-primary-foreground transition hover:scale-[1.03]"
+              className="inline-flex items-center gap-2 rounded-full bg-[#0066cc] hover:bg-[#0071e3] px-4 py-2 text-sm font-medium text-white transition hover:scale-[1.03] active:scale-95 shadow-sm"
             >
               <svg
                 width="14"
