@@ -4,7 +4,7 @@ import dimasPhoto from "@/assets/Foto Formal_Dimas_Putih.png";
 import logoNav from "@/assets/Logo_Nav.png";
 import logoNavWht from "@/assets/Logo_Nav_Wht.png";
 import ojkLogo from "@/assets/ojk_logo.jpg";
-import idxLogo from "@/assets/id:x_logo.png";
+import idxLogo from "@/assets/idx-site-icon.png";
 import pkuyLogo from "@/assets/pkuy_logo.jpg";
 import fsadLogo from "@/assets/fsad_logo.png";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
@@ -27,6 +27,9 @@ import tspOptimizerImg from "@/assets/tsp_optimizer.png";
 import simulationDasImg from "@/assets/simulation_das.png";
 import dataWarehouseImg from "@/assets/data_warehouse.jpeg";
 import { FlippingCard } from "@/components/ui/flipping-card";
+import ThreeDCarousel, { ThreeDCarouselItem } from "@/components/ThreeDCarousel";
+import { ScrollTimeline, TimelineEvent } from "@/components/ScrollTimeline";
+
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -124,43 +127,57 @@ const SKILLS = {
   Tools: ["Git / GitHub", "Jupyter", "Google Colab", "Streamlit", "MySQL", "Pentaho Kettle"],
 };
 
-const EXPERIENCE = [
+const EXPERIENCE: ThreeDCarouselItem[] = [
   {
-    role: "Data Analyst Intern",
-    org: "Otoritas Jasa Keuangan (OJK) — East Java",
+    id: 1,
+    title: "Data Analyst Intern",
+    brand: "Otoritas Jasa Keuangan (OJK) — East Java",
     period: "Feb 2026 – Mar 2026",
-    logo: ojkLogo,
+    logoUrl: ojkLogo,
     points: [
       "Built SPLOG, a web-based logistics system managing 315+ items and centralizing stock monitoring.",
       "Automated reporting pipelines that cut report preparation time by ~60%.",
     ],
+    tags: ["Data Analytics", "Logistics System", "Automation", "Financial Services"],
+    gradient: "bg-gradient-to-r from-blue-600/30 via-indigo-600/15 to-card",
   },
   {
-    role: "Data Scientist Intern",
-    org: "id/x partners × Rakamin Academy",
+    id: 2,
+    title: "Data Scientist Intern",
+    brand: "id/x partners × Rakamin Academy",
     period: "Aug 2025 – Sep 2025",
-    logo: idxLogo,
+    logoUrl: idxLogo,
     points: [
       "Delivered an end-to-end ML capstone with measurable accuracy benchmarks using Python & Scikit-learn.",
       "Collaborated with Business Analysts, Data Engineers, and PMs to ship data-driven IT solutions.",
     ],
+    tags: ["Machine Learning", "Python", "Scikit-Learn", "Cross-Functional"],
+    gradient: "bg-gradient-to-r from-purple-600/30 via-pink-600/15 to-card",
   },
   {
-    role: "CEO Analyst",
-    org: "Produktifkuy",
+    id: 3,
+    title: "CEO Analyst",
+    brand: "Produktifkuy",
     period: "Jan 2025 – Jul 2025",
-    logo: pkuyLogo,
+    logoUrl: pkuyLogo,
     points: [
       "Selected as 1 of 53 from 1,500+ applicants; led analysis across 6 divisions resulting in 6 org-wide improvements.",
       "Authored 20+ strategic proposals and data-driven decks supporting executive decisions.",
     ],
+    tags: ["Executive Strategy", "Org Analytics", "Decision Support", "Leadership"],
+    gradient: "bg-gradient-to-r from-emerald-600/30 via-teal-600/15 to-card",
   },
   {
-    role: "Vice Project Officer — FSAD FAIR 2025",
-    org: "Organizational",
+    id: 4,
+    title: "Vice Project Officer",
+    brand: "FSAD FAIR 2025 — Organizational",
     period: "May 2025 – Jul 2025",
-    logo: fsadLogo,
-    points: ["Coordinated 70+ committee members; engaged 160+ high school students nationwide."],
+    logoUrl: fsadLogo,
+    points: [
+      "Coordinated 70+ committee members; engaged 160+ high school students nationwide.",
+    ],
+    tags: ["Project Management", "Team Leadership", "Event Coordination", "FSAD ITS"],
+    gradient: "bg-gradient-to-r from-amber-600/30 via-orange-600/15 to-card",
   },
 ];
 
@@ -280,34 +297,54 @@ const SECTION_ACCENTS: Record<string, string> = {
   contact: "var(--secondary-1)",
 };
 
-const ACHIEVEMENTS = [
+const ACHIEVEMENTS: TimelineEvent[] = [
   {
     year: "2026",
     scope: "International",
     title: "1st Place — International Business Strategy Competition (UNJ)",
+    subtitle: "Universitas Negeri Jakarta",
   },
   {
     year: "2026",
     scope: "International",
     title: "1st Place — Dokter Data Infographic Competition",
+    subtitle: "Dokter Data Indonesia",
   },
-  { year: "2025", scope: "National", title: "Gold Medal — SATRIA DATA 2025, Kemendiktisaintek RI" },
+  {
+    year: "2025",
+    scope: "National",
+    title: "Gold Medal — SATRIA DATA 2025",
+    subtitle: "Kemendiktisaintek RI",
+  },
   {
     year: "2025",
     scope: "National",
     title: "1st Place — Brawijaya National Youth Competition (UB)",
+    subtitle: "Universitas Brawijaya",
   },
-  { year: "2025", scope: "National", title: "1st Place — Data Competition, ISFEST UMN" },
+  {
+    year: "2025",
+    scope: "National",
+    title: "1st Place — Data Competition, ISFEST UMN",
+    subtitle: "Universitas Multimedia Nusantara",
+  },
   {
     year: "2024",
     scope: "International",
-    title: "1st Runner Up — International Youthpreneur Competition (SBM ITB)",
+    title: "1st Runner Up — International Youthpreneur Competition",
+    subtitle: "SBM ITB",
   },
-  { year: "2024", scope: "National", title: "1st Place — Infographic Competition 4C FILKOM UB" },
+  {
+    year: "2024",
+    scope: "National",
+    title: "1st Place — Infographic Competition 4C FILKOM UB",
+    subtitle: "Universitas Brawijaya",
+  },
   {
     year: "2023",
     scope: "International",
-    title: "Silver — Greater Bay Area International Math Olympiad",
+    title: "Silver Medal — Greater Bay Area International Math Olympiad",
+    subtitle: "GBA Olympiad Committee",
   },
 ];
 
@@ -1143,42 +1180,12 @@ function Experience() {
       }
       reveal="reveal-left"
     >
-      <ol className="relative space-y-6 border-l-2 border-border/80 pl-6 md:pl-10">
-        {EXPERIENCE.map((e, i) => (
-          <li key={i} className={`reveal ${i % 2 === 0 ? "reveal-left" : "reveal-right"} relative`}>
-            <span className="absolute -left-[33px] top-2 grid h-4 w-4 place-items-center rounded-full bg-background border-2 border-border md:-left-[45px]">
-              <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-br from-primary via-secondary-1 to-accent animate-pulse-glow" />
-            </span>
-            <div className="relative rounded-2xl border-2 border-border/90 bg-card p-6 md:p-7 shadow-md transition-all duration-300 hover:border-primary/60 hover:shadow-xl w-full">
-              <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <h3 className="font-display text-lg font-semibold">{e.role}</h3>
-                    <span className="font-mono text-xs font-semibold text-muted-foreground">
-                      {e.period}
-                    </span>
-                  </div>
-                  <div className="mt-1 text-sm text-primary font-medium">{e.org}</div>
-                  <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
-                    {e.points.map((p, j) => (
-                      <li key={j} className="flex gap-2">
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                        {p}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {e.logo && (
-                  <div className="relative shrink-0 w-12 h-12 rounded-xl border-1.5 border-border/90 bg-surface-2 flex items-center justify-center overflow-hidden p-1.5 shadow-sm hover:scale-105 transition-transform duration-300">
-                    <img src={e.logo} alt={e.org} className="w-full h-full object-contain" />
-                  </div>
-                )}
-              </div>
-            </div>
-          </li>
-        ))}
-      </ol>
+      <ThreeDCarousel
+        items={EXPERIENCE}
+        autoRotate={true}
+        rotateInterval={4500}
+        cardHeight={480}
+      />
     </Section>
   );
 }
@@ -1352,26 +1359,13 @@ function Achievements() {
       title={<>Awards & achievements.</>}
       reveal="reveal-rotate"
     >
-      <div className="grid gap-3">
-        {ACHIEVEMENTS.map((a, i) => (
-          <div
-            key={i}
-            className={`reveal ${i % 2 === 0 ? "reveal-left" : "reveal-right"} group flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 rounded-2xl border-1.5 border-border/90 bg-card/95 px-5 py-4 shadow-sm transition-all hover:border-primary/60 hover:shadow-md hover:scale-[1.008]`}
-          >
-            <div className="flex items-center gap-3 shrink-0">
-              <span className="font-display text-lg sm:text-xl font-semibold text-muted-foreground group-hover:text-foreground">
-                {a.year}
-              </span>
-              <span
-                className={`rounded-full border px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider shadow-2xs ${a.scope === "International" ? "bg-primary/20 text-primary border-primary/30" : "bg-accent/25 text-accent-foreground border-accent/40"}`}
-              >
-                {a.scope}
-              </span>
-            </div>
-            <span className="text-sm md:text-base font-medium">{a.title}</span>
-          </div>
-        ))}
-      </div>
+      <ScrollTimeline
+        events={ACHIEVEMENTS}
+        progressIndicator={true}
+        cardAlignment="alternating"
+        cardVariant="elevated"
+        revealAnimation="slide"
+      />
     </Section>
   );
 }

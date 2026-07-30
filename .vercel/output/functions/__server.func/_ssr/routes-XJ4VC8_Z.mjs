@@ -1,12 +1,12 @@
 import { o as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { g as require_react_dom } from "../_libs/@tanstack/react-router+[...].mjs";
-import { a as Linkedin, c as ArrowUpRight, i as LoaderCircle, n as Moon, o as Instagram, r as Mail, s as Github, t as Sun } from "../_libs/lucide-react.mjs";
+import { _ as ArrowRight, a as Mail, c as Instagram, d as ChevronLeft, f as Calendar, g as ArrowUpRight, h as Award, i as Medal, l as Github, m as Briefcase, n as Sun, o as LoaderCircle, p as Building2, r as Moon, s as Linkedin, t as Trophy, u as ChevronRight } from "../_libs/lucide-react.mjs";
 import { n as clsx, t as cva } from "../_libs/class-variance-authority+clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
 import { a as motion, i as useScroll, n as useTransform, o as AnimatePresence, r as useMotionValue, t as useSpring } from "../_libs/framer-motion.mjs";
 import { t as motion$1 } from "../_libs/motion.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-vj9s6WmR.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-XJ4VC8_Z.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var import_react_dom = require_react_dom();
@@ -14,7 +14,7 @@ var Foto_Formal_Dimas_Putih_default = "/assets/Foto%20Formal_Dimas_Putih-D5kYmjN
 var Logo_Nav_default = "/assets/Logo_Nav-B4PF436_.png";
 var Logo_Nav_Wht_default = "/assets/Logo_Nav_Wht-BOVcUqNG.png";
 var ojk_logo_default = "/assets/ojk_logo-Cs-uygCR.jpg";
-var id_x_logo_default = "/assets/id_x_logo-BVitZ7Pg.png";
+var idx_site_icon_default = "/assets/idx-site-icon-D1vxuoLN.png";
 var pkuy_logo_default = "/assets/pkuy_logo-Dw50WDZ8.jpg";
 var fsad_logo_default = "/assets/fsad_logo-DYZrpq_Y.png";
 function cn(...inputs) {
@@ -901,6 +901,553 @@ function FlippingCard({ frontContent, backContent, className, height = 420, widt
 		})
 	});
 }
+var Card = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("rounded-xl border bg-card text-card-foreground shadow", className),
+	...props
+}));
+Card.displayName = "Card";
+var CardHeader = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("flex flex-col space-y-1.5 p-6", className),
+	...props
+}));
+CardHeader.displayName = "CardHeader";
+var CardTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("font-semibold leading-none tracking-tight", className),
+	...props
+}));
+CardTitle.displayName = "CardTitle";
+var CardDescription = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("text-sm text-muted-foreground", className),
+	...props
+}));
+CardDescription.displayName = "CardDescription";
+var CardContent = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("p-6 pt-0", className),
+	...props
+}));
+CardContent.displayName = "CardContent";
+var CardFooter = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("flex items-center p-6 pt-0", className),
+	...props
+}));
+CardFooter.displayName = "CardFooter";
+var MOBILE_BREAKPOINT = 768;
+function useIsMobile() {
+	const [isMobile, setIsMobile] = import_react.useState(void 0);
+	import_react.useEffect(() => {
+		const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+		const onChange = () => {
+			setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+		};
+		mql.addEventListener("change", onChange);
+		setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+		return () => mql.removeEventListener("change", onChange);
+	}, []);
+	return !!isMobile;
+}
+var ThreeDCarousel = ({ items = [], autoRotate = true, rotateInterval = 4500, cardHeight = 480, isMobileSwipe = true }) => {
+	const [active, setActive] = (0, import_react.useState)(0);
+	const carouselRef = (0, import_react.useRef)(null);
+	const [isInView, setIsInView] = (0, import_react.useState)(false);
+	const [isHovering, setIsHovering] = (0, import_react.useState)(false);
+	const [touchStart, setTouchStart] = (0, import_react.useState)(null);
+	const [touchEnd, setTouchEnd] = (0, import_react.useState)(null);
+	const isMobile = useIsMobile();
+	const minSwipeDistance = 40;
+	const nextSlide = (0, import_react.useCallback)(() => {
+		if (items.length === 0) return;
+		setActive((prev) => (prev + 1) % items.length);
+	}, [items.length]);
+	const prevSlide = (0, import_react.useCallback)(() => {
+		if (items.length === 0) return;
+		setActive((prev) => (prev - 1 + items.length) % items.length);
+	}, [items.length]);
+	(0, import_react.useEffect)(() => {
+		if (autoRotate && isInView && !isHovering && items.length > 1) {
+			const interval = setInterval(nextSlide, rotateInterval);
+			return () => clearInterval(interval);
+		}
+	}, [
+		isInView,
+		isHovering,
+		autoRotate,
+		rotateInterval,
+		items.length,
+		nextSlide
+	]);
+	(0, import_react.useEffect)(() => {
+		const el = carouselRef.current;
+		if (!el) return;
+		const observer = new IntersectionObserver(([entry]) => setIsInView(entry.isIntersecting), { threshold: .2 });
+		observer.observe(el);
+		return () => observer.disconnect();
+	}, []);
+	(0, import_react.useEffect)(() => {
+		const handleKeyDown = (e) => {
+			if (!isInView) return;
+			if (e.key === "ArrowLeft") prevSlide();
+			else if (e.key === "ArrowRight") nextSlide();
+		};
+		window.addEventListener("keydown", handleKeyDown);
+		return () => window.removeEventListener("keydown", handleKeyDown);
+	}, [
+		isInView,
+		prevSlide,
+		nextSlide
+	]);
+	const onTouchStart = (e) => {
+		if (!isMobileSwipe) return;
+		setTouchStart(e.targetTouches[0].clientX);
+		setTouchEnd(null);
+	};
+	const onTouchMove = (e) => {
+		if (!isMobileSwipe) return;
+		setTouchEnd(e.targetTouches[0].clientX);
+	};
+	const onTouchEnd = () => {
+		if (!isMobileSwipe || !touchStart || !touchEnd) return;
+		const distance = touchStart - touchEnd;
+		if (distance > minSwipeDistance) nextSlide();
+		else if (distance < -40) prevSlide();
+	};
+	const getCardStyle = (index) => {
+		const total = items.length;
+		if (total === 0) return {};
+		let diff = (index - active) % total;
+		if (diff > total / 2) diff -= total;
+		if (diff < -total / 2) diff += total;
+		if (diff === 0) return {
+			transform: "translateX(0%) scale(1) rotateY(0deg)",
+			opacity: 1,
+			zIndex: 30,
+			pointerEvents: "auto",
+			filter: "drop-shadow(0 20px 25px rgba(0,0,0,0.15))"
+		};
+		else if (diff === 1 || total === 2 && diff === -1) return {
+			transform: isMobile ? "translateX(30%) scale(0.88) rotateY(-10deg)" : "translateX(45%) scale(0.92) rotateY(-15deg)",
+			opacity: .6,
+			zIndex: 20,
+			cursor: "pointer",
+			filter: "blur(0.5px)"
+		};
+		else if (diff === -1) return {
+			transform: isMobile ? "translateX(-30%) scale(0.88) rotateY(10deg)" : "translateX(-45%) scale(0.92) rotateY(15deg)",
+			opacity: .6,
+			zIndex: 20,
+			cursor: "pointer",
+			filter: "blur(0.5px)"
+		};
+		else {
+			const dir = diff > 0 ? 1 : -1;
+			return {
+				transform: `translateX(${dir * (isMobile ? 60 : 80)}%) scale(0.75) rotateY(${-dir * 25}deg)`,
+				opacity: 0,
+				zIndex: 10,
+				pointerEvents: "none"
+			};
+		}
+	};
+	if (!items || items.length === 0) return null;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+		id: "ThreeDCarousel",
+		className: "relative w-full py-4 select-none",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "w-full mx-auto px-2 sm:px-4",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "relative overflow-visible h-[560px] sm:h-[580px] flex items-center justify-center [perspective:1200px]",
+				onMouseEnter: () => setIsHovering(true),
+				onMouseLeave: () => setIsHovering(false),
+				onTouchStart,
+				onTouchMove,
+				onTouchEnd,
+				ref: carouselRef,
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "absolute inset-0 flex items-center justify-center",
+						children: items.map((item, index) => {
+							const cardStyle = getCardStyle(index);
+							const isActive = index === active;
+							return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								onClick: () => !isActive && setActive(index),
+								style: cardStyle,
+								className: "absolute top-1/2 -translate-y-1/2 w-full max-w-[340px] sm:max-w-[440px] md:max-w-[500px] transition-all duration-500 ease-out preserve-3d",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
+									style: { minHeight: `${cardHeight}px` },
+									className: `overflow-hidden border-2 transition-all duration-300 flex flex-col bg-card/95 backdrop-blur-md ${isActive ? "border-primary/60 ring-2 ring-primary/20 shadow-2xl" : "border-border/80 shadow-md hover:border-primary/40"}`,
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: `relative p-5 flex flex-col justify-between overflow-hidden border-b border-border/60 ${item.gradient || "bg-gradient-to-r from-primary/20 via-surface-2 to-card"}`,
+										style: item.imageUrl ? {
+											backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.85)), url(${item.imageUrl})`,
+											backgroundSize: "cover",
+											backgroundPosition: "center"
+										} : void 0,
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "flex items-center justify-between gap-3 z-10",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												className: "flex items-center gap-3",
+												children: [item.logoUrl ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+													src: item.logoUrl,
+													alt: item.brand,
+													className: "h-10 sm:h-12 w-auto max-w-[130px] sm:max-w-[150px] object-contain rounded-md shadow-xs shrink-0"
+												}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+													className: "w-10 h-10 rounded-md border border-primary/30 bg-primary/10 flex items-center justify-center shrink-0 text-primary",
+													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Building2, { className: "w-5 h-5" })
+												}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "text-xs font-bold uppercase tracking-wider text-muted-foreground block line-clamp-1",
+													children: item.brand
+												}) })]
+											}), item.period && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												className: "inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border/80 bg-background/80 backdrop-blur-md text-[11px] font-mono font-medium text-foreground shadow-2xs shrink-0",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar, { className: "w-3 h-3 text-primary" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: item.period })]
+											})]
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+											className: "mt-4 z-10",
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+												className: "flex items-center gap-2",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Briefcase, { className: "w-4 h-4 text-primary shrink-0" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+													className: "font-display text-lg sm:text-xl font-bold text-foreground line-clamp-1",
+													children: item.title
+												})]
+											})
+										})]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
+										className: "p-5 sm:p-6 flex flex-col justify-between flex-grow",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [item.description && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+											className: "text-sm font-medium text-muted-foreground mb-3 leading-relaxed",
+											children: item.description
+										}), item.points && item.points.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+											className: "space-y-2.5 text-xs sm:text-sm text-muted-foreground leading-relaxed",
+											children: item.points.map((pt, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
+												className: "flex items-start gap-2.5",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500 animate-pulse-slow" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "text-foreground/90",
+													children: pt
+												})]
+											}, idx))
+										})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "mt-5 pt-4 border-t border-border/50 flex flex-col gap-3",
+											children: [item.tags && item.tags.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+												className: "flex flex-wrap gap-1.5",
+												children: item.tags.map((tag, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "inline-flex items-center px-2.5 py-1 rounded-md bg-blue-500/10 border border-blue-500/20 text-[11px] font-mono font-medium text-blue-600 dark:text-blue-400",
+													children: tag
+												}, idx))
+											}), item.link && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+												href: item.link,
+												target: "_blank",
+												rel: "noopener noreferrer",
+												className: "inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline transition-all group",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Learn more" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "w-3.5 h-3.5 transition-transform group-hover:translate-x-1" })]
+											})]
+										})]
+									})]
+								})
+							}, item.id);
+						})
+					}),
+					!isMobile && items.length > 1 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						className: "absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-background/90 hover:bg-background border border-border/80 rounded-full flex items-center justify-center text-foreground hover:text-primary z-40 shadow-lg transition-all hover:scale-110 active:scale-95 backdrop-blur-md cursor-pointer",
+						onClick: prevSlide,
+						"aria-label": "Previous Experience",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronLeft, { className: "w-6 h-6" })
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						className: "absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-background/90 hover:bg-background border border-border/80 rounded-full flex items-center justify-center text-foreground hover:text-primary z-40 shadow-lg transition-all hover:scale-110 active:scale-95 backdrop-blur-md cursor-pointer",
+						onClick: nextSlide,
+						"aria-label": "Next Experience",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, { className: "w-6 h-6" })
+					})] }),
+					items.length > 1 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "absolute -bottom-2 left-0 right-0 flex justify-center items-center space-x-2.5 z-40",
+						children: items.map((_, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							className: `h-2.5 rounded-full transition-all duration-300 cursor-pointer ${active === idx ? "bg-primary w-7 shadow-sm" : "bg-border hover:bg-muted-foreground/40 w-2.5"}`,
+							onClick: () => setActive(idx),
+							"aria-label": `Go to slide ${idx + 1}`
+						}, idx))
+					})
+				]
+			})
+		})
+	});
+};
+var DEFAULT_EVENTS = [
+	{
+		year: "2026",
+		scope: "International",
+		title: "1st Place — International Business Strategy Competition (UNJ)",
+		subtitle: "Universitas Negeri Jakarta"
+	},
+	{
+		year: "2026",
+		scope: "International",
+		title: "1st Place — Dokter Data Infographic Competition",
+		subtitle: "Dokter Data"
+	},
+	{
+		year: "2025",
+		scope: "National",
+		title: "Gold Medal — SATRIA DATA 2025, Kemendiktisaintek RI",
+		subtitle: "Kemendiktisaintek RI"
+	}
+];
+var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder = "sequential", cardAlignment = "alternating", lineColor = "bg-border/60", activeColor = "bg-primary", progressIndicator = true, cardVariant = "elevated", cardEffect = "glow", parallaxIntensity = 0, progressLineWidth = 3, progressLineCap = "round", dateFormat = "badge", revealAnimation = "slide", className = "", connectorStyle = "line", perspective = true, darkMode = false }) => {
+	const scrollRef = (0, import_react.useRef)(null);
+	const [activeIndex, setActiveIndex] = (0, import_react.useState)(-1);
+	const timelineRefs = (0, import_react.useRef)([]);
+	const { scrollYProgress } = useScroll({
+		target: scrollRef,
+		offset: ["start 60%", "end 75%"]
+	});
+	const smoothProgress = useSpring(scrollYProgress, {
+		stiffness: 120,
+		damping: 25,
+		restDelta: .001
+	});
+	const progressHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
+	(0, import_react.useEffect)(() => {
+		const unsubscribe = scrollYProgress.on("change", (v) => {
+			const newIndex = Math.floor(v * events.length);
+			if (newIndex !== activeIndex && newIndex >= 0 && newIndex < events.length) setActiveIndex(newIndex);
+		});
+		return () => unsubscribe();
+	}, [
+		scrollYProgress,
+		events.length,
+		activeIndex
+	]);
+	const getCardVariants = (index) => {
+		const baseDelay = animationOrder === "simultaneous" ? 0 : animationOrder === "staggered" ? index % 3 * .15 : .1;
+		const initialStates = {
+			fade: {
+				opacity: 0,
+				y: 30
+			},
+			slide: {
+				x: cardAlignment === "left" ? -50 : cardAlignment === "right" ? 50 : index % 2 === 0 ? -50 : 50,
+				opacity: 0
+			},
+			scale: {
+				scale: .85,
+				opacity: 0
+			},
+			flip: {
+				rotateY: 45,
+				opacity: 0
+			},
+			none: { opacity: 1 }
+		};
+		return {
+			initial: initialStates[revealAnimation] || initialStates.fade,
+			whileInView: {
+				opacity: 1,
+				y: 0,
+				x: 0,
+				scale: 1,
+				rotateY: 0,
+				transition: {
+					duration: .6,
+					delay: baseDelay,
+					ease: [
+						.25,
+						.1,
+						.25,
+						1
+					]
+				}
+			},
+			viewport: {
+				once: false,
+				margin: "-40px"
+			}
+		};
+	};
+	const getConnectorClasses = () => {
+		const baseClasses = cn("absolute left-4 lg:left-1/2 transform lg:-translate-x-1/2", lineColor);
+		const widthStyle = `w-[${progressLineWidth}px]`;
+		switch (connectorStyle) {
+			case "dots": return cn(baseClasses, "w-1 rounded-full");
+			case "dashed": return cn(baseClasses, widthStyle, `[mask-image:linear-gradient(to_bottom,black_33%,transparent_33%,transparent_66%,black_66%)] [mask-size:1px_12px]`);
+			default: return cn(baseClasses, widthStyle);
+		}
+	};
+	const getCardClasses = (index) => {
+		const baseClasses = "relative z-30 rounded-2xl transition-all duration-300";
+		const variantClasses = {
+			default: "bg-card border border-border shadow-sm",
+			elevated: "bg-card/95 backdrop-blur-md border border-border/90 shadow-md hover:border-primary/50",
+			outlined: "bg-card/40 backdrop-blur border-2 border-primary/20",
+			filled: "bg-primary/10 border border-primary/30"
+		};
+		const effectClasses = {
+			none: "",
+			glow: "hover:shadow-[0_0_20px_rgba(59,130,246,0.25)] hover:scale-[1.015]",
+			shadow: "hover:shadow-xl hover:-translate-y-1",
+			bounce: "hover:scale-[1.03] hover:shadow-md active:scale-[0.97]"
+		};
+		const alignmentClassesDesktop = cardAlignment === "alternating" ? index % 2 === 0 ? "lg:mr-[calc(50%+32px)]" : "lg:ml-[calc(50%+32px)]" : cardAlignment === "left" ? "lg:mr-auto lg:ml-0" : "lg:ml-auto lg:mr-0";
+		return cn(baseClasses, variantClasses[cardVariant], effectClasses[cardEffect], alignmentClassesDesktop, "ml-12 lg:ml-0 w-[calc(100%-3rem)] lg:w-[calc(50%-44px)]");
+	};
+	const getScopeBadge = (scope) => {
+		if (!scope) return null;
+		return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+			className: cn("rounded-full border px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider shadow-2xs shrink-0", scope.toLowerCase().includes("international") ? "bg-primary/20 text-primary border-primary/30" : "bg-accent/20 text-accent-foreground border-accent/30"),
+			children: scope
+		});
+	};
+	const getEventIcon = (event) => {
+		if (event.icon) return event.icon;
+		if (event.scope?.toLowerCase().includes("international")) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trophy, { className: "h-4 w-4 text-primary shrink-0" });
+		else if (event.title.toLowerCase().includes("gold") || event.title.toLowerCase().includes("1st")) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Medal, { className: "h-4 w-4 text-amber-500 shrink-0" });
+		return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Award, { className: "h-4 w-4 text-secondary-1 shrink-0" });
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		ref: scrollRef,
+		className: cn("relative w-full select-none py-6 sm:py-10", darkMode ? "bg-background text-foreground" : "", className),
+		children: [(title || subtitle) && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "text-center pb-8 px-4",
+			children: [title && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+				className: "text-2xl md:text-4xl font-bold mb-2",
+				children: title
+			}), subtitle && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				className: "text-sm md:text-base text-muted-foreground max-w-xl mx-auto",
+				children: subtitle
+			})]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "relative max-w-5xl mx-auto px-3 sm:px-6 pt-4 pb-12",
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "relative mx-auto",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: cn(getConnectorClasses(), "h-[calc(100%-1rem)] absolute top-2 z-10") }),
+					progressIndicator && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion$1.div, {
+						className: "absolute top-2 z-10 left-4 lg:left-1/2 -translate-x-1/2",
+						style: {
+							height: progressHeight,
+							maxHeight: "calc(100% - 1rem)",
+							width: `${progressLineWidth}px`,
+							borderRadius: progressLineCap === "round" ? "9999px" : "0px",
+							background: `linear-gradient(to bottom, #3b82f6, #6366f1, #8b5cf6)`,
+							boxShadow: `
+                    0 0 12px rgba(99,102,241,0.5),
+                    0 0 20px rgba(139,92,246,0.3)
+                  `
+						}
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion$1.div, {
+						className: "absolute z-20 left-4 lg:left-1/2",
+						style: {
+							top: `calc(${progressHeight} + 8px)`,
+							translateX: "-50%",
+							translateY: "-50%"
+						},
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion$1.div, {
+							className: "w-4 h-4 rounded-full",
+							style: {
+								background: "radial-gradient(circle, rgba(139,92,246,0.9) 0%, rgba(99,102,241,0.6) 45%, rgba(59,130,246,0) 80%)",
+								boxShadow: `
+                      0 0 12px 3px rgba(139, 92, 246, 0.7),
+                      0 0 20px 6px rgba(99, 102, 241, 0.5),
+                      0 0 32px 10px rgba(59, 130, 246, 0.3)
+                    `
+							},
+							animate: { scale: [
+								1,
+								1.35,
+								1
+							] },
+							transition: {
+								duration: 1.8,
+								repeat: Infinity,
+								ease: "easeInOut"
+							}
+						})
+					})] }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "relative z-20 space-y-8 lg:space-y-12",
+						children: events.map((event, index) => {
+							const yOffset = useTransform(smoothProgress, [0, 1], [parallaxIntensity * 60, -parallaxIntensity * 60]);
+							const isActive = index <= activeIndex;
+							return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								ref: (el) => {
+									timelineRefs.current[index] = el;
+								},
+								className: cn("relative flex items-center py-2", "flex-col lg:flex-row", cardAlignment === "alternating" ? index % 2 === 0 ? "lg:justify-start" : "lg:flex-row-reverse lg:justify-start" : cardAlignment === "left" ? "lg:justify-start" : "lg:flex-row-reverse lg:justify-start"),
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: cn("absolute top-6 lg:top-1/2 transform -translate-y-1/2 z-30", "left-4 lg:left-1/2 -translate-x-1/2"),
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion$1.div, {
+										className: cn("w-6 h-6 rounded-full border-2 bg-background flex items-center justify-center transition-colors duration-300", isActive ? "border-primary bg-primary/20 shadow-[0_0_10px_rgba(59,130,246,0.6)]" : "border-border bg-card"),
+										animate: isActive ? {
+											scale: [
+												1,
+												1.25,
+												1
+											],
+											boxShadow: [
+												"0 0 0px rgba(59,130,246,0)",
+												"0 0 14px rgba(59,130,246,0.6)",
+												"0 0 0px rgba(59,130,246,0)"
+											]
+										} : {},
+										transition: {
+											duration: 1.2,
+											repeat: Infinity,
+											repeatDelay: 3,
+											ease: "easeInOut"
+										},
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: cn("w-2 h-2 rounded-full", isActive ? "bg-primary" : "bg-muted-foreground/40") })
+									})
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion$1.div, {
+									className: cn(getCardClasses(index)),
+									variants: getCardVariants(index),
+									initial: "initial",
+									whileInView: "whileInView",
+									viewport: {
+										once: false,
+										margin: "-60px"
+									},
+									style: parallaxIntensity > 0 ? { y: yOffset } : void 0,
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
+										className: "bg-card/95 border-border/80 shadow-md backdrop-blur-md overflow-hidden",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
+											className: "p-5 sm:p-6",
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+													className: "flex items-center justify-between gap-3 mb-3",
+													children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+														className: "flex items-center gap-2",
+														children: [getEventIcon(event), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+															className: "font-mono text-sm font-bold text-foreground",
+															children: event.year
+														})]
+													}), getScopeBadge(event.scope)]
+												}),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+													className: "text-base sm:text-lg font-bold text-foreground leading-snug",
+													children: event.title
+												}),
+												event.subtitle && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+													className: "mt-1 text-xs sm:text-sm font-medium text-muted-foreground",
+													children: event.subtitle
+												}),
+												event.description && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+													className: "mt-2 text-xs sm:text-sm text-muted-foreground/90 leading-relaxed",
+													children: event.description
+												})
+											]
+										})
+									})
+								})]
+							}, event.id || index);
+						})
+					})
+				]
+			})
+		})]
+	});
+};
 var CV_URL = "https://drive.google.com/file/d/1mzAsEG_2YFVSqtDOvY_E7tsW3vvR-Dw4/view?usp=sharing";
 var SOCIALS = {
 	instagram: "https://www.instagram.com/dwhyu.s_/",
@@ -988,32 +1535,64 @@ function Logo({ name, size = 14 }) {
 }
 var EXPERIENCE = [
 	{
-		role: "Data Analyst Intern",
-		org: "Otoritas Jasa Keuangan (OJK) — East Java",
+		id: 1,
+		title: "Data Analyst Intern",
+		brand: "Otoritas Jasa Keuangan (OJK) — East Java",
 		period: "Feb 2026 – Mar 2026",
-		logo: ojk_logo_default,
-		points: ["Built SPLOG, a web-based logistics system managing 315+ items and centralizing stock monitoring.", "Automated reporting pipelines that cut report preparation time by ~60%."]
+		logoUrl: ojk_logo_default,
+		points: ["Built SPLOG, a web-based logistics system managing 315+ items and centralizing stock monitoring.", "Automated reporting pipelines that cut report preparation time by ~60%."],
+		tags: [
+			"Data Analytics",
+			"Logistics System",
+			"Automation",
+			"Financial Services"
+		],
+		gradient: "bg-gradient-to-r from-blue-600/30 via-indigo-600/15 to-card"
 	},
 	{
-		role: "Data Scientist Intern",
-		org: "id/x partners × Rakamin Academy",
+		id: 2,
+		title: "Data Scientist Intern",
+		brand: "id/x partners × Rakamin Academy",
 		period: "Aug 2025 – Sep 2025",
-		logo: id_x_logo_default,
-		points: ["Delivered an end-to-end ML capstone with measurable accuracy benchmarks using Python & Scikit-learn.", "Collaborated with Business Analysts, Data Engineers, and PMs to ship data-driven IT solutions."]
+		logoUrl: idx_site_icon_default,
+		points: ["Delivered an end-to-end ML capstone with measurable accuracy benchmarks using Python & Scikit-learn.", "Collaborated with Business Analysts, Data Engineers, and PMs to ship data-driven IT solutions."],
+		tags: [
+			"Machine Learning",
+			"Python",
+			"Scikit-Learn",
+			"Cross-Functional"
+		],
+		gradient: "bg-gradient-to-r from-purple-600/30 via-pink-600/15 to-card"
 	},
 	{
-		role: "CEO Analyst",
-		org: "Produktifkuy",
+		id: 3,
+		title: "CEO Analyst",
+		brand: "Produktifkuy",
 		period: "Jan 2025 – Jul 2025",
-		logo: pkuy_logo_default,
-		points: ["Selected as 1 of 53 from 1,500+ applicants; led analysis across 6 divisions resulting in 6 org-wide improvements.", "Authored 20+ strategic proposals and data-driven decks supporting executive decisions."]
+		logoUrl: pkuy_logo_default,
+		points: ["Selected as 1 of 53 from 1,500+ applicants; led analysis across 6 divisions resulting in 6 org-wide improvements.", "Authored 20+ strategic proposals and data-driven decks supporting executive decisions."],
+		tags: [
+			"Executive Strategy",
+			"Org Analytics",
+			"Decision Support",
+			"Leadership"
+		],
+		gradient: "bg-gradient-to-r from-emerald-600/30 via-teal-600/15 to-card"
 	},
 	{
-		role: "Vice Project Officer — FSAD FAIR 2025",
-		org: "Organizational",
+		id: 4,
+		title: "Vice Project Officer",
+		brand: "FSAD FAIR 2025 — Organizational",
 		period: "May 2025 – Jul 2025",
-		logo: fsad_logo_default,
-		points: ["Coordinated 70+ committee members; engaged 160+ high school students nationwide."]
+		logoUrl: fsad_logo_default,
+		points: ["Coordinated 70+ committee members; engaged 160+ high school students nationwide."],
+		tags: [
+			"Project Management",
+			"Team Leadership",
+			"Event Coordination",
+			"FSAD ITS"
+		],
+		gradient: "bg-gradient-to-r from-amber-600/30 via-orange-600/15 to-card"
 	}
 ];
 var PROJECTS = [
@@ -1156,42 +1735,50 @@ var ACHIEVEMENTS = [
 	{
 		year: "2026",
 		scope: "International",
-		title: "1st Place — International Business Strategy Competition (UNJ)"
+		title: "1st Place — International Business Strategy Competition (UNJ)",
+		subtitle: "Universitas Negeri Jakarta"
 	},
 	{
 		year: "2026",
 		scope: "International",
-		title: "1st Place — Dokter Data Infographic Competition"
+		title: "1st Place — Dokter Data Infographic Competition",
+		subtitle: "Dokter Data Indonesia"
 	},
 	{
 		year: "2025",
 		scope: "National",
-		title: "Gold Medal — SATRIA DATA 2025, Kemendiktisaintek RI"
+		title: "Gold Medal — SATRIA DATA 2025",
+		subtitle: "Kemendiktisaintek RI"
 	},
 	{
 		year: "2025",
 		scope: "National",
-		title: "1st Place — Brawijaya National Youth Competition (UB)"
+		title: "1st Place — Brawijaya National Youth Competition (UB)",
+		subtitle: "Universitas Brawijaya"
 	},
 	{
 		year: "2025",
 		scope: "National",
-		title: "1st Place — Data Competition, ISFEST UMN"
+		title: "1st Place — Data Competition, ISFEST UMN",
+		subtitle: "Universitas Multimedia Nusantara"
 	},
 	{
 		year: "2024",
 		scope: "International",
-		title: "1st Runner Up — International Youthpreneur Competition (SBM ITB)"
+		title: "1st Runner Up — International Youthpreneur Competition",
+		subtitle: "SBM ITB"
 	},
 	{
 		year: "2024",
 		scope: "National",
-		title: "1st Place — Infographic Competition 4C FILKOM UB"
+		title: "1st Place — Infographic Competition 4C FILKOM UB",
+		subtitle: "Universitas Brawijaya"
 	},
 	{
 		year: "2023",
 		scope: "International",
-		title: "Silver — Greater Bay Area International Math Olympiad"
+		title: "Silver Medal — Greater Bay Area International Math Olympiad",
+		subtitle: "GBA Olympiad Committee"
 	}
 ];
 function useReveal() {
@@ -2072,53 +2659,11 @@ function Experience() {
 			"."
 		] }),
 		reveal: "reveal-left",
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ol", {
-			className: "relative space-y-6 border-l-2 border-border/80 pl-6 md:pl-10",
-			children: EXPERIENCE.map((e, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
-				className: `reveal ${i % 2 === 0 ? "reveal-left" : "reveal-right"} relative`,
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					className: "absolute -left-[33px] top-2 grid h-4 w-4 place-items-center rounded-full bg-background border-2 border-border md:-left-[45px]",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "h-2.5 w-2.5 rounded-full bg-gradient-to-br from-primary via-secondary-1 to-accent animate-pulse-glow" })
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "relative rounded-2xl border-2 border-border/90 bg-card p-6 md:p-7 shadow-md transition-all duration-300 hover:border-primary/60 hover:shadow-xl w-full",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex flex-col md:flex-row md:items-start justify-between gap-4",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex-1",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "flex flex-wrap items-baseline justify-between gap-2",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-										className: "font-display text-lg font-semibold",
-										children: e.role
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "font-mono text-xs font-semibold text-muted-foreground",
-										children: e.period
-									})]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									className: "mt-1 text-sm text-primary font-medium",
-									children: e.org
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
-									className: "mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground",
-									children: e.points.map((p, j) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
-										className: "flex gap-2",
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" }), p]
-									}, j))
-								})
-							]
-						}), e.logo && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "relative shrink-0 w-12 h-12 rounded-xl border-1.5 border-border/90 bg-surface-2 flex items-center justify-center overflow-hidden p-1.5 shadow-sm hover:scale-105 transition-transform duration-300",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-								src: e.logo,
-								alt: e.org,
-								className: "w-full h-full object-contain"
-							})
-						})]
-					})
-				})]
-			}, i))
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThreeDCarousel, {
+			items: EXPERIENCE,
+			autoRotate: true,
+			rotateInterval: 4500,
+			cardHeight: 480
 		})
 	});
 }
@@ -2270,24 +2815,12 @@ function Achievements() {
 		eyebrow: "04 — Recognition",
 		title: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children: "Awards & achievements." }),
 		reveal: "reveal-rotate",
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			className: "grid gap-3",
-			children: ACHIEVEMENTS.map((a, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: `reveal ${i % 2 === 0 ? "reveal-left" : "reveal-right"} group flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 rounded-2xl border-1.5 border-border/90 bg-card/95 px-5 py-4 shadow-sm transition-all hover:border-primary/60 hover:shadow-md hover:scale-[1.008]`,
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "flex items-center gap-3 shrink-0",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						className: "font-display text-lg sm:text-xl font-semibold text-muted-foreground group-hover:text-foreground",
-						children: a.year
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						className: `rounded-full border px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider shadow-2xs ${a.scope === "International" ? "bg-primary/20 text-primary border-primary/30" : "bg-accent/25 text-accent-foreground border-accent/40"}`,
-						children: a.scope
-					})]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					className: "text-sm md:text-base font-medium",
-					children: a.title
-				})]
-			}, i))
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollTimeline, {
+			events: ACHIEVEMENTS,
+			progressIndicator: true,
+			cardAlignment: "alternating",
+			cardVariant: "elevated",
+			revealAnimation: "slide"
 		})
 	});
 }
