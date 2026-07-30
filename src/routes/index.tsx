@@ -19,6 +19,14 @@ import { ClippedCircle } from "@/components/unlumen-ui/clipped-circle";
 import { GitHubContributions } from "@/components/github-contributions";
 import { InitialLoader } from "@/components/initial-loader";
 import { SkillsBeamShowcase } from "@/components/skills-beam-showcase";
+import parkvisionImg from "@/assets/parkvision.png";
+import indostockImg from "@/assets/indostock.png";
+import orderDashboardImg from "@/assets/order_dashboard.png";
+import customerClusterImg from "@/assets/customer_cluster.png";
+import tspOptimizerImg from "@/assets/tsp_optimizer.png";
+import simulationDasImg from "@/assets/simulation_das.png";
+import dataWarehouseImg from "@/assets/data_warehouse.jpeg";
+import { FlippingCard } from "@/components/ui/flipping-card";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -160,51 +168,106 @@ const PROJECTS = [
   {
     name: "ParkVision AI",
     tag: "Computer Vision",
-    desc: "Real-time parking slot detection web app using YOLOv8 with full-stack inference pipeline and interactive dashboard, deployed on Vercel.",
+    image: parkvisionImg,
+    desc: "Real-time parking slot detection web app using YOLOv8 with full-stack inference pipeline & interactive dashboard, deployed on Vercel.",
     tech: ["YOLOv8", "Python", "Vercel", "Streamlit"],
     url: "http://parkvisionai.vercel.app/",
+    detailsTitle: "ParkVision AI",
+    details: [
+      "Real-time parking slot detection web application powered by YOLOv8 deep learning.",
+      "Full-stack computer vision inference pipeline with live occupancy analytics & telemetry.",
+      "Deployed on Vercel with high-performance responsive stream processing."
+    ],
   },
   {
     name: "IndoStockAI",
     tag: "ML Forecasting",
-    desc: "AI stock analytics platform combining real-time market data with ML forecasting for the Indonesian capital market.",
+    image: indostockImg,
+    desc: "Realtime Stock Analytics & Forecasting System combining live market data with ML forecasting for the Indonesian capital market.",
     tech: ["Python", "Big Data", "Time Series", "Streamlit"],
-    url: "https://www.linkedin.com/posts/dimaswahyusaputra111_bigdataanalytics-machinelearning-stockmarketanalytics-activity-7418655014862196736-iAVA",
+    url: "https://www.linkedin.com/posts/dimaswahyusaputra111_bigdataanalytics-machinelearning-stockmarketanalytics-activity-7418655014862196736-iAVA?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEUi-q0BYLb19X6Wpd1NGkUSgUjMCB4cboY",
+    detailsTitle: "IndoStockAI: Realtime Stock Analytics",
+    details: [
+      "AI stock analytics platform for the Indonesian capital market (IDX).",
+      "Combines Big Data analytics with Time Series ML models for market forecasting.",
+      "Surfaces live price action, technical indicators, and predictive buy/sell signals."
+    ],
   },
   {
     name: "Order Management Dashboard",
     tag: "Business Intelligence",
-    desc: "Looker Studio dashboard analyzing 9,994 orders across 49 states — surfaced Consumer segment as 51.9% of orders and Technology as 60.3% of revenue.",
+    image: orderDashboardImg,
+    desc: "Looker Studio dashboard analyzing 9,994 orders across 49 states & 3 customer segments (PCA HIMASTA-ITS 2026).",
     tech: ["Looker Studio", "SQL", "EDA"],
     url: "https://lnkd.in/gjYSBt_M",
+    detailsTitle: "Order Management Dashboard (PCA)",
+    details: [
+      "Analyzed 9,994 orders from 793 customers across 49 states & 3 customer segments.",
+      "Consumer segment contributed 51.9% of orders; Technology accounted for 60.3% of orders.",
+      "NYC recorded highest order volume (915 transactions); total orders grew from 7.6K to 12.5K.",
+      "Special thanks to Fa Rida & Fitria Nur Aida for sharing valuable insights during PCA HIMASTA-ITS 2026!"
+    ],
   },
   {
-    name: "Customer Segmentation",
+    name: "Clustering-Based Customer Insights",
     tag: "Unsupervised ML",
-    desc: "K-Means clustering (K=4, Elbow + Silhouette validated) on e-commerce data to define personas like High-Potential Newcomers and At-Risk Lapsed.",
+    image: customerClusterImg,
+    desc: "E-Commerce Customer Behavior & Sales Data Analysis using K-Means Clustering at Institut Teknologi Sepuluh Nopember (ITS).",
     tech: ["Scikit-learn", "Python", "Tableau"],
-    url: "https://www.linkedin.com/posts/dimaswahyusaputra111_unsupervisedmachinelearning-kmeansclustering-activity-7412402721502339073-TRvi",
+    url: "https://www.linkedin.com/posts/dimaswahyusaputra111_unsupervisedmachinelearning-kmeansclustering-activity-7412402721502339073-TRvi?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEUi-q0BYLb19X6Wpd1NGkUSgUjMCB4cboY",
+    detailsTitle: "Clustering-Based Customer Insights (ITS)",
+    details: [
+      "Determined optimal K=4 clusters using Elbow Method & Silhouette Score evaluation.",
+      "Clustered on Monetary Value, Avg Session Duration, Customer Ratings & Return Rate.",
+      "Uncovered personas: High-Potential Newcomers, One-Time Big Spenders, At-Risk Lapsed & Loyal Returners.",
+      "Enables targeted business strategies like loyalty programs & recovery campaigns."
+    ],
   },
   {
-    name: "FRS Monitoring Data Warehouse",
-    tag: "Data Engineering",
-    desc: "End-to-end OLTP/OLAP warehouse for ITS course registration with ETL in Pentaho Kettle and Power BI dashboards on GPA & capacity trends.",
-    tech: ["MySQL", "Pentaho", "Power BI"],
-    url: "https://www.linkedin.com/posts/dimaswahyusaputra111_datawarehouse-businessintelligence-powerbi-activity-7347203885381361664-3MIg",
-  },
-  {
-    name: "TSP Optimizer",
-    tag: "Optimization",
-    desc: "PCB drilling TSP optimizer using 5 constructive heuristics and 2-Opt, achieving up to 15% distance reduction vs. greedy.",
+    name: "TSP Optimizer Application",
+    tag: "Metaheuristic Optimization",
+    image: tspOptimizerImg,
+    desc: "Interactive simulation & optimization application solving Traveling Salesman Problem (TSP) for PCB drilling at ITS.",
     tech: ["Python", "Machine Learning"],
-    url: "https://www.linkedin.com/posts/dimaswahyusaputra111_metaheuristicoptimization-travelingsalesmanproblem-activity-7411438890093338624-y9tr",
+    url: "https://www.linkedin.com/posts/dimaswahyusaputra111_metaheuristicoptimization-travelingsalesmanproblem-activity-7411438890093338624-y9tr?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEUi-q0BYLb19X6Wpd1NGkUSgUjMCB4cboY",
+    detailsTitle: "TSP Optimizer Application (ITS)",
+    details: [
+      "Modeled PCB drilling process as TSP to minimize total travel distance & operational cost.",
+      "Implemented Nearest Neighbor, Nearest/Cheapest/Farthest/Arbitrary Insertion + 2-Opt local search.",
+      "Farthest Insertion produced shortest route; 2-Opt achieved up to 15% distance reduction.",
+      "Provides interactive simulation & route visualization for manufacturing decision support."
+    ],
   },
   {
-    name: "Design Analysis & Simulation",
-    tag: "Engineering",
-    desc: "Final project for the Design Analysis and Simulation course — modeling, simulation, and engineering analysis presented end-to-end.",
-    tech: ["Python", "Statistical Analysis"],
-    url: "https://www.linkedin.com/posts/dimaswahyusaputra111_final-project-for-the-design-analysis-and-activity-7377047766457384960-ijPT",
+    name: "Design Analysis and Simulation",
+    tag: "Simulation & Optimization",
+    image: simulationDasImg,
+    desc: "Customer service system simulation & waiting time optimization at Galaxy Mall 2 Food Court Surabaya (ITS Final Project).",
+    tech: ["Statistical Analysis", "EDA"],
+    url: "https://www.linkedin.com/posts/dimaswahyusaputra111_final-project-for-the-design-analysis-and-activity-7377047766457384960-ijPT?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEUi-q0BYLb19X6Wpd1NGkUSgUjMCB4cboY",
+    detailsTitle: "Design Analysis and Simulation (ITS)",
+    details: [
+      "Analyzed customer service system efficiency & waiting times at Galaxy Mall 2 Food Court.",
+      "Identified low utility at food stands vs high bottleneck at cashier & seating areas.",
+      "Optimized model via Response Surface Methodology (RSM) with Central Composite Design.",
+      "1 cashier + 5 seating servers brought all server utility below 50% for optimal flow.",
+      "Tools: ExtendSim, EasyFit, SPSS, Minitab, and Figma."
+    ],
+  },
+  {
+    name: "Data Warehouse Course Project",
+    tag: "Data Engineering & BI",
+    image: dataWarehouseImg,
+    desc: "End-to-end Data Warehouse & Power BI monitoring dashboard for ITS Course Registration Form (FRS) academic planning.",
+    tech: ["MySQL", "Pentaho Kettle", "Power BI"],
+    url: "https://www.linkedin.com/posts/dimaswahyusaputra111_datawarehouse-businessintelligence-powerbi-activity-7347203885381361664-3MIg?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEUi-q0BYLb19X6Wpd1NGkUSgUjMCB4cboY",
+    detailsTitle: "Data Warehouse Course Project (ITS)",
+    details: [
+      "Designed end-to-end data process for ITS Course Registration Form (FRS) system.",
+      "Built MySQL OLTP/OLAP databases & executed ETL pipelines using Pentaho Kettle.",
+      "Developed Power BI dashboards tracking SKS credit distribution, GPA trends & class capacities.",
+      "Created Figma UI mockups before Power BI deployment to guide academic planning."
+    ],
   },
 ];
 
@@ -1141,58 +1204,140 @@ function Projects() {
       }
       reveal="reveal-zoom"
     >
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {PROJECTS.map((p, i) => (
-          <article
+          <FlippingCard
             key={i}
-            className={`reveal reveal-zoom group relative flex flex-col overflow-hidden rounded-3xl border-2 border-border/90 bg-gradient-to-br ${PROJECT_ACCENTS[i % PROJECT_ACCENTS.length]} bg-card p-6 md:p-7 shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-primary/70 hover:shadow-2xl`}
-          >
-            <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-primary/10 blur-2xl transition group-hover:bg-primary/30" />
-            <div className="flex items-center justify-between">
-              <span className="rounded-full border-1.5 border-border/90 bg-surface-2/90 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-foreground shadow-2xs">
-                {p.tag}
-              </span>
-              <span className="font-mono text-xs font-semibold text-muted-foreground">
-                0{i + 1}
-              </span>
-            </div>
-            <h3 className="mt-5 font-display text-xl font-semibold">{p.name}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
-            <div className="mt-5 flex flex-wrap gap-1.5">
-              {p.tech.map((t) => (
-                <span
-                  key={t}
-                  className="inline-flex items-center gap-1.5 rounded-md border border-border/80 bg-surface-2/90 px-2.5 py-1 font-mono text-[11px] font-medium text-foreground shadow-2xs hover:border-primary/50 transition-colors"
-                >
-                  <Logo name={t} size={12} />
-                  {t}
-                </span>
-              ))}
-            </div>
-            {p.url && (
-              <div className="mt-6 flex">
-                <a
-                  href={p.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group/btn inline-flex items-center gap-2 rounded-full border-1.5 border-border/90 bg-surface px-4 py-2 text-xs font-semibold text-foreground shadow-2xs transition-all hover:border-primary hover:bg-primary hover:text-primary-foreground hover:shadow-md"
-                >
-                  View project
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.4"
-                    className="transition group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
-                  >
-                    <path d="M7 17 17 7M9 7h8v8" />
-                  </svg>
-                </a>
+            height={460}
+            className="reveal reveal-zoom group/card hover:scale-[1.01] transition-all duration-300"
+            frontContent={
+              <div className="relative flex h-full w-full flex-col justify-between overflow-hidden bg-gradient-to-br from-card via-surface/90 to-card p-5">
+                {/* Background image & gradient overlay */}
+                <div className="relative h-44 w-full overflow-hidden rounded-2xl border border-border/70 shadow-inner">
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    className="h-full w-full object-cover object-center transition-transform duration-700 group-hover/card:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                  {/* Category Pill */}
+                  <span className="absolute left-3 top-3 rounded-full border border-white/20 bg-black/60 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur-md shadow-xs">
+                    {p.tag}
+                  </span>
+
+                  {/* Project index badge */}
+                  <span className="absolute right-3 top-3 rounded-full border border-white/20 bg-black/60 px-2.5 py-0.5 font-mono text-xs font-semibold text-white/90 backdrop-blur-md">
+                    0{i + 1}
+                  </span>
+                </div>
+
+                {/* Body Content */}
+                <div className="mt-4 flex flex-1 flex-col justify-between">
+                  <div>
+                    <h3 className="font-display text-lg font-semibold text-foreground line-clamp-1">
+                      {p.name}
+                    </h3>
+                    <p className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-3">
+                      {p.desc}
+                    </p>
+                  </div>
+
+                  {/* Tech stack */}
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {p.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="inline-flex items-center gap-1 rounded-md border border-border/80 bg-surface-2/80 px-2 py-0.5 font-mono text-[10px] font-medium text-foreground shadow-2xs"
+                      >
+                        <Logo name={t} size={11} />
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Flip Prompt Hint */}
+                  <div className="mt-3 flex items-center justify-between border-t border-border/50 pt-2.5 text-[11px] font-medium text-primary">
+                    <span className="inline-flex items-center gap-1.5 opacity-90 group-hover/card:opacity-100">
+                      Hover / Tap to flip
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="animate-pulse">
+                        <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
+                        <path d="M21 3v5h-5" />
+                      </svg>
+                    </span>
+                    <span className="font-mono text-[10px] text-muted-foreground">Flip →</span>
+                  </div>
+                </div>
               </div>
-            )}
-          </article>
+            }
+            backContent={
+              <div className="relative flex h-full w-full flex-col justify-between overflow-hidden bg-gradient-to-br from-card via-surface-2/95 to-card p-5 text-card-foreground">
+                <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/20 blur-xl" />
+
+                {/* Header */}
+                <div>
+                  <div className="flex items-center justify-between border-b border-border/60 pb-2">
+                    <span className="rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-primary">
+                      {p.tag}
+                    </span>
+                    <span className="font-mono text-xs font-bold text-muted-foreground">
+                      0{i + 1}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-2.5 font-display text-base font-semibold text-foreground line-clamp-1">
+                    {p.detailsTitle || p.name}
+                  </h3>
+
+                  {/* Highlights Bullet List */}
+                  <ul className="mt-2.5 space-y-1.5 text-[11.5px] leading-relaxed text-muted-foreground overflow-y-auto max-h-[200px] pr-1">
+                    {p.details.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-1.5">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Footer with Explore More Button */}
+                <div className="mt-3 border-t border-border/60 pt-2.5">
+                  <div className="mb-2.5 flex flex-wrap gap-1">
+                    {p.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="inline-flex items-center gap-1 rounded bg-surface-2/90 px-1.5 py-0.5 font-mono text-[9.5px] text-muted-foreground"
+                      >
+                        <Logo name={t} size={10} />
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="group/btn inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground shadow-md transition-all hover:bg-primary/90 hover:shadow-lg hover:scale-[1.02] active:scale-95"
+                  >
+                    Explore More
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      className="transition-transform group-hover/btn:translate-x-1"
+                    >
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            }
+          />
         ))}
       </div>
     </Section>
