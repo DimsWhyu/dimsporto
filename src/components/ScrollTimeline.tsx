@@ -9,7 +9,8 @@ import {
 } from "motion/react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
-import { Calendar, Trophy, Award, Medal } from "lucide-react";
+import { Calendar, Trophy, Award, Medal, Maximize2 } from "lucide-react";
+import { CertificateModal } from "@/components/CertificateModal";
 
 export interface TimelineEvent {
   id?: string;
@@ -20,6 +21,7 @@ export interface TimelineEvent {
   description?: string;
   icon?: React.ReactNode;
   color?: string;
+  certificateUrl?: string;
 }
 
 export interface ScrollTimelineProps {
@@ -89,6 +91,7 @@ export const ScrollTimeline = ({
 }: ScrollTimelineProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [selectedCert, setSelectedCert] = useState<TimelineEvent | null>(null);
   const timelineRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const { scrollYProgress } = useScroll({
@@ -420,6 +423,30 @@ export const ScrollTimeline = ({
                             {event.description}
                           </p>
                         )}
+
+                        {/* Certificate Image Preview Fit */}
+                        {event.certificateUrl && (
+                          <div
+                            className="mt-3.5 relative group overflow-hidden rounded-xl border border-border/80 bg-background/50 transition-all duration-300 hover:border-primary/60 cursor-pointer shadow-xs"
+                            onClick={() => setSelectedCert(event)}
+                          >
+                            <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] flex items-center justify-center p-1.5 bg-gradient-to-b from-surface/40 to-surface/80">
+                              <img
+                                src={event.certificateUrl}
+                                alt={event.title}
+                                className="w-full h-full object-contain rounded-lg transition-transform duration-500 group-hover:scale-[1.02]"
+                                loading="lazy"
+                              />
+                              {/* Hover Overlay Badge */}
+                              <div className="absolute inset-0 flex items-center justify-center bg-black/45 opacity-0 transition-opacity duration-300 group-hover:opacity-100 backdrop-blur-[2px] rounded-xl">
+                                <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/75 px-3.5 py-1.5 text-xs font-medium text-white shadow-lg">
+                                  <Maximize2 className="h-3.5 w-3.5 text-primary" />
+                                  Click to Inspect & Zoom
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -429,6 +456,23 @@ export const ScrollTimeline = ({
           </div>
         </div>
       </div>
+
+      {/* Certificate Zoom Modal */}
+      <CertificateModal
+        isOpen={Boolean(selectedCert)}
+        onClose={() => setSelectedCert(null)}
+        cert={
+          selectedCert
+            ? {
+                title: selectedCert.title,
+                subtitle: selectedCert.subtitle,
+                scope: selectedCert.scope,
+                year: selectedCert.year,
+                certificateUrl: selectedCert.certificateUrl!,
+              }
+            : null
+        }
+      />
     </div>
   );
 };

@@ -14,7 +14,7 @@ export const TextReveal: FC<TextRevealProps> = ({ children, className }) => {
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start 0.75", "end 0.45"],
+    offset: ["start 0.85", "end 0.35"],
   });
 
   if (typeof children !== "string") {
@@ -24,8 +24,8 @@ export const TextReveal: FC<TextRevealProps> = ({ children, className }) => {
   const words = children.split(" ");
 
   return (
-    <div ref={sectionRef} className={cn("relative z-0 h-[150vh]", className)}>
-      <div className="sticky top-0 mx-auto flex h-screen max-w-5xl items-center justify-start px-6 py-12">
+    <div ref={sectionRef} className={cn("relative z-0 h-[100vh]", className)}>
+      <div className="sticky top-0 mx-auto flex h-screen max-w-5xl items-center justify-start px-6 py-8 md:py-12">
         <p className="flex flex-wrap justify-start text-3xl font-extrabold md:text-5xl lg:text-6xl xl:text-7xl tracking-tight leading-tight text-left">
           {words.map((word, i) => {
             const start = i / words.length;

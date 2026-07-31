@@ -10,7 +10,7 @@ import {
 import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import logoBrow from "../assets/Logo_Brow.png?url";
+import logoBrow from "../assets/brand/logo-brow.png?url";
 
 function NotFoundComponent() {
   return (

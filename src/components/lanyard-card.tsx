@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useMemo } from "react";
 import * as THREE from "three";
-import dimasPhoto from "@/assets/Foto Formal_Dimas_Putih.png";
+import dimasPhoto from "@/assets/profile/dimas-formal.png";
 
 interface LanyardCardProps {
   className?: string;

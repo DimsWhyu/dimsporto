@@ -1,7 +1,7 @@
 import { useRef, useState, createRef } from "react";
 import { AnimatedBeam } from "@/components/ui/animated-beam";
-import logoNav from "@/assets/Logo_Nav.png";
-import logoNavWht from "@/assets/Logo_Nav_Wht.png";
+import logoNav from "@/assets/brand/logo-nav.png";
+import logoNavWht from "@/assets/brand/logo-nav-white.png";
 
 // Curated core technologies (libraries removed for clean balance)
 const TOP_SKILLS = [

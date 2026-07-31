@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import dimasPhoto from "@/assets/Foto Formal_Dimas_Putih.png";
-import logoNav from "@/assets/Logo_Nav.png";
-import logoNavWht from "@/assets/Logo_Nav_Wht.png";
-import ojkLogo from "@/assets/ojk_logo.jpg";
-import idxLogo from "@/assets/idx-site-icon.png";
-import pkuyLogo from "@/assets/pkuy_logo.jpg";
-import fsadLogo from "@/assets/fsad_logo.png";
+import dimasPhoto from "@/assets/profile/dimas-formal.png";
+import logoNav from "@/assets/brand/logo-nav.png";
+import logoNavWht from "@/assets/brand/logo-nav-white.png";
+import ojkLogo from "@/assets/experiences/ojk-logo.jpg";
+import idxLogo from "@/assets/experiences/idx-logo.png";
+import pkuyLogo from "@/assets/experiences/pkuy-logo.jpg";
+import fsadLogo from "@/assets/experiences/fsad-logo.png";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { Mail, Linkedin, Instagram, Github } from "lucide-react";
 import { Dock, DockIcon } from "@/components/ui/dock";
@@ -19,13 +19,21 @@ import { ClippedCircle } from "@/components/unlumen-ui/clipped-circle";
 import { GitHubContributions } from "@/components/github-contributions";
 import { InitialLoader } from "@/components/initial-loader";
 import { SkillsBeamShowcase } from "@/components/skills-beam-showcase";
-import parkvisionImg from "@/assets/parkvision.png";
-import indostockImg from "@/assets/indostock.png";
-import orderDashboardImg from "@/assets/order_dashboard.png";
-import customerClusterImg from "@/assets/customer_cluster.png";
-import tspOptimizerImg from "@/assets/tsp_optimizer.png";
-import simulationDasImg from "@/assets/simulation_das.png";
-import dataWarehouseImg from "@/assets/data_warehouse.jpeg";
+import parkvisionImg from "@/assets/projects/parkvision.png";
+import indostockImg from "@/assets/projects/indostock.png";
+import orderDashboardImg from "@/assets/projects/order-dashboard.png";
+import customerClusterImg from "@/assets/projects/customer-cluster.png";
+import tspOptimizerImg from "@/assets/projects/tsp-optimizer.png";
+import simulationDasImg from "@/assets/projects/simulation-das.png";
+import dataWarehouseImg from "@/assets/projects/data-warehouse.jpeg";
+import cert01 from "@/assets/achievements/01-ibsc-unj-2026.jpg";
+import cert02 from "@/assets/achievements/02-dokter-data-2026.png";
+import cert03 from "@/assets/achievements/03-satria-data-2025.jpg";
+import cert04 from "@/assets/achievements/04-bnyc-ub-2025.png";
+import cert05 from "@/assets/achievements/05-isfest-umn-2025.png";
+import cert06 from "@/assets/achievements/06-iyt-itb-2024.png";
+import cert07 from "@/assets/achievements/07-4c-filkom-ub-2024.png";
+import cert08 from "@/assets/achievements/08-gba-olympiad-2023.jpg";
 import { FlippingCard } from "@/components/ui/flipping-card";
 import ThreeDCarousel, { ThreeDCarouselItem } from "@/components/ThreeDCarousel";
 import { ScrollTimeline, TimelineEvent } from "@/components/ScrollTimeline";
@@ -303,48 +311,56 @@ const ACHIEVEMENTS: TimelineEvent[] = [
     scope: "International",
     title: "1st Place — International Business Strategy Competition (UNJ)",
     subtitle: "Universitas Negeri Jakarta",
+    certificateUrl: cert01,
   },
   {
     year: "2026",
     scope: "International",
     title: "1st Place — Dokter Data Infographic Competition",
     subtitle: "Dokter Data Indonesia",
+    certificateUrl: cert02,
   },
   {
     year: "2025",
     scope: "National",
     title: "Gold Medal — SATRIA DATA 2025",
     subtitle: "Kemendiktisaintek RI",
+    certificateUrl: cert03,
   },
   {
     year: "2025",
     scope: "National",
     title: "1st Place — Brawijaya National Youth Competition (UB)",
     subtitle: "Universitas Brawijaya",
+    certificateUrl: cert04,
   },
   {
     year: "2025",
     scope: "National",
     title: "1st Place — Data Competition, ISFEST UMN",
     subtitle: "Universitas Multimedia Nusantara",
+    certificateUrl: cert05,
   },
   {
     year: "2024",
     scope: "International",
     title: "1st Runner Up — International Youthpreneur Competition",
     subtitle: "SBM ITB",
+    certificateUrl: cert06,
   },
   {
     year: "2024",
     scope: "National",
     title: "1st Place — Infographic Competition 4C FILKOM UB",
     subtitle: "Universitas Brawijaya",
+    certificateUrl: cert07,
   },
   {
     year: "2023",
     scope: "International",
     title: "Silver Medal — Greater Bay Area International Math Olympiad",
     subtitle: "GBA Olympiad Committee",
+    certificateUrl: cert08,
   },
 ];
 
@@ -917,7 +933,7 @@ function Hero() {
     return () => el.removeEventListener("mousemove", onMove);
   }, []);
   return (
-    <section id="top" ref={ref} className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
+    <section id="top" ref={ref} className="relative overflow-hidden pt-24 pb-12 md:pt-32 md:pb-16">
       <InteractiveGridPattern
         className="[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]"
         width={40}
@@ -1104,8 +1120,8 @@ function Section({
   reveal?: string;
 }) {
   return (
-    <section id={id} className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-      <div className={`reveal ${reveal} mb-12 max-w-2xl`}>
+    <section id={id} className="mx-auto max-w-6xl px-6 py-14 md:py-20">
+      <div className={`reveal ${reveal} mb-8 md:mb-10 max-w-2xl`}>
         <div className="font-mono text-xs uppercase tracking-[0.2em] text-primary">{eyebrow}</div>
         <h2 className="mt-3 font-display text-3xl font-semibold md:text-5xl">{title}</h2>
       </div>
