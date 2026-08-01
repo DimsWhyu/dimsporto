@@ -134,9 +134,9 @@ const ThreeDCarousel = ({
       // Right card
       return {
         transform: isMobile
-          ? "translateX(30%) scale(0.88) rotateY(-10deg)"
+          ? "translateX(10%) scale(0.82) rotateY(-6deg)"
           : "translateX(45%) scale(0.92) rotateY(-15deg)",
-        opacity: 0.6,
+        opacity: 0.5,
         zIndex: 20,
         cursor: "pointer",
         filter: "blur(0.5px)",
@@ -145,9 +145,9 @@ const ThreeDCarousel = ({
       // Left card
       return {
         transform: isMobile
-          ? "translateX(-30%) scale(0.88) rotateY(10deg)"
+          ? "translateX(-10%) scale(0.82) rotateY(6deg)"
           : "translateX(-45%) scale(0.92) rotateY(15deg)",
-        opacity: 0.6,
+        opacity: 0.5,
         zIndex: 20,
         cursor: "pointer",
         filter: "blur(0.5px)",
@@ -156,7 +156,7 @@ const ThreeDCarousel = ({
       // Background hidden cards
       const dir = diff > 0 ? 1 : -1;
       return {
-        transform: `translateX(${dir * (isMobile ? 60 : 80)}%) scale(0.75) rotateY(${-dir * 25}deg)`,
+        transform: `translateX(${dir * (isMobile ? 35 : 80)}%) scale(0.7) rotateY(${-dir * 20}deg)`,
         opacity: 0,
         zIndex: 10,
         pointerEvents: "none" as const,
@@ -167,11 +167,11 @@ const ThreeDCarousel = ({
   if (!items || items.length === 0) return null;
 
   return (
-    <section id="ThreeDCarousel" className="relative w-full py-4 select-none">
-      <div className="w-full mx-auto px-2 sm:px-4">
+    <section id="ThreeDCarousel" className="relative w-full py-2 sm:py-4 select-none">
+      <div className="w-full mx-auto px-1 sm:px-4">
         {/* Carousel Container */}
         <div
-          className="relative overflow-visible h-[560px] sm:h-[580px] flex items-center justify-center [perspective:1200px]"
+          className="relative overflow-visible h-[480px] xs:h-[500px] sm:h-[580px] flex items-center justify-center [perspective:1200px]"
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
           onTouchStart={onTouchStart}
@@ -189,10 +189,10 @@ const ThreeDCarousel = ({
                   key={item.id}
                   onClick={() => !isActive && setActive(index)}
                   style={cardStyle}
-                  className="absolute top-1/2 -translate-y-1/2 w-full max-w-[340px] sm:max-w-[440px] md:max-w-[500px] transition-all duration-500 ease-out preserve-3d"
+                  className="absolute top-1/2 -translate-y-1/2 w-[calc(100vw-4.5rem)] xs:w-[calc(100vw-5rem)] max-w-[300px] xs:max-w-[320px] sm:max-w-[440px] md:max-w-[500px] transition-all duration-500 ease-out preserve-3d"
                 >
                   <Card
-                    style={{ minHeight: `${cardHeight}px` }}
+                    style={{ minHeight: isMobile ? "390px" : `${cardHeight}px` }}
                     className={`overflow-hidden border-2 transition-all duration-300 flex flex-col bg-card/95 backdrop-blur-md ${
                       isActive
                         ? "border-primary/60 ring-2 ring-primary/20 shadow-2xl"
@@ -201,7 +201,7 @@ const ThreeDCarousel = ({
                   >
                     {/* Header Banner */}
                     <div
-                      className={`relative p-5 flex flex-col justify-between overflow-hidden border-b border-border/60 ${
+                      className={`relative p-3.5 sm:p-5 flex flex-col justify-between overflow-hidden border-b border-border/60 ${
                         item.gradient || "bg-gradient-to-r from-primary/20 via-surface-2 to-card"
                       }`}
                       style={
@@ -215,39 +215,39 @@ const ThreeDCarousel = ({
                       }
                     >
                       {/* Top Bar: Brand Logo & Period */}
-                      <div className="flex items-center justify-between gap-3 z-10">
-                        <div className="flex items-center gap-3">
+                      <div className="flex items-center justify-between gap-2.5 z-10">
+                        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                           {item.logoUrl ? (
                             <img
                               src={item.logoUrl}
                               alt={item.brand}
-                              className="h-10 sm:h-12 w-auto max-w-[130px] sm:max-w-[150px] object-contain rounded-md shadow-xs shrink-0"
+                              className="h-8 sm:h-12 w-auto max-w-[110px] sm:max-w-[150px] object-contain rounded-md shadow-xs shrink-0"
                             />
                           ) : (
-                            <div className="w-10 h-10 rounded-md border border-primary/30 bg-primary/10 flex items-center justify-center shrink-0 text-primary">
-                              <Building2 className="w-5 h-5" />
+                            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-md border border-primary/30 bg-primary/10 flex items-center justify-center shrink-0 text-primary">
+                              <Building2 className="w-4 h-4 sm:w-5 sm:h-5" />
                             </div>
                           )}
-                          <div>
-                            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block line-clamp-1">
+                          <div className="truncate">
+                            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-muted-foreground block truncate">
                               {item.brand}
                             </span>
                           </div>
                         </div>
 
                         {item.period && (
-                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border/80 bg-background/80 backdrop-blur-md text-[11px] font-mono font-medium text-foreground shadow-2xs shrink-0">
-                            <Calendar className="w-3 h-3 text-primary" />
+                          <div className="inline-flex items-center gap-1 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full border border-border/80 bg-background/80 backdrop-blur-md text-[10px] sm:text-[11px] font-mono font-medium text-foreground shadow-2xs shrink-0">
+                            <Calendar className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-primary" />
                             <span>{item.period}</span>
                           </div>
                         )}
                       </div>
 
                       {/* Main Title / Role */}
-                      <div className="mt-4 z-10">
-                        <div className="flex items-center gap-2">
-                          <Briefcase className="w-4 h-4 text-primary shrink-0" />
-                          <h3 className="font-display text-lg sm:text-xl font-bold text-foreground line-clamp-1">
+                      <div className="mt-2.5 sm:mt-4 z-10">
+                        <div className="flex items-center gap-1.5 sm:gap-2">
+                          <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary shrink-0" />
+                          <h3 className="font-display text-base sm:text-xl font-bold text-foreground line-clamp-1">
                             {item.title}
                           </h3>
                         </div>
@@ -255,18 +255,18 @@ const ThreeDCarousel = ({
                     </div>
 
                     {/* Content Section */}
-                    <CardContent className="p-5 sm:p-6 flex flex-col justify-between flex-grow">
+                    <CardContent className="p-3.5 sm:p-6 flex flex-col justify-between flex-grow">
                       <div>
                         {item.description && (
-                          <p className="text-sm font-medium text-muted-foreground mb-3 leading-relaxed">
+                          <p className="text-xs sm:text-sm font-medium text-muted-foreground mb-2 sm:mb-3 leading-relaxed">
                             {item.description}
                           </p>
                         )}
 
                         {item.points && item.points.length > 0 && (
-                          <ul className="space-y-2.5 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                          <ul className="space-y-1.5 sm:space-y-2.5 text-xs sm:text-sm text-muted-foreground leading-relaxed">
                             {item.points.map((pt, idx) => (
-                              <li key={idx} className="flex items-start gap-2.5">
+                              <li key={idx} className="flex items-start gap-2">
                                 <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500 animate-pulse-slow" />
                                 <span className="text-foreground/90">{pt}</span>
                               </li>
@@ -276,13 +276,13 @@ const ThreeDCarousel = ({
                       </div>
 
                       {/* Tags & Action Link */}
-                      <div className="mt-5 pt-4 border-t border-border/50 flex flex-col gap-3">
+                      <div className="mt-3 sm:mt-5 pt-3 sm:pt-4 border-t border-border/50 flex flex-col gap-2.5 sm:gap-3">
                         {item.tags && item.tags.length > 0 && (
-                          <div className="flex flex-wrap gap-1.5">
+                          <div className="flex flex-wrap gap-1 sm:gap-1.5">
                             {item.tags.map((tag, idx) => (
                               <span
                                 key={idx}
-                                className="inline-flex items-center px-2.5 py-1 rounded-md bg-blue-500/10 border border-blue-500/20 text-[11px] font-mono font-medium text-blue-600 dark:text-blue-400"
+                                className="inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md bg-blue-500/10 border border-blue-500/20 text-[10px] sm:text-[11px] font-mono font-medium text-blue-600 dark:text-blue-400"
                               >
                                 {tag}
                               </span>
@@ -309,22 +309,22 @@ const ThreeDCarousel = ({
             })}
           </div>
 
-          {/* Desktop Navigation Arrow Controls */}
-          {!isMobile && items.length > 1 && (
+          {/* Navigation Arrow Controls (Mobile & Desktop) */}
+          {items.length > 1 && (
             <>
               <button
-                className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-background/90 hover:bg-background border border-border/80 rounded-full flex items-center justify-center text-foreground hover:text-primary z-40 shadow-lg transition-all hover:scale-110 active:scale-95 backdrop-blur-md cursor-pointer"
+                className="absolute -left-1 sm:left-2 md:left-6 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-11 sm:h-11 bg-background/90 hover:bg-background border border-border/90 rounded-full flex items-center justify-center text-foreground hover:text-primary z-40 shadow-lg transition-all hover:scale-110 active:scale-95 backdrop-blur-md cursor-pointer"
                 onClick={prevSlide}
                 aria-label="Previous Experience"
               >
-                <ChevronLeft className="w-6 h-6" />
+                <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
               </button>
               <button
-                className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-background/90 hover:bg-background border border-border/80 rounded-full flex items-center justify-center text-foreground hover:text-primary z-40 shadow-lg transition-all hover:scale-110 active:scale-95 backdrop-blur-md cursor-pointer"
+                className="absolute -right-1 sm:right-2 md:right-6 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-11 sm:h-11 bg-background/90 hover:bg-background border border-border/90 rounded-full flex items-center justify-center text-foreground hover:text-primary z-40 shadow-lg transition-all hover:scale-110 active:scale-95 backdrop-blur-md cursor-pointer"
                 onClick={nextSlide}
                 aria-label="Next Experience"
               >
-                <ChevronRight className="w-6 h-6" />
+                <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
               </button>
             </>
           )}

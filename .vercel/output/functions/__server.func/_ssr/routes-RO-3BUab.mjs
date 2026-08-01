@@ -6,7 +6,7 @@ import { n as clsx, t as cva } from "../_libs/class-variance-authority+clsx.mjs"
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
 import { a as motion, i as useScroll, n as useTransform, o as AnimatePresence, r as useMotionValue, t as useSpring } from "../_libs/framer-motion.mjs";
 import { t as motion$1 } from "../_libs/motion.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-C2GTq1Xn.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-RO-3BUab.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var import_react_dom = require_react_dom();
@@ -405,16 +405,19 @@ function GitHubContributions() {
 		}
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "mt-8 rounded-2xl border-2 border-border/90 bg-card p-6 shadow-md transition-all hover:border-primary/60 hover:shadow-lg",
+		className: "mt-6 sm:mt-8 w-full max-w-full min-w-0 overflow-hidden rounded-2xl border-2 border-border/90 bg-card p-4 sm:p-6 shadow-md transition-all hover:border-primary/60 hover:shadow-lg",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "flex items-center justify-between",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "flex items-center justify-between gap-2 flex-wrap",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "flex items-center gap-2",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 						className: "font-mono text-xs font-semibold uppercase tracking-widest text-muted-foreground",
 						children: "GitHub Contributions"
-					})
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "sm:hidden font-mono text-[10px] text-primary font-medium bg-primary/10 px-2 py-0.5 rounded-full border border-primary/20",
+						children: "Slide ↔"
+					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
 					href: GITHUB_URL,
 					target: "_blank",
@@ -424,14 +427,14 @@ function GitHubContributions() {
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "mt-4 overflow-x-auto pb-2 scrollbar-none",
+				className: "relative mt-4 w-full overflow-x-auto pb-3 touch-pan-x custom-scrollbar",
 				children: loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "flex h-28 items-center justify-center gap-2 text-xs font-mono text-muted-foreground",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "size-4 animate-spin text-primary" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Loading contributions..." })]
 				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "min-w-[540px]",
+					className: "w-full min-w-[480px] sm:min-w-[500px] lg:min-w-0 select-none",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "relative mb-2 flex text-[10px] font-mono font-semibold uppercase text-muted-foreground h-4",
+						className: "relative mb-2 flex text-[9px] sm:text-[10px] font-mono font-semibold uppercase text-muted-foreground h-4",
 						children: monthLabels.map((m, i) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 							style: {
 								position: "absolute",
@@ -440,13 +443,14 @@ function GitHubContributions() {
 							children: m.label
 						}, `${m.label}-${i}`))
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "flex gap-[3.5px]",
+						className: "flex justify-between gap-[2px] sm:gap-[3.5px] lg:gap-[4px] w-full",
 						children: weeks.map((week, wIdx) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "flex flex-col gap-[3.5px]",
+							className: "flex flex-col gap-[2px] sm:gap-[3.5px] lg:gap-[4px] flex-1",
 							children: week.map((day) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 								onMouseEnter: () => setHoveredDay(day),
 								onMouseLeave: () => setHoveredDay(null),
-								className: `size-2.5 rounded-[2.5px] border transition-all duration-150 ${getLevelColor(day.level)} hover:scale-130 hover:z-10 shadow-2xs`,
+								onTouchStart: () => setHoveredDay(day),
+								className: `w-full aspect-square rounded-[2px] sm:rounded-[2.5px] border transition-all duration-150 ${getLevelColor(day.level)} hover:scale-130 hover:z-10 shadow-2xs`,
 								title: `${day.count} contributions on ${day.date}`
 							}, day.date))
 						}, wIdx))
@@ -454,7 +458,7 @@ function GitHubContributions() {
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "mt-4 flex items-center justify-between border-t-2 border-border/80 pt-3.5",
+				className: "mt-3 flex items-center justify-between border-t-2 border-border/80 pt-3",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 					className: "font-mono text-xs text-muted-foreground",
 					children: hoveredDay ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
@@ -755,16 +759,20 @@ function SkillLogo({ name, elementRef, hoveredSkill, setHoveredSkill }) {
 		title: name,
 		onMouseEnter: () => setHoveredSkill(name),
 		onMouseLeave: () => setHoveredSkill(null),
-		className: `group/icon relative flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl sm:rounded-2xl border p-2 sm:p-2.5 shadow-2xs transition-all duration-300 cursor-pointer shrink-0 ${isHovered ? "scale-120 z-40 border-primary bg-card ring-2 ring-primary/60 shadow-lg shadow-primary/20 opacity-100" : hoveredSkill !== null && !isHovered ? "opacity-25 blur-[1.5px] scale-90 border-border/40 bg-card/40" : "border-border/80 bg-card/90 hover:border-primary hover:scale-110 opacity-100"}`,
+		onTouchStart: (e) => {
+			e.stopPropagation();
+			setHoveredSkill(isHovered ? null : name);
+		},
+		className: `group/icon relative flex h-9 w-9 xs:h-10 xs:w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl sm:rounded-2xl border p-1.5 xs:p-2 sm:p-2.5 shadow-2xs transition-all duration-300 cursor-pointer shrink-0 ${isHovered ? "scale-115 z-40 border-primary bg-card ring-2 ring-primary/60 shadow-lg shadow-primary/20 opacity-100" : hoveredSkill !== null && !isHovered ? "opacity-25 blur-[1.5px] scale-90 border-border/40 bg-card/40" : "border-border/80 bg-card/90 hover:border-primary hover:scale-110 opacity-100"}`,
 		children: [url ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 			src: url,
 			alt: name,
-			className: "h-5 w-5 sm:h-6 sm:w-6 object-contain"
+			className: "h-4 w-4 xs:h-5 xs:w-5 sm:h-6 sm:w-6 object-contain"
 		}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-			className: "font-mono text-[10px] sm:text-[11px] font-bold text-primary",
+			className: "font-mono text-[9px] xs:text-[10px] sm:text-[11px] font-bold text-primary",
 			children: name.slice(0, 2)
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-			className: "absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/icon:opacity-100 transition-all duration-200 pointer-events-none z-50 whitespace-nowrap rounded-md bg-foreground px-2 py-0.5 font-mono text-[10px] font-medium text-background shadow-md",
+			className: `absolute -bottom-7 left-1/2 -translate-x-1/2 transition-all duration-200 pointer-events-none z-50 whitespace-nowrap rounded-md bg-foreground px-2 py-0.5 font-mono text-[10px] font-medium text-background shadow-md ${isHovered ? "opacity-100 scale-100" : "opacity-0 scale-95 group-hover/icon:opacity-100 group-hover/icon:scale-100"}`,
 			children: name
 		})]
 	});
@@ -779,7 +787,7 @@ function SkillsBeamShowcase() {
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		ref: containerRef,
-		className: "relative flex flex-col items-center justify-between w-full max-w-full rounded-3xl border border-border/80 bg-card p-4 sm:p-6 shadow-sm overflow-hidden min-h-[480px] sm:min-h-[520px]",
+		className: "relative flex flex-col items-center justify-between w-full max-w-full min-w-0 rounded-3xl border border-border/80 bg-card p-3 xs:p-4 sm:p-6 shadow-sm overflow-hidden min-h-[440px] xs:min-h-[480px] sm:min-h-[520px]",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 bg-grid opacity-30 pointer-events-none" }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
@@ -888,15 +896,23 @@ var _07_4c_filkom_ub_2024_default = "/assets/07-4c-filkom-ub-2024-CvRGNX1N.png";
 var _08_gba_olympiad_2023_default = "/assets/08-gba-olympiad-2023-DpH-80vi.jpg";
 function FlippingCard({ frontContent, backContent, className, height = 420, width, ...props }) {
 	const [isFlipped, setIsFlipped] = (0, import_react.useState)(false);
+	const handleContainerClick = (e) => {
+		if (e.target.closest("a, button")) return;
+		setIsFlipped((prev) => !prev);
+	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		className: cn("group [perspective:1000px] w-full cursor-pointer select-none", className),
+		className: cn("group [perspective:1000px] w-full cursor-pointer select-none touch-manipulation", className),
 		style: {
 			height: typeof height === "number" ? `${height}px` : height,
 			width: width ? typeof width === "number" ? `${width}px` : width : "100%"
 		},
-		onClick: () => setIsFlipped((prev) => !prev),
-		onMouseEnter: () => setIsFlipped(true),
-		onMouseLeave: () => setIsFlipped(false),
+		onClick: handleContainerClick,
+		onMouseEnter: () => {
+			if (typeof window !== "undefined" && window.matchMedia("(hover: hover)").matches) setIsFlipped(true);
+		},
+		onMouseLeave: () => {
+			if (typeof window !== "undefined" && window.matchMedia("(hover: hover)").matches) setIsFlipped(false);
+		},
 		...props,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: cn("relative h-full w-full rounded-3xl transition-transform duration-700 [transform-style:preserve-3d]", isFlipped ? "[transform:rotateY(180deg)]" : "group-hover:[transform:rotateY(180deg)]"),
@@ -1039,15 +1055,15 @@ var ThreeDCarousel = ({ items = [], autoRotate = true, rotateInterval = 4500, ca
 			filter: "drop-shadow(0 20px 25px rgba(0,0,0,0.15))"
 		};
 		else if (diff === 1 || total === 2 && diff === -1) return {
-			transform: isMobile ? "translateX(30%) scale(0.88) rotateY(-10deg)" : "translateX(45%) scale(0.92) rotateY(-15deg)",
-			opacity: .6,
+			transform: isMobile ? "translateX(10%) scale(0.82) rotateY(-6deg)" : "translateX(45%) scale(0.92) rotateY(-15deg)",
+			opacity: .5,
 			zIndex: 20,
 			cursor: "pointer",
 			filter: "blur(0.5px)"
 		};
 		else if (diff === -1) return {
-			transform: isMobile ? "translateX(-30%) scale(0.88) rotateY(10deg)" : "translateX(-45%) scale(0.92) rotateY(15deg)",
-			opacity: .6,
+			transform: isMobile ? "translateX(-10%) scale(0.82) rotateY(6deg)" : "translateX(-45%) scale(0.92) rotateY(15deg)",
+			opacity: .5,
 			zIndex: 20,
 			cursor: "pointer",
 			filter: "blur(0.5px)"
@@ -1055,7 +1071,7 @@ var ThreeDCarousel = ({ items = [], autoRotate = true, rotateInterval = 4500, ca
 		else {
 			const dir = diff > 0 ? 1 : -1;
 			return {
-				transform: `translateX(${dir * (isMobile ? 60 : 80)}%) scale(0.75) rotateY(${-dir * 25}deg)`,
+				transform: `translateX(${dir * (isMobile ? 35 : 80)}%) scale(0.7) rotateY(${-dir * 20}deg)`,
 				opacity: 0,
 				zIndex: 10,
 				pointerEvents: "none"
@@ -1065,11 +1081,11 @@ var ThreeDCarousel = ({ items = [], autoRotate = true, rotateInterval = 4500, ca
 	if (!items || items.length === 0) return null;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
 		id: "ThreeDCarousel",
-		className: "relative w-full py-4 select-none",
+		className: "relative w-full py-2 sm:py-4 select-none",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			className: "w-full mx-auto px-2 sm:px-4",
+			className: "w-full mx-auto px-1 sm:px-4",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "relative overflow-visible h-[560px] sm:h-[580px] flex items-center justify-center [perspective:1200px]",
+				className: "relative overflow-visible h-[480px] xs:h-[500px] sm:h-[580px] flex items-center justify-center [perspective:1200px]",
 				onMouseEnter: () => setIsHovering(true),
 				onMouseLeave: () => setIsHovering(false),
 				onTouchStart,
@@ -1085,66 +1101,69 @@ var ThreeDCarousel = ({ items = [], autoRotate = true, rotateInterval = 4500, ca
 							return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 								onClick: () => !isActive && setActive(index),
 								style: cardStyle,
-								className: "absolute top-1/2 -translate-y-1/2 w-full max-w-[340px] sm:max-w-[440px] md:max-w-[500px] transition-all duration-500 ease-out preserve-3d",
+								className: "absolute top-1/2 -translate-y-1/2 w-[calc(100vw-4.5rem)] xs:w-[calc(100vw-5rem)] max-w-[300px] xs:max-w-[320px] sm:max-w-[440px] md:max-w-[500px] transition-all duration-500 ease-out preserve-3d",
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-									style: { minHeight: `${cardHeight}px` },
+									style: { minHeight: isMobile ? "390px" : `${cardHeight}px` },
 									className: `overflow-hidden border-2 transition-all duration-300 flex flex-col bg-card/95 backdrop-blur-md ${isActive ? "border-primary/60 ring-2 ring-primary/20 shadow-2xl" : "border-border/80 shadow-md hover:border-primary/40"}`,
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-										className: `relative p-5 flex flex-col justify-between overflow-hidden border-b border-border/60 ${item.gradient || "bg-gradient-to-r from-primary/20 via-surface-2 to-card"}`,
+										className: `relative p-3.5 sm:p-5 flex flex-col justify-between overflow-hidden border-b border-border/60 ${item.gradient || "bg-gradient-to-r from-primary/20 via-surface-2 to-card"}`,
 										style: item.imageUrl ? {
 											backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.85)), url(${item.imageUrl})`,
 											backgroundSize: "cover",
 											backgroundPosition: "center"
 										} : void 0,
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-											className: "flex items-center justify-between gap-3 z-10",
+											className: "flex items-center justify-between gap-2.5 z-10",
 											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-												className: "flex items-center gap-3",
+												className: "flex items-center gap-2 sm:gap-3 min-w-0",
 												children: [item.logoUrl ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 													src: item.logoUrl,
 													alt: item.brand,
-													className: "h-10 sm:h-12 w-auto max-w-[130px] sm:max-w-[150px] object-contain rounded-md shadow-xs shrink-0"
+													className: "h-8 sm:h-12 w-auto max-w-[110px] sm:max-w-[150px] object-contain rounded-md shadow-xs shrink-0"
 												}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-													className: "w-10 h-10 rounded-md border border-primary/30 bg-primary/10 flex items-center justify-center shrink-0 text-primary",
-													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Building2, { className: "w-5 h-5" })
-												}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-													className: "text-xs font-bold uppercase tracking-wider text-muted-foreground block line-clamp-1",
-													children: item.brand
-												}) })]
+													className: "w-8 h-8 sm:w-10 sm:h-10 rounded-md border border-primary/30 bg-primary/10 flex items-center justify-center shrink-0 text-primary",
+													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Building2, { className: "w-4 h-4 sm:w-5 sm:h-5" })
+												}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+													className: "truncate",
+													children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+														className: "text-[10px] sm:text-xs font-bold uppercase tracking-wider text-muted-foreground block truncate",
+														children: item.brand
+													})
+												})]
 											}), item.period && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-												className: "inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border/80 bg-background/80 backdrop-blur-md text-[11px] font-mono font-medium text-foreground shadow-2xs shrink-0",
-												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar, { className: "w-3 h-3 text-primary" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: item.period })]
+												className: "inline-flex items-center gap-1 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full border border-border/80 bg-background/80 backdrop-blur-md text-[10px] sm:text-[11px] font-mono font-medium text-foreground shadow-2xs shrink-0",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar, { className: "w-2.5 h-2.5 sm:w-3 sm:h-3 text-primary" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: item.period })]
 											})]
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-											className: "mt-4 z-10",
+											className: "mt-2.5 sm:mt-4 z-10",
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-												className: "flex items-center gap-2",
-												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Briefcase, { className: "w-4 h-4 text-primary shrink-0" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-													className: "font-display text-lg sm:text-xl font-bold text-foreground line-clamp-1",
+												className: "flex items-center gap-1.5 sm:gap-2",
+												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Briefcase, { className: "w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary shrink-0" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+													className: "font-display text-base sm:text-xl font-bold text-foreground line-clamp-1",
 													children: item.title
 												})]
 											})
 										})]
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-										className: "p-5 sm:p-6 flex flex-col justify-between flex-grow",
+										className: "p-3.5 sm:p-6 flex flex-col justify-between flex-grow",
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [item.description && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-											className: "text-sm font-medium text-muted-foreground mb-3 leading-relaxed",
+											className: "text-xs sm:text-sm font-medium text-muted-foreground mb-2 sm:mb-3 leading-relaxed",
 											children: item.description
 										}), item.points && item.points.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
-											className: "space-y-2.5 text-xs sm:text-sm text-muted-foreground leading-relaxed",
+											className: "space-y-1.5 sm:space-y-2.5 text-xs sm:text-sm text-muted-foreground leading-relaxed",
 											children: item.points.map((pt, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
-												className: "flex items-start gap-2.5",
+												className: "flex items-start gap-2",
 												children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500 animate-pulse-slow" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 													className: "text-foreground/90",
 													children: pt
 												})]
 											}, idx))
 										})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-											className: "mt-5 pt-4 border-t border-border/50 flex flex-col gap-3",
+											className: "mt-3 sm:mt-5 pt-3 sm:pt-4 border-t border-border/50 flex flex-col gap-2.5 sm:gap-3",
 											children: [item.tags && item.tags.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-												className: "flex flex-wrap gap-1.5",
+												className: "flex flex-wrap gap-1 sm:gap-1.5",
 												children: item.tags.map((tag, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-													className: "inline-flex items-center px-2.5 py-1 rounded-md bg-blue-500/10 border border-blue-500/20 text-[11px] font-mono font-medium text-blue-600 dark:text-blue-400",
+													className: "inline-flex items-center px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md bg-blue-500/10 border border-blue-500/20 text-[10px] sm:text-[11px] font-mono font-medium text-blue-600 dark:text-blue-400",
 													children: tag
 												}, idx))
 											}), item.link && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
@@ -1160,16 +1179,16 @@ var ThreeDCarousel = ({ items = [], autoRotate = true, rotateInterval = 4500, ca
 							}, item.id);
 						})
 					}),
-					!isMobile && items.length > 1 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-						className: "absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-background/90 hover:bg-background border border-border/80 rounded-full flex items-center justify-center text-foreground hover:text-primary z-40 shadow-lg transition-all hover:scale-110 active:scale-95 backdrop-blur-md cursor-pointer",
+					items.length > 1 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						className: "absolute -left-1 sm:left-2 md:left-6 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-11 sm:h-11 bg-background/90 hover:bg-background border border-border/90 rounded-full flex items-center justify-center text-foreground hover:text-primary z-40 shadow-lg transition-all hover:scale-110 active:scale-95 backdrop-blur-md cursor-pointer",
 						onClick: prevSlide,
 						"aria-label": "Previous Experience",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronLeft, { className: "w-6 h-6" })
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronLeft, { className: "w-4 h-4 sm:w-6 sm:h-6" })
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-						className: "absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 bg-background/90 hover:bg-background border border-border/80 rounded-full flex items-center justify-center text-foreground hover:text-primary z-40 shadow-lg transition-all hover:scale-110 active:scale-95 backdrop-blur-md cursor-pointer",
+						className: "absolute -right-1 sm:right-2 md:right-6 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-11 sm:h-11 bg-background/90 hover:bg-background border border-border/90 rounded-full flex items-center justify-center text-foreground hover:text-primary z-40 shadow-lg transition-all hover:scale-110 active:scale-95 backdrop-blur-md cursor-pointer",
 						onClick: nextSlide,
 						"aria-label": "Next Experience",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, { className: "w-6 h-6" })
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, { className: "w-4 h-4 sm:w-6 sm:h-6" })
 					})] }),
 					items.length > 1 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 						className: "absolute -bottom-2 left-0 right-0 flex justify-center items-center space-x-2.5 z-40",
@@ -1501,7 +1520,7 @@ var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder
 		};
 	};
 	const getConnectorClasses = () => {
-		const baseClasses = cn("absolute left-4 lg:left-1/2 transform lg:-translate-x-1/2", lineColor);
+		const baseClasses = cn("absolute left-3.5 sm:left-4 lg:left-1/2 transform lg:-translate-x-1/2", lineColor);
 		const widthStyle = `w-[${progressLineWidth}px]`;
 		switch (connectorStyle) {
 			case "dots": return cn(baseClasses, "w-1 rounded-full");
@@ -1524,7 +1543,7 @@ var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder
 			bounce: "hover:scale-[1.03] hover:shadow-md active:scale-[0.97]"
 		};
 		const alignmentClassesDesktop = cardAlignment === "alternating" ? index % 2 === 0 ? "lg:mr-[calc(50%+32px)]" : "lg:ml-[calc(50%+32px)]" : cardAlignment === "left" ? "lg:mr-auto lg:ml-0" : "lg:ml-auto lg:mr-0";
-		return cn(baseClasses, variantClasses[cardVariant], effectClasses[cardEffect], alignmentClassesDesktop, "ml-12 lg:ml-0 w-[calc(100%-3rem)] lg:w-[calc(50%-44px)]");
+		return cn(baseClasses, variantClasses[cardVariant], effectClasses[cardEffect], alignmentClassesDesktop, "ml-8 sm:ml-12 lg:ml-0 w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] lg:w-[calc(50%-44px)]");
 	};
 	const getScopeBadge = (scope) => {
 		if (!scope) return null;
@@ -1554,7 +1573,7 @@ var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: cn(getConnectorClasses(), "h-[calc(100%-1rem)] absolute top-2 z-10") }),
 						progressIndicator && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion$1.div, {
-							className: "absolute top-2 z-10 left-4 lg:left-1/2 -translate-x-1/2",
+							className: "absolute top-2 z-10 left-3.5 sm:left-4 lg:left-1/2 -translate-x-1/2",
 							style: {
 								height: progressHeight,
 								maxHeight: "calc(100% - 1rem)",
@@ -1567,7 +1586,7 @@ var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder
                   `
 							}
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion$1.div, {
-							className: "absolute z-20 left-4 lg:left-1/2",
+							className: "absolute z-20 left-3.5 sm:left-4 lg:left-1/2",
 							style: {
 								top: `calc(${progressHeight} + 8px)`,
 								translateX: "-50%",
@@ -1607,7 +1626,7 @@ var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder
 									},
 									className: cn("relative flex items-center py-2", "flex-col lg:flex-row", cardAlignment === "alternating" ? index % 2 === 0 ? "lg:justify-start" : "lg:flex-row-reverse lg:justify-start" : cardAlignment === "left" ? "lg:justify-start" : "lg:flex-row-reverse lg:justify-start"),
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-										className: cn("absolute top-6 lg:top-1/2 transform -translate-y-1/2 z-30", "left-4 lg:left-1/2 -translate-x-1/2"),
+										className: cn("absolute top-6 lg:top-1/2 transform -translate-y-1/2 z-30", "left-3.5 sm:left-4 lg:left-1/2 -translate-x-1/2"),
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion$1.div, {
 											className: cn("w-6 h-6 rounded-full border-2 bg-background flex items-center justify-center transition-colors duration-300", isActive ? cn(theme.nodeBorderClass, theme.nodeBgClass) : "border-border bg-card"),
 											animate: isActive ? {
@@ -2485,7 +2504,7 @@ function Nav() {
 					})
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "flex items-center gap-3",
+					className: "flex items-center gap-2.5",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
 							href: CV_URL,
@@ -2503,14 +2522,31 @@ function Nav() {
 							}), "Download CV"]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ThemeToggle, {}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 							onClick: () => setOpen((v) => !v),
-							className: "md:hidden inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3.5 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-foreground shadow-2xs hover:border-primary/80 active:scale-95 transition-all",
+							className: "md:hidden flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-surface/90 text-foreground shadow-xs hover:border-primary/80 active:scale-95 transition-all cursor-pointer",
 							"aria-label": "Toggle Navigation Menu",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: open ? "CLOSE" : "MENU" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-primary font-bold text-sm leading-none",
-								children: open ? "✕" : "+"
-							})]
+							children: open ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
+								width: "20",
+								height: "20",
+								viewBox: "0 0 24 24",
+								fill: "none",
+								stroke: "currentColor",
+								strokeWidth: "2.2",
+								strokeLinecap: "round",
+								strokeLinejoin: "round",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M18 6L6 18M6 6l12 12" })
+							}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
+								width: "20",
+								height: "20",
+								viewBox: "0 0 24 24",
+								fill: "none",
+								stroke: "currentColor",
+								strokeWidth: "2.2",
+								strokeLinecap: "round",
+								strokeLinejoin: "round",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M4 6h16M4 12h16M4 18h16" })
+							})
 						})
 					]
 				})
@@ -2530,15 +2566,15 @@ function Nav() {
 			y: "-100%"
 		},
 		transition: {
-			duration: .42,
+			duration: .38,
 			ease: [
-				.76,
-				0,
-				.24,
+				.16,
+				1,
+				.3,
 				1
 			]
 		},
-		className: "fixed inset-0 z-[100] flex flex-col justify-between bg-background p-6 sm:p-8 md:hidden overflow-y-auto select-none",
+		className: "fixed inset-0 z-[100] flex flex-col justify-between bg-background/98 backdrop-blur-2xl p-6 sm:p-8 md:hidden overflow-y-auto select-none",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "w-full flex items-center justify-between border-b border-border/70 pb-4 font-mono text-xs text-muted-foreground uppercase tracking-widest",
@@ -2560,13 +2596,14 @@ function Nav() {
 							children: "DIMAS WAHYU / 2026"
 						})
 					]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 					onClick: () => setOpen(false),
-					className: "inline-flex items-center gap-1.5 rounded-xl border-2 border-border/90 bg-card px-3.5 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-foreground shadow-xs active:scale-95 transition-all",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "CLOSE" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						className: "text-primary font-bold text-sm",
+					className: "flex h-9 w-9 items-center justify-center rounded-full border border-border/90 bg-card text-foreground shadow-xs active:scale-95 transition-all",
+					"aria-label": "Close menu",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "text-primary font-bold text-base",
 						children: "✕"
-					})]
+					})
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
@@ -2642,7 +2679,7 @@ function Hero() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 		id: "top",
 		ref,
-		className: "relative overflow-hidden pt-24 pb-12 md:pt-32 md:pb-16",
+		className: "relative overflow-hidden pt-28 pb-12 sm:pt-32 md:pt-36 md:pb-16",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InteractiveGridPattern, {
 				className: "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
@@ -2661,12 +2698,61 @@ function Hero() {
 				style: { animationDelay: "-9s" }
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-[1.2fr_1fr] md:items-center",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "reveal",
+				className: "mx-auto flex flex-col md:grid md:grid-cols-[1.2fr_1fr] max-w-6xl gap-8 sm:gap-12 px-4 sm:px-6 md:items-center",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "reveal relative mx-auto w-full max-w-[260px] xs:max-w-[280px] sm:max-w-sm order-1 md:order-2 mt-2 sm:mt-0",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "relative aspect-square rounded-[2rem] border-2 border-border/90 bg-gradient-to-br from-primary/25 via-secondary-1/15 to-accent/25 p-3 sm:p-4 glow-ring shadow-lg",
+						style: { transform: "perspective(900px) rotateX(calc(var(--my,0)*-6deg)) rotateY(calc(var(--mx,0)*8deg))" },
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "absolute -right-2 sm:-right-4 -top-3 sm:-top-4 rounded-full border border-border/90 glass px-2.5 sm:px-3 py-1 sm:py-1.5 font-mono text-[10px] sm:text-xs font-semibold animate-float-slow shadow-xs",
+								children: "data-driven ✦"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: dimas_formal_default,
+								alt: "Dimas Wahyu Saputra",
+								className: "h-full w-full rounded-[1.5rem] object-cover object-top",
+								loading: "eager"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "absolute -bottom-3 sm:-bottom-4 -left-2 sm:-left-4 rounded-2xl border border-border/90 glass p-2.5 sm:p-3 font-mono text-[10px] sm:text-xs shadow-sm",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "text-muted-foreground font-semibold",
+									children: "status"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "text-foreground font-medium",
+									children: "Final-year @ ITS · Open 2026"
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "absolute -left-3 sm:-left-6 top-1/3 grid h-10 w-10 sm:h-12 sm:w-12 place-items-center rounded-2xl border-1.5 border-border bg-card shadow-md animate-float-slow",
+								style: { animationDelay: "-2s" },
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+									src: "https://cdn.simpleicons.org/python/3776AB",
+									alt: "",
+									width: 22,
+									height: 22
+								})
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "absolute -right-3 sm:-right-6 top-2/3 grid h-10 w-10 sm:h-12 sm:w-12 place-items-center rounded-2xl border-1.5 border-border bg-card shadow-md animate-float-slow",
+								style: { animationDelay: "-4s" },
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+									src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/New_Power_BI_Logo.svg/3840px-New_Power_BI_Logo.svg.png",
+									alt: "Power BI",
+									width: 22,
+									height: 22,
+									className: "h-5 w-5 sm:h-6 sm:w-6 object-contain"
+								})
+							})
+						]
+					})
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "reveal text-center md:text-left flex flex-col items-center md:items-start order-2 md:order-1",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
-							className: "mt-4 sm:mt-5 font-display text-3xl sm:text-5xl md:text-7xl font-semibold leading-[1.1] tracking-tight",
+							className: "mt-2 sm:mt-4 font-display text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-extrabold leading-[1.15] md:leading-[1.1] tracking-tight text-center md:text-left",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 									className: "block",
@@ -2693,27 +2779,27 @@ function Hero() {
 							]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-							className: "mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg",
+							className: "mt-5 sm:mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg text-center md:text-left",
 							children: [
 								"I'm ",
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-foreground font-medium",
+									className: "text-foreground font-semibold",
 									children: "Dimas Wahyu Saputra"
 								}),
 								" — a final-year Data Science student at ",
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-foreground",
+									className: "text-foreground font-semibold",
 									children: "ITS"
 								}),
 								", building dashboards, ML models, and analytics products that move metrics in the real world."
 							]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "mt-8 flex flex-wrap items-center gap-3",
+							className: "mt-6 sm:mt-8 flex flex-wrap items-center justify-center md:justify-start gap-2.5 sm:gap-3",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
 									href: "#projects",
-									className: "group inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background transition hover:opacity-90 active:scale-95",
+									className: "group inline-flex items-center gap-2 rounded-full bg-foreground px-4 sm:px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-medium text-background transition hover:opacity-90 active:scale-95",
 									children: ["View my work", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
 										width: "14",
 										height: "14",
@@ -2729,7 +2815,7 @@ function Hero() {
 									href: CV_URL,
 									target: "_blank",
 									rel: "noreferrer",
-									className: "group inline-flex items-center gap-2 rounded-full bg-[#0066cc] hover:bg-[#0071e3] px-5 py-3 text-sm font-medium text-white shadow-md transition hover:scale-[1.03] active:scale-95",
+									className: "group inline-flex items-center gap-2 rounded-full bg-[#0066cc] hover:bg-[#0071e3] px-4 sm:px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-medium text-white shadow-md transition hover:scale-[1.03] active:scale-95",
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
 										width: "14",
 										height: "14",
@@ -2742,14 +2828,14 @@ function Hero() {
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
 									href: "#contact",
-									className: "inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium hover:bg-surface active:scale-95",
+									className: "inline-flex items-center gap-2 rounded-full border border-border px-4 sm:px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-medium hover:bg-surface active:scale-95",
 									children: "Get in touch"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SocialIcons, {})
 							]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dl", {
-							className: "mt-12 grid max-w-md grid-cols-3 gap-6",
+							className: "mt-8 sm:mt-12 mx-auto md:mx-0 grid max-w-md grid-cols-3 gap-2 sm:gap-6 text-center md:text-left",
 							children: [
 								{
 									k: "20+",
@@ -2764,63 +2850,14 @@ function Hero() {
 									v: "Rows analyzed"
 								}
 							].map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", {
-								className: "font-display text-3xl font-semibold gradient-text",
+								className: "font-display text-2xl sm:text-3xl font-extrabold gradient-text",
 								children: s.k
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", {
-								className: "mt-1 text-xs uppercase tracking-widest text-muted-foreground",
+								className: "mt-1 text-[10px] sm:text-xs uppercase tracking-widest text-muted-foreground font-medium",
 								children: s.v
 							})] }, s.v))
 						})
 					]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "reveal relative mx-auto w-full max-w-sm",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "relative aspect-square rounded-[2rem] border-2 border-border/90 bg-gradient-to-br from-primary/25 via-secondary-1/15 to-accent/25 p-4 glow-ring shadow-lg",
-						style: { transform: "perspective(900px) rotateX(calc(var(--my,0)*-6deg)) rotateY(calc(var(--mx,0)*8deg))" },
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "absolute -right-4 -top-4 rounded-full border border-border/90 glass px-3 py-1.5 font-mono text-xs font-semibold animate-float-slow shadow-xs",
-								children: "data-driven ✦"
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-								src: dimas_formal_default,
-								alt: "Dimas Wahyu Saputra",
-								className: "h-full w-full rounded-[1.5rem] object-cover object-top",
-								loading: "eager"
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "absolute -bottom-4 -left-4 rounded-2xl border border-border/90 glass p-3 font-mono text-xs shadow-sm",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									className: "text-muted-foreground font-semibold",
-									children: "status"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									className: "text-foreground font-medium",
-									children: "Final-year @ ITS · Open 2026"
-								})]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "absolute -left-6 top-1/3 grid h-12 w-12 place-items-center rounded-2xl border-1.5 border-border bg-card shadow-md animate-float-slow",
-								style: { animationDelay: "-2s" },
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-									src: "https://cdn.simpleicons.org/python/3776AB",
-									alt: "",
-									width: 24,
-									height: 24
-								})
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "absolute -right-6 top-2/3 grid h-12 w-12 place-items-center rounded-2xl border-1.5 border-border bg-card shadow-md animate-float-slow",
-								style: { animationDelay: "-4s" },
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-									src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/New_Power_BI_Logo.svg/3840px-New_Power_BI_Logo.svg.png",
-									alt: "Power BI",
-									width: 24,
-									height: 24,
-									className: "h-6 w-6 object-contain"
-								})
-							})
-						]
-					})
 				})]
 			})
 		]
@@ -2862,14 +2899,14 @@ function Marquee() {
 function Section({ id, eyebrow, title, children, reveal = "" }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 		id,
-		className: "mx-auto max-w-6xl px-6 py-14 md:py-20",
+		className: "mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-16 md:py-20 overflow-hidden",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: `reveal ${reveal} mb-8 md:mb-10 max-w-2xl`,
+			className: `reveal ${reveal} mb-6 sm:mb-8 md:mb-10 max-w-2xl`,
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "font-mono text-xs uppercase tracking-[0.2em] text-primary",
+				className: "font-mono text-xs uppercase tracking-[0.2em] text-primary font-semibold",
 				children: eyebrow
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-				className: "mt-3 font-display text-3xl font-semibold md:text-5xl",
+				className: "mt-2.5 sm:mt-3 font-display text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight",
 				children: title
 			})]
 		}), children]
@@ -2889,28 +2926,28 @@ function About() {
 		] }),
 		reveal: "reveal-blur",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "grid gap-10 lg:grid-cols-[1fr_1.15fr] items-start",
+			className: "grid gap-8 lg:gap-10 lg:grid-cols-[1.35fr_1fr] xl:grid-cols-[1.4fr_1fr] items-start w-full max-w-full min-w-0 overflow-hidden",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "reveal reveal-left space-y-4 text-base leading-relaxed text-muted-foreground",
+				className: "reveal space-y-4 text-sm sm:text-base leading-relaxed text-muted-foreground w-full max-w-full min-w-0",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
 						"I study",
 						" ",
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "text-foreground font-medium",
+							className: "text-foreground font-semibold",
 							children: "Data Science at Institut Teknologi Sepuluh Nopember (ITS)"
 						}),
 						" ",
 						"and was named",
 						" ",
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "text-foreground font-medium",
+							className: "text-foreground font-semibold",
 							children: "3rd Most Outstanding Student of ITS 2026"
 						}),
 						". I'm an awardee of the",
 						" ",
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "text-foreground font-medium",
+							className: "text-foreground font-semibold",
 							children: "Beasiswa Indonesia Maju (BIM) DN"
 						}),
 						" ",
@@ -2921,7 +2958,7 @@ function About() {
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(GitHubContributions, {})
 				]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "reveal reveal-right w-full",
+				className: "reveal w-full max-w-full min-w-0 overflow-hidden",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SkillsBeamShowcase, {})
 			})]
 		})
@@ -3183,7 +3220,7 @@ function Contact() {
 				" to clipboard"
 			] })]
 		}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "reveal reveal-flip grid gap-8 rounded-3xl border-2 border-border/90 bg-card/90 p-6 sm:p-8 lg:grid-cols-12 md:p-10 shadow-2xl backdrop-blur-xl relative overflow-hidden items-center",
+			className: "reveal reveal-flip grid gap-8 rounded-3xl border-2 border-border/90 bg-card/90 p-6 sm:p-8 md:p-10 lg:grid-cols-12 shadow-2xl backdrop-blur-xl relative overflow-hidden items-center",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "lg:col-span-7 flex flex-col justify-between space-y-6",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
@@ -3191,8 +3228,42 @@ function Contact() {
 						className: "text-2xl sm:text-3xl font-bold tracking-tight text-foreground",
 						children: "Dimas Wahyu Saputra"
 					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "my-5 flex items-center justify-center lg:hidden",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion$1.div, {
+							className: "relative flex items-center justify-center",
+							initial: {
+								scale: .9,
+								opacity: 0
+							},
+							whileInView: {
+								scale: 1,
+								opacity: 1
+							},
+							viewport: { once: true },
+							transition: {
+								duration: .6,
+								ease: "easeOut"
+							},
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 rounded-full bg-gradient-to-tr from-primary/25 via-accent/25 to-secondary-1/25 blur-3xl scale-125 pointer-events-none" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion$1.img, {
+								src: memoji_default,
+								alt: "Dimas Waving Memoji",
+								className: "w-52 xs:w-64 h-auto object-contain relative z-10 drop-shadow-2xl pointer-events-none",
+								animate: { y: [
+									0,
+									-8,
+									0
+								] },
+								transition: {
+									duration: 4,
+									repeat: Infinity,
+									ease: "easeInOut"
+								}
+							})]
+						})
+					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-						className: "mt-2 text-sm text-muted-foreground leading-relaxed",
+						className: "mt-2 text-sm sm:text-base text-muted-foreground leading-relaxed",
 						children: [
 							"Data Science Student at ITS • Analytics, BI Dashboards & Predictive Modeling. Based in ",
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
@@ -3316,7 +3387,7 @@ function Contact() {
 					})]
 				})]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "lg:col-span-5 flex items-center justify-center relative p-4",
+				className: "hidden lg:flex lg:col-span-5 items-center justify-center relative p-4",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion$1.div, {
 					className: "relative flex items-center justify-center",
 					initial: {
@@ -3335,7 +3406,7 @@ function Contact() {
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 rounded-full bg-gradient-to-tr from-primary/15 via-accent/15 to-secondary-1/15 blur-3xl scale-110 pointer-events-none" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion$1.img, {
 						src: memoji_default,
 						alt: "Dimas Waving Memoji",
-						className: "w-full max-w-[260px] sm:max-w-[300px] md:max-w-[320px] h-auto object-contain relative z-10 drop-shadow-2xl pointer-events-none",
+						className: "w-full max-w-[280px] md:max-w-[320px] h-auto object-contain relative z-10 drop-shadow-2xl pointer-events-none",
 						animate: { y: [
 							0,
 							-8,

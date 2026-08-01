@@ -787,7 +787,7 @@ function Nav() {
           </nav>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             <a
               href={CV_URL}
               target="_blank"
@@ -807,29 +807,35 @@ function Nav() {
               Download CV
             </a>
             <ThemeToggle />
+            {/* Burger Menu Button (Mobile) */}
             <button
               onClick={() => setOpen((v) => !v)}
-              className="md:hidden inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3.5 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-foreground shadow-2xs hover:border-primary/80 active:scale-95 transition-all"
+              className="md:hidden flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-surface/90 text-foreground shadow-xs hover:border-primary/80 active:scale-95 transition-all cursor-pointer"
               aria-label="Toggle Navigation Menu"
             >
-              <span>{open ? "CLOSE" : "MENU"}</span>
-              <span className="text-primary font-bold text-sm leading-none">
-                {open ? "✕" : "+"}
-              </span>
+              {open ? (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Fullscreen Mobile Drawer Menu (Reference: irfansabrian.vercel.app) */}
+      {/* Fullscreen Slide-Down Mobile Drawer Menu */}
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ opacity: 0, y: "-100%" }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "-100%" }}
-            transition={{ duration: 0.42, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-[100] flex flex-col justify-between bg-background p-6 sm:p-8 md:hidden overflow-y-auto select-none"
+            transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-[100] flex flex-col justify-between bg-background/98 backdrop-blur-2xl p-6 sm:p-8 md:hidden overflow-y-auto select-none"
           >
             {/* Top Bar Header */}
             <div className="w-full flex items-center justify-between border-b border-border/70 pb-4 font-mono text-xs text-muted-foreground uppercase tracking-widest">
@@ -844,10 +850,10 @@ function Nav() {
               </div>
               <button
                 onClick={() => setOpen(false)}
-                className="inline-flex items-center gap-1.5 rounded-xl border-2 border-border/90 bg-card px-3.5 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-foreground shadow-xs active:scale-95 transition-all"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-border/90 bg-card text-foreground shadow-xs active:scale-95 transition-all"
+                aria-label="Close menu"
               >
-                <span>CLOSE</span>
-                <span className="text-primary font-bold text-sm">✕</span>
+                <span className="text-primary font-bold text-base">✕</span>
               </button>
             </div>
 
@@ -935,7 +941,7 @@ function Hero() {
     return () => el.removeEventListener("mousemove", onMove);
   }, []);
   return (
-    <section id="top" ref={ref} className="relative overflow-hidden pt-24 pb-12 md:pt-32 md:pb-16">
+    <section id="top" ref={ref} className="relative overflow-hidden pt-28 pb-12 sm:pt-32 md:pt-36 md:pb-16">
       <InteractiveGridPattern
         className="[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]"
         width={40}
@@ -952,9 +958,54 @@ function Hero() {
         className="absolute left-1/2 bottom-0 -z-10 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-accent/20 blur-3xl animate-blob"
         style={{ animationDelay: "-9s" }}
       />
-      <div className="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-[1.2fr_1fr] md:items-center">
-        <div className="reveal">
-          <h1 className="mt-4 sm:mt-5 font-display text-3xl sm:text-5xl md:text-7xl font-semibold leading-[1.1] tracking-tight">
+      {/* On mobile: Photo is at top, followed by Headline text. On desktop: 2 column side-by-side */}
+      <div className="mx-auto flex flex-col md:grid md:grid-cols-[1.2fr_1fr] max-w-6xl gap-8 sm:gap-12 px-4 sm:px-6 md:items-center">
+        {/* Photo Card (Order 1 on mobile, Order 2 on desktop) */}
+        <div className="reveal relative mx-auto w-full max-w-[260px] xs:max-w-[280px] sm:max-w-sm order-1 md:order-2 mt-2 sm:mt-0">
+          <div
+            className="relative aspect-square rounded-[2rem] border-2 border-border/90 bg-gradient-to-br from-primary/25 via-secondary-1/15 to-accent/25 p-3 sm:p-4 glow-ring shadow-lg"
+            style={{
+              transform:
+                "perspective(900px) rotateX(calc(var(--my,0)*-6deg)) rotateY(calc(var(--mx,0)*8deg))",
+            }}
+          >
+            <div className="absolute -right-2 sm:-right-4 -top-3 sm:-top-4 rounded-full border border-border/90 glass px-2.5 sm:px-3 py-1 sm:py-1.5 font-mono text-[10px] sm:text-xs font-semibold animate-float-slow shadow-xs">
+              data-driven ✦
+            </div>
+            <img
+              src={dimasPhoto}
+              alt="Dimas Wahyu Saputra"
+              className="h-full w-full rounded-[1.5rem] object-cover object-top"
+              loading="eager"
+            />
+            <div className="absolute -bottom-3 sm:-bottom-4 -left-2 sm:-left-4 rounded-2xl border border-border/90 glass p-2.5 sm:p-3 font-mono text-[10px] sm:text-xs shadow-sm">
+              <div className="text-muted-foreground font-semibold">status</div>
+              <div className="text-foreground font-medium">Final-year @ ITS · Open 2026</div>
+            </div>
+            <div
+              className="absolute -left-3 sm:-left-6 top-1/3 grid h-10 w-10 sm:h-12 sm:w-12 place-items-center rounded-2xl border-1.5 border-border bg-card shadow-md animate-float-slow"
+              style={{ animationDelay: "-2s" }}
+            >
+              <img src="https://cdn.simpleicons.org/python/3776AB" alt="" width={22} height={22} />
+            </div>
+            <div
+              className="absolute -right-3 sm:-right-6 top-2/3 grid h-10 w-10 sm:h-12 sm:w-12 place-items-center rounded-2xl border-1.5 border-border bg-card shadow-md animate-float-slow"
+              style={{ animationDelay: "-4s" }}
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/New_Power_BI_Logo.svg/3840px-New_Power_BI_Logo.svg.png"
+                alt="Power BI"
+                width={22}
+                height={22}
+                className="h-5 w-5 sm:h-6 sm:w-6 object-contain"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Text & Headline (Order 2 on mobile, Order 1 on desktop) */}
+        <div className="reveal text-center md:text-left flex flex-col items-center md:items-start order-2 md:order-1">
+          <h1 className="mt-2 sm:mt-4 font-display text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-extrabold leading-[1.15] md:leading-[1.1] tracking-tight text-center md:text-left">
             <span className="block">Turning complex</span>
             <span className="block">data into</span>
             <span className="block">
@@ -963,16 +1014,16 @@ function Hero() {
             </span>
             <span className="block text-foreground/90">that ship.</span>
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            I'm <span className="text-foreground font-medium">Dimas Wahyu Saputra</span> — a
-            final-year Data Science student at <span className="text-foreground">ITS</span>,
+          <p className="mt-5 sm:mt-6 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg text-center md:text-left">
+            I'm <span className="text-foreground font-semibold">Dimas Wahyu Saputra</span> — a
+            final-year Data Science student at <span className="text-foreground font-semibold">ITS</span>,
             building dashboards, ML models, and analytics products that move metrics in the real
             world.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center md:justify-start gap-2.5 sm:gap-3">
             <a
               href="#projects"
-              className="group inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background transition hover:opacity-90 active:scale-95"
+              className="group inline-flex items-center gap-2 rounded-full bg-foreground px-4 sm:px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-medium text-background transition hover:opacity-90 active:scale-95"
             >
               View my work
               <svg
@@ -991,7 +1042,7 @@ function Hero() {
               href={CV_URL}
               target="_blank"
               rel="noreferrer"
-              className="group inline-flex items-center gap-2 rounded-full bg-[#0066cc] hover:bg-[#0071e3] px-5 py-3 text-sm font-medium text-white shadow-md transition hover:scale-[1.03] active:scale-95"
+              className="group inline-flex items-center gap-2 rounded-full bg-[#0066cc] hover:bg-[#0071e3] px-4 sm:px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-medium text-white shadow-md transition hover:scale-[1.03] active:scale-95"
             >
               <svg
                 width="14"
@@ -1007,67 +1058,26 @@ function Hero() {
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium hover:bg-surface active:scale-95"
+              className="inline-flex items-center gap-2 rounded-full border border-border px-4 sm:px-5 py-2.5 sm:py-3 text-xs sm:text-sm font-medium hover:bg-surface active:scale-95"
             >
               Get in touch
             </a>
             <SocialIcons />
           </div>
-          <dl className="mt-12 grid max-w-md grid-cols-3 gap-6">
+          <dl className="mt-8 sm:mt-12 mx-auto md:mx-0 grid max-w-md grid-cols-3 gap-2 sm:gap-6 text-center md:text-left">
             {[
               { k: "20+", v: "Awards won" },
               { k: "3", v: "Internships" },
               { k: "9k+", v: "Rows analyzed" },
             ].map((s) => (
               <div key={s.v}>
-                <dt className="font-display text-3xl font-semibold gradient-text">{s.k}</dt>
-                <dd className="mt-1 text-xs uppercase tracking-widest text-muted-foreground">
+                <dt className="font-display text-2xl sm:text-3xl font-extrabold gradient-text">{s.k}</dt>
+                <dd className="mt-1 text-[10px] sm:text-xs uppercase tracking-widest text-muted-foreground font-medium">
                   {s.v}
                 </dd>
               </div>
             ))}
           </dl>
-        </div>
-        <div className="reveal relative mx-auto w-full max-w-sm">
-          <div
-            className="relative aspect-square rounded-[2rem] border-2 border-border/90 bg-gradient-to-br from-primary/25 via-secondary-1/15 to-accent/25 p-4 glow-ring shadow-lg"
-            style={{
-              transform:
-                "perspective(900px) rotateX(calc(var(--my,0)*-6deg)) rotateY(calc(var(--mx,0)*8deg))",
-            }}
-          >
-            <div className="absolute -right-4 -top-4 rounded-full border border-border/90 glass px-3 py-1.5 font-mono text-xs font-semibold animate-float-slow shadow-xs">
-              data-driven ✦
-            </div>
-            <img
-              src={dimasPhoto}
-              alt="Dimas Wahyu Saputra"
-              className="h-full w-full rounded-[1.5rem] object-cover object-top"
-              loading="eager"
-            />
-            <div className="absolute -bottom-4 -left-4 rounded-2xl border border-border/90 glass p-3 font-mono text-xs shadow-sm">
-              <div className="text-muted-foreground font-semibold">status</div>
-              <div className="text-foreground font-medium">Final-year @ ITS · Open 2026</div>
-            </div>
-            <div
-              className="absolute -left-6 top-1/3 grid h-12 w-12 place-items-center rounded-2xl border-1.5 border-border bg-card shadow-md animate-float-slow"
-              style={{ animationDelay: "-2s" }}
-            >
-              <img src="https://cdn.simpleicons.org/python/3776AB" alt="" width={24} height={24} />
-            </div>
-            <div
-              className="absolute -right-6 top-2/3 grid h-12 w-12 place-items-center rounded-2xl border-1.5 border-border bg-card shadow-md animate-float-slow"
-              style={{ animationDelay: "-4s" }}
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/New_Power_BI_Logo.svg/3840px-New_Power_BI_Logo.svg.png"
-                alt="Power BI"
-                width={24}
-                height={24}
-                className="h-6 w-6 object-contain"
-              />
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -1118,10 +1128,10 @@ function Section({
   reveal?: string;
 }) {
   return (
-    <section id={id} className="mx-auto max-w-6xl px-6 py-14 md:py-20">
-      <div className={`reveal ${reveal} mb-8 md:mb-10 max-w-2xl`}>
-        <div className="font-mono text-xs uppercase tracking-[0.2em] text-primary">{eyebrow}</div>
-        <h2 className="mt-3 font-display text-3xl font-semibold md:text-5xl">{title}</h2>
+    <section id={id} className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-16 md:py-20 overflow-hidden">
+      <div className={`reveal ${reveal} mb-6 sm:mb-8 md:mb-10 max-w-2xl`}>
+        <div className="font-mono text-xs uppercase tracking-[0.2em] text-primary font-semibold">{eyebrow}</div>
+        <h2 className="mt-2.5 sm:mt-3 font-display text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight">{title}</h2>
       </div>
       {children}
     </section>
@@ -1148,19 +1158,19 @@ function About() {
       }
       reveal="reveal-blur"
     >
-      <div className="grid gap-10 lg:grid-cols-[1fr_1.15fr] items-start">
-        <div className="reveal reveal-left space-y-4 text-base leading-relaxed text-muted-foreground">
+      <div className="grid gap-8 lg:gap-10 lg:grid-cols-[1.35fr_1fr] xl:grid-cols-[1.4fr_1fr] items-start w-full max-w-full min-w-0 overflow-hidden">
+        <div className="reveal space-y-4 text-sm sm:text-base leading-relaxed text-muted-foreground w-full max-w-full min-w-0">
           <p>
             I study{" "}
-            <span className="text-foreground font-medium">
+            <span className="text-foreground font-semibold">
               Data Science at Institut Teknologi Sepuluh Nopember (ITS)
             </span>{" "}
             and was named{" "}
-            <span className="text-foreground font-medium">
+            <span className="text-foreground font-semibold">
               3rd Most Outstanding Student of ITS 2026
             </span>
             . I'm an awardee of the{" "}
-            <span className="text-foreground font-medium">Beasiswa Indonesia Maju (BIM) DN</span>{" "}
+            <span className="text-foreground font-semibold">Beasiswa Indonesia Maju (BIM) DN</span>{" "}
             scholarship from Kemdiktisaintek RI.
           </p>
           <p>
@@ -1174,7 +1184,7 @@ function About() {
           </p>
           <GitHubContributions />
         </div>
-        <div className="reveal reveal-right w-full">
+        <div className="reveal w-full max-w-full min-w-0 overflow-hidden">
           <SkillsBeamShowcase />
         </div>
       </div>
@@ -1453,14 +1463,39 @@ function Contact() {
         )}
       </AnimatePresence>
 
-      <div className="reveal reveal-flip grid gap-8 rounded-3xl border-2 border-border/90 bg-card/90 p-6 sm:p-8 lg:grid-cols-12 md:p-10 shadow-2xl backdrop-blur-xl relative overflow-hidden items-center">
+      <div className="reveal reveal-flip grid gap-8 rounded-3xl border-2 border-border/90 bg-card/90 p-6 sm:p-8 md:p-10 lg:grid-cols-12 shadow-2xl backdrop-blur-xl relative overflow-hidden items-center">
         {/* Left Column: Contact Details & Quick Actions */}
         <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
           <div>
             <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
               Dimas Wahyu Saputra
             </h3>
-            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+
+            {/* Mobile-only Memoji Photo directly underneath name */}
+            <div className="my-5 flex items-center justify-center lg:hidden">
+              <motion.div
+                className="relative flex items-center justify-center"
+                initial={{ scale: 0.9, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+              >
+                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/25 via-accent/25 to-secondary-1/25 blur-3xl scale-125 pointer-events-none" />
+                <motion.img
+                  src={memojiImg}
+                  alt="Dimas Waving Memoji"
+                  className="w-52 xs:w-64 h-auto object-contain relative z-10 drop-shadow-2xl pointer-events-none"
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              </motion.div>
+            </div>
+
+            <p className="mt-2 text-sm sm:text-base text-muted-foreground leading-relaxed">
               Data Science Student at ITS • Analytics, BI Dashboards & Predictive Modeling.
               Based in <span className="font-semibold text-foreground">Surabaya, East Java</span>.
             </p>
@@ -1577,8 +1612,8 @@ function Contact() {
           </div>
         </div>
 
-        {/* Right Column: Transparent Memoji cutout (NO CARD / NO COMPONENT WRAPPER!) */}
-        <div className="lg:col-span-5 flex items-center justify-center relative p-4">
+        {/* Right Column: Desktop Waving Memoji Photo Cutout (Original Desktop Layout) */}
+        <div className="hidden lg:flex lg:col-span-5 items-center justify-center relative p-4">
           <motion.div
             className="relative flex items-center justify-center"
             initial={{ scale: 0.9, opacity: 0 }}
@@ -1593,7 +1628,7 @@ function Contact() {
             <motion.img
               src={memojiImg}
               alt="Dimas Waving Memoji"
-              className="w-full max-w-[260px] sm:max-w-[300px] md:max-w-[320px] h-auto object-contain relative z-10 drop-shadow-2xl pointer-events-none"
+              className="w-full max-w-[280px] md:max-w-[320px] h-auto object-contain relative z-10 drop-shadow-2xl pointer-events-none"
               animate={{ y: [0, -8, 0] }}
               transition={{
                 duration: 4,

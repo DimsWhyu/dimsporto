@@ -19,19 +19,36 @@ export function FlippingCard({
 }: FlippingCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
 
+  const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // If click originated from an anchor or button inside backContent, do not flip back
+    const target = e.target as HTMLElement;
+    if (target.closest("a, button")) {
+      return;
+    }
+    setIsFlipped((prev) => !prev);
+  };
+
   return (
     <div
       className={cn(
-        "group [perspective:1000px] w-full cursor-pointer select-none",
+        "group [perspective:1000px] w-full cursor-pointer select-none touch-manipulation",
         className
       )}
       style={{
         height: typeof height === "number" ? `${height}px` : height,
         width: width ? (typeof width === "number" ? `${width}px` : width) : "100%",
       }}
-      onClick={() => setIsFlipped((prev) => !prev)}
-      onMouseEnter={() => setIsFlipped(true)}
-      onMouseLeave={() => setIsFlipped(false)}
+      onClick={handleContainerClick}
+      onMouseEnter={() => {
+        if (typeof window !== "undefined" && window.matchMedia("(hover: hover)").matches) {
+          setIsFlipped(true);
+        }
+      }}
+      onMouseLeave={() => {
+        if (typeof window !== "undefined" && window.matchMedia("(hover: hover)").matches) {
+          setIsFlipped(false);
+        }
+      }}
       {...props}
     >
       <div

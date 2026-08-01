@@ -90,6 +90,7 @@
     scroll-behavior: smooth;
     overflow-x: hidden;
     max-width: 100vw;
+    -webkit-tap-highlight-color: transparent;
   }
   body {
     background-color: var(--color-background);
@@ -97,8 +98,10 @@
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     max-width: 100vw;
+    width: 100%;
   }
   h1,
   h2,
@@ -106,6 +109,15 @@
   h4 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
+  }
+
+  /* Responsive media rules (Principle 14) */
+  img,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
+    height: auto;
   }
 }
 
@@ -456,6 +468,28 @@
   }
   .back-to-top-enter {
     animation: back-to-top-in 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  /* Custom visible slidebar for mobile horizontal scrolling */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--color-primary) 70%, transparent) color-mix(in oklab, var(--color-muted) 80%, transparent);
+    -webkit-overflow-scrolling: touch;
+  }
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 6px;
+    display: block !important;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: color-mix(in oklab, var(--color-muted) 80%, transparent);
+    border-radius: 9999px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--color-primary) 70%, transparent);
+    border-radius: 9999px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
   }
 }
 

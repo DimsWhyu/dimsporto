@@ -100,12 +100,15 @@ export function GitHubContributions() {
   };
 
   return (
-    <div className="mt-8 rounded-2xl border-2 border-border/90 bg-card p-6 shadow-md transition-all hover:border-primary/60 hover:shadow-lg">
+    <div className="mt-6 sm:mt-8 w-full max-w-full min-w-0 overflow-hidden rounded-2xl border-2 border-border/90 bg-card p-4 sm:p-6 shadow-md transition-all hover:border-primary/60 hover:shadow-lg">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-2 flex-wrap">
         <div className="flex items-center gap-2">
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-muted-foreground">
             GitHub Contributions
+          </span>
+          <span className="sm:hidden font-mono text-[10px] text-primary font-medium bg-primary/10 px-2 py-0.5 rounded-full border border-primary/20">
+            Slide ↔
           </span>
         </div>
         <a
@@ -119,17 +122,17 @@ export function GitHubContributions() {
         </a>
       </div>
 
-      {/* Grid Container */}
-      <div className="mt-4 overflow-x-auto pb-2 scrollbar-none">
+      {/* Grid Container with Visible Mobile Slidebar */}
+      <div className="relative mt-4 w-full overflow-x-auto pb-3 touch-pan-x custom-scrollbar">
         {loading ? (
           <div className="flex h-28 items-center justify-center gap-2 text-xs font-mono text-muted-foreground">
             <Loader2 className="size-4 animate-spin text-primary" />
             <span>Loading contributions...</span>
           </div>
         ) : (
-          <div className="min-w-[540px]">
+          <div className="w-full min-w-[480px] sm:min-w-[500px] lg:min-w-0 select-none">
             {/* Months Header */}
-            <div className="relative mb-2 flex text-[10px] font-mono font-semibold uppercase text-muted-foreground h-4">
+            <div className="relative mb-2 flex text-[9px] sm:text-[10px] font-mono font-semibold uppercase text-muted-foreground h-4">
               {monthLabels.map((m, i) => (
                 <span
                   key={`${m.label}-${i}`}
@@ -144,15 +147,16 @@ export function GitHubContributions() {
             </div>
 
             {/* Matrix Grid */}
-            <div className="flex gap-[3.5px]">
+            <div className="flex justify-between gap-[2px] sm:gap-[3.5px] lg:gap-[4px] w-full">
               {weeks.map((week, wIdx) => (
-                <div key={wIdx} className="flex flex-col gap-[3.5px]">
+                <div key={wIdx} className="flex flex-col gap-[2px] sm:gap-[3.5px] lg:gap-[4px] flex-1">
                   {week.map((day) => (
                     <div
                       key={day.date}
                       onMouseEnter={() => setHoveredDay(day)}
                       onMouseLeave={() => setHoveredDay(null)}
-                      className={`size-2.5 rounded-[2.5px] border transition-all duration-150 ${getLevelColor(
+                      onTouchStart={() => setHoveredDay(day)}
+                      className={`w-full aspect-square rounded-[2px] sm:rounded-[2.5px] border transition-all duration-150 ${getLevelColor(
                         day.level,
                       )} hover:scale-130 hover:z-10 shadow-2xs`}
                       title={`${day.count} contributions on ${day.date}`}
@@ -166,7 +170,7 @@ export function GitHubContributions() {
       </div>
 
       {/* Footer */}
-      <div className="mt-4 flex items-center justify-between border-t-2 border-border/80 pt-3.5">
+      <div className="mt-3 flex items-center justify-between border-t-2 border-border/80 pt-3">
         <div className="font-mono text-xs text-muted-foreground">
           {hoveredDay ? (
             <span>

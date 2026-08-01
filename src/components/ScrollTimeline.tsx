@@ -291,7 +291,7 @@ export const ScrollTimeline = ({
 
   const getConnectorClasses = () => {
     const baseClasses = cn(
-      "absolute left-4 lg:left-1/2 transform lg:-translate-x-1/2",
+      "absolute left-3.5 sm:left-4 lg:left-1/2 transform lg:-translate-x-1/2",
       lineColor
     );
     const widthStyle = `w-[${progressLineWidth}px]`;
@@ -338,7 +338,7 @@ export const ScrollTimeline = ({
       variantClasses[cardVariant],
       effectClasses[cardEffect],
       alignmentClassesDesktop,
-      "ml-12 lg:ml-0 w-[calc(100%-3rem)] lg:w-[calc(50%-44px)]"
+      "ml-8 sm:ml-12 lg:ml-0 w-[calc(100%-2rem)] sm:w-[calc(100%-3rem)] lg:w-[calc(50%-44px)]"
     );
   };
 
@@ -399,7 +399,7 @@ export const ScrollTimeline = ({
             <>
               {/* Progress Line */}
               <motion.div
-                className="absolute top-2 z-10 left-4 lg:left-1/2 -translate-x-1/2"
+                className="absolute top-2 z-10 left-3.5 sm:left-4 lg:left-1/2 -translate-x-1/2"
                 style={{
                   height: progressHeight,
                   maxHeight: "calc(100% - 1rem)",
@@ -414,7 +414,7 @@ export const ScrollTimeline = ({
               />
               {/* Traveling Glow Comet at line head */}
               <motion.div
-                className="absolute z-20 left-4 lg:left-1/2"
+                className="absolute z-20 left-3.5 sm:left-4 lg:left-1/2"
                 style={{
                   top: `calc(${progressHeight} + 8px)`,
                   translateX: "-50%",
@@ -476,7 +476,7 @@ export const ScrollTimeline = ({
                   <div
                     className={cn(
                       "absolute top-6 lg:top-1/2 transform -translate-y-1/2 z-30",
-                      "left-4 lg:left-1/2 -translate-x-1/2"
+                      "left-3.5 sm:left-4 lg:left-1/2 -translate-x-1/2"
                     )}
                   >
                     <motion.div

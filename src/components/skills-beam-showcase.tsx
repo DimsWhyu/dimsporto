@@ -75,23 +75,30 @@ function SkillLogo({ name, elementRef, hoveredSkill, setHoveredSkill }: SkillLog
       title={name}
       onMouseEnter={() => setHoveredSkill(name)}
       onMouseLeave={() => setHoveredSkill(null)}
-      className={`group/icon relative flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl sm:rounded-2xl border p-2 sm:p-2.5 shadow-2xs transition-all duration-300 cursor-pointer shrink-0 ${
+      onTouchStart={(e) => {
+        // Toggle hover on touch
+        e.stopPropagation();
+        setHoveredSkill(isHovered ? null : name);
+      }}
+      className={`group/icon relative flex h-9 w-9 xs:h-10 xs:w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl sm:rounded-2xl border p-1.5 xs:p-2 sm:p-2.5 shadow-2xs transition-all duration-300 cursor-pointer shrink-0 ${
         isHovered
-          ? "scale-120 z-40 border-primary bg-card ring-2 ring-primary/60 shadow-lg shadow-primary/20 opacity-100"
+          ? "scale-115 z-40 border-primary bg-card ring-2 ring-primary/60 shadow-lg shadow-primary/20 opacity-100"
           : isDimmed
             ? "opacity-25 blur-[1.5px] scale-90 border-border/40 bg-card/40"
             : "border-border/80 bg-card/90 hover:border-primary hover:scale-110 opacity-100"
       }`}
     >
       {url ? (
-        <img src={url} alt={name} className="h-5 w-5 sm:h-6 sm:w-6 object-contain" />
+        <img src={url} alt={name} className="h-4 w-4 xs:h-5 xs:w-5 sm:h-6 sm:w-6 object-contain" />
       ) : (
-        <span className="font-mono text-[10px] sm:text-[11px] font-bold text-primary">
+        <span className="font-mono text-[9px] xs:text-[10px] sm:text-[11px] font-bold text-primary">
           {name.slice(0, 2)}
         </span>
       )}
       {/* Floating Tooltip */}
-      <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/icon:opacity-100 transition-all duration-200 pointer-events-none z-50 whitespace-nowrap rounded-md bg-foreground px-2 py-0.5 font-mono text-[10px] font-medium text-background shadow-md">
+      <span className={`absolute -bottom-7 left-1/2 -translate-x-1/2 transition-all duration-200 pointer-events-none z-50 whitespace-nowrap rounded-md bg-foreground px-2 py-0.5 font-mono text-[10px] font-medium text-background shadow-md ${
+        isHovered ? "opacity-100 scale-100" : "opacity-0 scale-95 group-hover/icon:opacity-100 group-hover/icon:scale-100"
+      }`}>
         {name}
       </span>
     </div>
@@ -114,7 +121,7 @@ export function SkillsBeamShowcase() {
   return (
     <div
       ref={containerRef}
-      className="relative flex flex-col items-center justify-between w-full max-w-full rounded-3xl border border-border/80 bg-card p-4 sm:p-6 shadow-sm overflow-hidden min-h-[480px] sm:min-h-[520px]"
+      className="relative flex flex-col items-center justify-between w-full max-w-full min-w-0 rounded-3xl border border-border/80 bg-card p-3 xs:p-4 sm:p-6 shadow-sm overflow-hidden min-h-[440px] xs:min-h-[480px] sm:min-h-[520px]"
     >
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
