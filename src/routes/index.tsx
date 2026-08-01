@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 import dimasPhoto from "@/assets/profile/dimas-formal.png";
+import memojiImg from "@/assets/profile/memoji.png";
 import logoNav from "@/assets/brand/logo-nav.png";
 import logoNavWht from "@/assets/brand/logo-nav-white.png";
 import ojkLogo from "@/assets/experiences/ojk-logo.jpg";
@@ -8,7 +10,7 @@ import idxLogo from "@/assets/experiences/idx-logo.png";
 import pkuyLogo from "@/assets/experiences/pkuy-logo.jpg";
 import fsadLogo from "@/assets/experiences/fsad-logo.png";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
-import { Mail, Linkedin, Instagram, Github } from "lucide-react";
+import { Mail, Linkedin, Instagram, Github, Phone, MapPin, Download, ExternalLink, ArrowRight, Check, Copy } from "lucide-react";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import { AnimatePresence, motion } from "motion/react";
 import { AnimatedList } from "@/components/ui/animated-list";
@@ -46,7 +48,7 @@ export const Route = createFileRoute("/")({
 const CV_URL = "https://drive.google.com/file/d/1mzAsEG_2YFVSqtDOvY_E7tsW3vvR-Dw4/view?usp=sharing";
 const SOCIALS = {
   instagram: "https://www.instagram.com/dwhyu.s_/",
-  linkedin: "https://www.linkedin.com/in/dimaswahyusaputra111/",
+  linkedin: "https://www.linkedin.com/in/dimaswsaputra/",
   email: "dimswahyus@gmail.com",
   github: "https://github.com/DimsWhyu",
   phone: "+6281311211367",
@@ -317,7 +319,7 @@ const ACHIEVEMENTS: TimelineEvent[] = [
     year: "2026",
     scope: "International",
     title: "1st Place — Dokter Data Infographic Competition",
-    subtitle: "Dokter Data Indonesia",
+    subtitle: "Statistics Department Universitas Diponegoro",
     certificateUrl: cert02,
   },
   {
@@ -451,7 +453,7 @@ function CustomCursor() {
     const onOver = (e: MouseEvent) => {
       const t = e.target as HTMLElement | null;
       const clickable = t?.closest<HTMLElement>(
-        'a, button, [role="button"], input, textarea, select, label, .cursor-pointer',
+        'a, button, [role="button"], input, textarea, select, label, .cursor-pointer, .cursor-grab, .cursor-grabbing',
       );
       if (clickable) {
         currentTarget = clickable;
@@ -952,10 +954,6 @@ function Hero() {
       />
       <div className="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-[1.2fr_1fr] md:items-center">
         <div className="reveal">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-mono text-muted-foreground">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            Open to Internship & Full-time roles
-          </div>
           <h1 className="mt-4 sm:mt-5 font-display text-3xl sm:text-5xl md:text-7xl font-semibold leading-[1.1] tracking-tight">
             <span className="block">Turning complex</span>
             <span className="block">data into</span>
@@ -1369,24 +1367,66 @@ function Projects() {
 
 function Achievements() {
   return (
-    <Section
-      id="achievements"
-      eyebrow="04 — Recognition"
-      title={<>Awards & achievements.</>}
-      reveal="reveal-rotate"
-    >
-      <ScrollTimeline
-        events={ACHIEVEMENTS}
-        progressIndicator={true}
-        cardAlignment="alternating"
-        cardVariant="elevated"
-        revealAnimation="slide"
+    <section id="achievements" className="relative overflow-hidden py-14 md:py-24">
+      {/* Background Interactive Grid & Glowing Blobs (With wide edge gradient fade) */}
+      <InteractiveGridPattern
+        className="[mask-image:radial-gradient(ellipse_70%_65%_at_center,black_15%,transparent_85%)]"
+        width={40}
+        height={40}
+        squares={[50, 100]}
+        squaresClassName="hover:fill-primary/10 stroke-border/40"
       />
-    </Section>
+      <div className="absolute left-1/4 top-10 -z-10 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-primary/25 blur-3xl animate-blob" />
+      <div
+        className="absolute right-1/4 top-1/3 -z-10 h-[380px] w-[380px] translate-x-1/2 rounded-full bg-secondary-1/25 blur-3xl animate-blob"
+        style={{ animationDelay: "-4s" }}
+      />
+      <div
+        className="absolute left-1/3 top-2/3 -z-10 h-[360px] w-[360px] -translate-x-1/2 rounded-full bg-accent/20 blur-3xl animate-blob"
+        style={{ animationDelay: "-8s" }}
+      />
+      <div
+        className="absolute right-1/3 bottom-10 -z-10 h-[340px] w-[340px] translate-x-1/2 rounded-full bg-primary/20 blur-3xl animate-blob"
+        style={{ animationDelay: "-12s" }}
+      />
+
+      <div className="mx-auto max-w-6xl px-6 relative z-10">
+        <div className="reveal reveal-rotate mb-8 md:mb-10 max-w-2xl">
+          <div className="font-mono text-xs uppercase tracking-[0.2em] text-primary">
+            04 — Recognition
+          </div>
+          <h2 className="mt-3 font-display text-3xl font-semibold md:text-5xl">
+            Awards & achievements.
+          </h2>
+        </div>
+
+        <ScrollTimeline
+          events={ACHIEVEMENTS}
+          progressIndicator={true}
+          cardAlignment="alternating"
+          cardVariant="elevated"
+          revealAnimation="slide"
+        />
+      </div>
+    </section>
   );
 }
 
 function Contact() {
+  const [copied, setCopied] = useState<string | null>(null);
+
+  const handleCopy = async (text: string, label: string) => {
+    try {
+      if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    setCopied(label);
+    setTimeout(() => setCopied(null), 2500);
+  };
+
   return (
     <Section
       id="contact"
@@ -1398,85 +1438,171 @@ function Contact() {
       }
       reveal="reveal-flip"
     >
-      <div className="reveal reveal-flip grid gap-8 rounded-3xl border-2 border-border/90 bg-card p-6 sm:p-8 md:grid-cols-[1.2fr_1fr] md:p-12 shadow-xl">
-        <div>
-          <p className="text-muted-foreground text-sm sm:text-base">
-            I'm currently open to internships and entry-level roles in data analytics, data science,
-            and business intelligence. Reach out — I usually reply within a day.
-          </p>
-          <div className="mt-8 space-y-3 font-mono text-sm">
-            <a
-              href={`mailto:${SOCIALS.email}`}
-              className="flex items-center gap-3 text-foreground hover:text-primary break-all"
-            >
-              <span className="text-muted-foreground shrink-0 font-semibold">email</span>→{" "}
-              {SOCIALS.email}
-            </a>
-            <a
-              href={SOCIALS.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-3 text-foreground hover:text-primary break-all"
-            >
-              <span className="text-muted-foreground shrink-0 font-semibold">linkedin</span>→
-              /in/dimaswahyusaputra111
-            </a>
-            <a
-              href={SOCIALS.instagram}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-3 text-foreground hover:text-primary break-all"
-            >
-              <span className="text-muted-foreground shrink-0 font-semibold">instagram</span>→
-              @dwhyu.s_
-            </a>
-            <a
-              href={`tel:${SOCIALS.phone}`}
-              className="flex items-center gap-3 text-foreground hover:text-primary"
-            >
-              <span className="text-muted-foreground shrink-0 font-semibold">phone</span>→ +62 813
-              1121 1367
-            </a>
-            <div className="flex items-center gap-3">
-              <span className="text-muted-foreground shrink-0 font-semibold">based</span>→ Surabaya,
-              East Java
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {copied && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.9 }}
+            className="fixed bottom-6 right-6 z-[100000] flex items-center gap-2.5 rounded-2xl border border-primary/40 bg-card/95 px-4 py-3 font-mono text-xs font-semibold text-foreground shadow-2xl backdrop-blur-xl"
+          >
+            <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-ping" />
+            <span>Copied {copied} to clipboard</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="reveal reveal-flip grid gap-8 rounded-3xl border-2 border-border/90 bg-card/90 p-6 sm:p-8 lg:grid-cols-12 md:p-10 shadow-2xl backdrop-blur-xl relative overflow-hidden items-center">
+        {/* Left Column: Contact Details & Quick Actions */}
+        <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
+          <div>
+            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+              Dimas Wahyu Saputra
+            </h3>
+            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+              Data Science Student at ITS • Analytics, BI Dashboards & Predictive Modeling.
+              Based in <span className="font-semibold text-foreground">Surabaya, East Java</span>.
+            </p>
+
+            {/* Quick Contact Interactive Grid */}
+            <div className="mt-6 grid gap-2.5 font-mono text-xs">
+              {/* Email item */}
+              <div className="group flex items-center justify-between gap-2 rounded-xl border border-border/70 bg-background/60 p-3 transition hover:border-primary/50 hover:bg-background/90">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10 text-primary border border-primary/20 shrink-0">
+                    <Mail className="h-3.5 w-3.5" />
+                  </div>
+                  <div className="truncate">
+                    <div className="text-[10px] text-muted-foreground font-semibold uppercase">Email</div>
+                    <a href={`mailto:${SOCIALS.email}`} className="text-foreground hover:text-primary transition font-medium truncate block">
+                      {SOCIALS.email}
+                    </a>
+                  </div>
+                </div>
+                <button
+                  onClick={() => handleCopy(SOCIALS.email, "Email")}
+                  className="rounded-lg border border-border bg-card px-2.5 py-1 text-[11px] font-semibold text-muted-foreground hover:text-foreground hover:border-primary/50 transition active:scale-95 shrink-0 cursor-pointer"
+                  title="Copy email"
+                >
+                  Copy
+                </button>
+              </div>
+
+              {/* LinkedIn item */}
+              <div className="group flex items-center justify-between gap-2 rounded-xl border border-border/70 bg-background/60 p-3 transition hover:border-primary/50 hover:bg-background/90">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#0a66c2]/15 text-[#0a66c2] dark:text-[#388bfd] border border-[#0a66c2]/30 shrink-0">
+                    <Linkedin className="h-3.5 w-3.5" />
+                  </div>
+                  <div className="truncate">
+                    <div className="text-[10px] text-muted-foreground font-semibold uppercase">LinkedIn</div>
+                    <a
+                      href={SOCIALS.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-foreground hover:text-primary transition font-medium truncate block"
+                    >
+                      /in/dimaswsaputra
+                    </a>
+                  </div>
+                </div>
+                <a
+                  href={SOCIALS.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 rounded-lg border border-border bg-card px-2.5 py-1 text-[11px] font-semibold text-muted-foreground hover:text-foreground hover:border-primary/50 transition active:scale-95 shrink-0"
+                >
+                  Visit <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
+
+              {/* WhatsApp / Phone item */}
+              <div className="group flex items-center justify-between gap-2 rounded-xl border border-border/70 bg-background/60 p-3 transition hover:border-primary/50 hover:bg-background/90">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 shrink-0">
+                    <Phone className="h-3.5 w-3.5" />
+                  </div>
+                  <div className="truncate">
+                    <div className="text-[10px] text-muted-foreground font-semibold uppercase">Phone / WhatsApp</div>
+                    <a href="https://wa.me/6281311211367" target="_blank" rel="noreferrer" className="text-foreground hover:text-primary transition font-medium truncate block">
+                      +62 813 1121 1367
+                    </a>
+                  </div>
+                </div>
+                <a
+                  href="https://wa.me/6281311211367?text=Hi%20Dimas,%20I%20saw%20your%20portfolio!"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 transition active:scale-95 shrink-0"
+                >
+                  Chat WA
+                </a>
+              </div>
             </div>
           </div>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+
+          {/* CV & Social Actions */}
+          <div className="pt-4 border-t border-border/60 flex flex-wrap items-center justify-between gap-3">
             <a
               href={CV_URL}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[#0066cc] hover:bg-[#0071e3] px-4 py-2 text-sm font-medium text-white transition hover:scale-[1.03] active:scale-95 shadow-sm"
+              className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-xs font-bold text-primary-foreground shadow-lg transition hover:bg-primary/90 hover:scale-[1.02] active:scale-95"
             >
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.4"
-              >
-                <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
-              </svg>
-              Download CV
+              <Download className="h-4 w-4" />
+              Download Resume (CV)
             </a>
-            <SocialIcons size={18} />
+
+            <div className="flex items-center gap-2">
+              <a
+                href={SOCIALS.github}
+                target="_blank"
+                rel="noreferrer"
+                className="flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-card text-foreground transition hover:border-primary hover:text-primary active:scale-95"
+                title="GitHub"
+              >
+                <Github className="h-4 w-4" />
+              </a>
+              <a
+                href={SOCIALS.instagram}
+                target="_blank"
+                rel="noreferrer"
+                className="flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-card text-foreground transition hover:border-primary hover:text-primary active:scale-95"
+                title="Instagram"
+              >
+                <Instagram className="h-4 w-4" />
+              </a>
+            </div>
           </div>
         </div>
-        <a
-          href={`mailto:${SOCIALS.email}?subject=Opportunity for Dimas`}
-          className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-secondary-1 to-accent p-8 text-primary-foreground transition hover:scale-[1.02]"
-        >
-          <div className="font-mono text-xs uppercase tracking-widest opacity-80">
-            Start a conversation
-          </div>
-          <div className="mt-3 font-display text-3xl font-semibold leading-tight">Say hi →</div>
-          <div className="mt-6 text-sm opacity-90">
-            For collaborations, internships, freelance dashboards, or just to talk about data.
-          </div>
-          <div className="absolute -bottom-12 -right-12 h-40 w-40 rounded-full bg-white/20 blur-2xl transition group-hover:bg-white/40" />
-        </a>
+
+        {/* Right Column: Transparent Memoji cutout (NO CARD / NO COMPONENT WRAPPER!) */}
+        <div className="lg:col-span-5 flex items-center justify-center relative p-4">
+          <motion.div
+            className="relative flex items-center justify-center"
+            initial={{ scale: 0.9, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            {/* Soft Ambient Background Glow behind Memoji */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/15 via-accent/15 to-secondary-1/15 blur-3xl scale-110 pointer-events-none" />
+
+            {/* Direct Transparent Memoji Cutout */}
+            <motion.img
+              src={memojiImg}
+              alt="Dimas Waving Memoji"
+              className="w-full max-w-[260px] sm:max-w-[300px] md:max-w-[320px] h-auto object-contain relative z-10 drop-shadow-2xl pointer-events-none"
+              animate={{ y: [0, -8, 0] }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </motion.div>
+        </div>
       </div>
     </Section>
   );

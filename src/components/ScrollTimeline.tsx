@@ -9,8 +9,132 @@ import {
 } from "motion/react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
-import { Calendar, Trophy, Award, Medal, Maximize2 } from "lucide-react";
+import { Calendar, Trophy, Award, Medal, Maximize2, Sparkles, Crown } from "lucide-react";
 import { CertificateModal } from "@/components/CertificateModal";
+
+export type RankCategory = "gold" | "silver" | "bronze" | "other";
+
+export interface RankTheme {
+  category: RankCategory;
+  badgeLabel: string;
+  badgeClass: string;
+  cardBorderClass: string;
+  cardGlowClass: string;
+  cardBgGradient: string;
+  topSheenClass: string;
+  iconBgClass: string;
+  iconColorClass: string;
+  nodeBorderClass: string;
+  nodeBgClass: string;
+  nodeDotBg: string;
+  nodeGlow: string;
+}
+
+export function getRankTheme(title: string): RankTheme {
+  const t = title.toLowerCase();
+
+  if (
+    t.includes("1st place") ||
+    t.includes("gold medal") ||
+    t.includes("winner") ||
+    t.includes("juara 1")
+  ) {
+    return {
+      category: "gold",
+      badgeLabel: t.includes("gold") ? "Gold Medal" : "1st Place Winner",
+      badgeClass:
+        "bg-amber-400/20 text-amber-500 dark:text-amber-300 border-amber-400/50 shadow-[0_0_12px_rgba(245,158,11,0.3)]",
+      cardBorderClass: "border-amber-400/60 dark:border-amber-400/50 hover:border-amber-400/90",
+      cardGlowClass:
+        "shadow-[0_4px_25px_-4px_rgba(245,158,11,0.25)] hover:shadow-[0_8px_35px_rgba(245,158,11,0.45)] hover:scale-[1.015]",
+      cardBgGradient: "from-amber-500/15 via-card/95 to-amber-950/20",
+      topSheenClass:
+        "bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.8)]",
+      iconBgClass:
+        "bg-gradient-to-br from-amber-400/30 to-yellow-500/20 border-amber-400/50 shadow-[0_0_12px_rgba(245,158,11,0.35)]",
+      iconColorClass: "text-amber-500 dark:text-amber-300",
+      nodeBorderClass: "border-amber-400",
+      nodeBgClass: "bg-amber-400/20",
+      nodeDotBg: "bg-amber-400",
+      nodeGlow: "0 0 16px rgba(245,158,11,0.8)",
+    };
+  }
+
+  if (
+    t.includes("2nd place") ||
+    t.includes("1st runner up") ||
+    t.includes("runner up") ||
+    t.includes("silver medal") ||
+    t.includes("juara 2")
+  ) {
+    return {
+      category: "silver",
+      badgeLabel: t.includes("silver") ? "Silver Medal" : "1st Runner Up",
+      badgeClass:
+        "bg-slate-300/25 text-slate-700 dark:text-slate-200 border-slate-300/50 shadow-[0_0_12px_rgba(203,213,225,0.25)]",
+      cardBorderClass: "border-slate-300/60 dark:border-slate-400/50 hover:border-slate-300/90",
+      cardGlowClass:
+        "shadow-[0_4px_25px_-4px_rgba(203,213,225,0.25)] hover:shadow-[0_8px_35px_rgba(203,213,225,0.45)] hover:scale-[1.015]",
+      cardBgGradient: "from-slate-300/15 via-card/95 to-slate-900/20",
+      topSheenClass:
+        "bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 shadow-[0_0_12px_rgba(203,213,225,0.8)]",
+      iconBgClass:
+        "bg-gradient-to-br from-slate-300/30 to-slate-400/20 border-slate-300/50 shadow-[0_0_12px_rgba(203,213,225,0.3)]",
+      iconColorClass: "text-slate-700 dark:text-slate-200",
+      nodeBorderClass: "border-slate-300",
+      nodeBgClass: "bg-slate-300/20",
+      nodeDotBg: "bg-slate-300",
+      nodeGlow: "0 0 16px rgba(203,213,225,0.8)",
+    };
+  }
+
+  if (
+    t.includes("3rd place") ||
+    t.includes("2nd runner up") ||
+    t.includes("bronze medal") ||
+    t.includes("juara 3")
+  ) {
+    return {
+      category: "bronze",
+      badgeLabel: t.includes("bronze") ? "Bronze Medal" : "3rd Place",
+      badgeClass:
+        "bg-amber-700/20 text-amber-600 dark:text-amber-400 border-amber-700/50 shadow-[0_0_12px_rgba(217,119,6,0.2)]",
+      cardBorderClass: "border-amber-700/60 dark:border-amber-600/50 hover:border-amber-600/90",
+      cardGlowClass:
+        "shadow-[0_4px_25px_-4px_rgba(217,119,6,0.2)] hover:shadow-[0_8px_35px_rgba(217,119,6,0.4)] hover:scale-[1.015]",
+      cardBgGradient: "from-amber-700/15 via-card/95 to-orange-950/20",
+      topSheenClass:
+        "bg-gradient-to-r from-amber-700 via-orange-500 to-amber-800 shadow-[0_0_12px_rgba(217,119,6,0.8)]",
+      iconBgClass:
+        "bg-gradient-to-br from-amber-700/30 to-orange-600/20 border-amber-700/50 shadow-[0_0_12px_rgba(217,119,6,0.3)]",
+      iconColorClass: "text-amber-600 dark:text-amber-400",
+      nodeBorderClass: "border-amber-600",
+      nodeBgClass: "bg-amber-600/20",
+      nodeDotBg: "bg-amber-600",
+      nodeGlow: "0 0 16px rgba(217,119,6,0.8)",
+    };
+  }
+
+  return {
+    category: "other",
+    badgeLabel: "Finalist / Award",
+    badgeClass:
+      "bg-primary/20 text-primary border-primary/40 shadow-[0_0_12px_rgba(59,130,246,0.2)]",
+    cardBorderClass: "border-primary/40 hover:border-primary/80",
+    cardGlowClass:
+      "shadow-[0_4px_25px_-4px_rgba(59,130,246,0.2)] hover:shadow-[0_8px_35px_rgba(59,130,246,0.4)] hover:scale-[1.015]",
+    cardBgGradient: "from-primary/15 via-card/95 to-indigo-950/20",
+    topSheenClass:
+      "bg-gradient-to-r from-blue-500 via-indigo-400 to-purple-500 shadow-[0_0_12px_rgba(59,130,246,0.8)]",
+    iconBgClass:
+      "bg-gradient-to-br from-primary/30 to-accent/20 border-primary/50 shadow-[0_0_12px_rgba(59,130,246,0.3)]",
+    iconColorClass: "text-primary",
+    nodeBorderClass: "border-primary",
+    nodeBgClass: "bg-primary/20",
+    nodeDotBg: "bg-primary",
+    nodeGlow: "0 0 16px rgba(59,130,246,0.8)",
+  };
+}
 
 export interface TimelineEvent {
   id?: string;
@@ -58,7 +182,7 @@ const DEFAULT_EVENTS: TimelineEvent[] = [
     year: "2026",
     scope: "International",
     title: "1st Place — Dokter Data Infographic Competition",
-    subtitle: "Dokter Data",
+    subtitle: "Statistics Department Universitas Diponegoro",
   },
   {
     year: "2025",
@@ -161,7 +285,7 @@ export const ScrollTimeline = ({
           ease: [0.25, 0.1, 0.25, 1.0] as [number, number, number, number],
         },
       },
-      viewport: { once: false, margin: "-40px" },
+      viewport: { once: true, margin: "-40px" },
     };
   };
 
@@ -328,6 +452,7 @@ export const ScrollTimeline = ({
                 [parallaxIntensity * 60, -parallaxIntensity * 60]
               );
               const isActive = index <= activeIndex;
+              const theme = getRankTheme(event.title);
 
               return (
                 <div
@@ -358,7 +483,7 @@ export const ScrollTimeline = ({
                       className={cn(
                         "w-6 h-6 rounded-full border-2 bg-background flex items-center justify-center transition-colors duration-300",
                         isActive
-                          ? "border-primary bg-primary/20 shadow-[0_0_10px_rgba(59,130,246,0.6)]"
+                          ? cn(theme.nodeBorderClass, theme.nodeBgClass)
                           : "border-border bg-card"
                       )}
                       animate={
@@ -366,9 +491,9 @@ export const ScrollTimeline = ({
                           ? {
                               scale: [1, 1.25, 1],
                               boxShadow: [
-                                "0 0 0px rgba(59,130,246,0)",
-                                "0 0 14px rgba(59,130,246,0.6)",
-                                "0 0 0px rgba(59,130,246,0)",
+                                "0 0 0px transparent",
+                                theme.nodeGlow,
+                                "0 0 0px transparent",
                               ],
                             }
                           : {}
@@ -380,7 +505,12 @@ export const ScrollTimeline = ({
                         ease: "easeInOut",
                       }}
                     >
-                      <span className={cn("w-2 h-2 rounded-full", isActive ? "bg-primary" : "bg-muted-foreground/40")} />
+                      <span
+                        className={cn(
+                          "w-2 h-2 rounded-full transition-colors duration-300",
+                          isActive ? theme.nodeDotBg : "bg-muted-foreground/40"
+                        )}
+                      />
                     </motion.div>
                   </div>
 
@@ -390,25 +520,82 @@ export const ScrollTimeline = ({
                     variants={getCardVariants(index)}
                     initial="initial"
                     whileInView="whileInView"
-                    viewport={{ once: false, margin: "-60px" }}
+                    viewport={{ once: true, margin: "-60px" }}
                     style={parallaxIntensity > 0 ? { y: yOffset } : undefined}
                   >
-                    <Card className="bg-card/95 border-border/80 shadow-md backdrop-blur-md overflow-hidden">
-                      <CardContent className="p-5 sm:p-6">
-                        {/* Header: Year & Scope Badge */}
-                        <div className="flex items-center justify-between gap-3 mb-3">
+                    <Card
+                      className={cn(
+                        "relative overflow-hidden border-2 transition-all duration-500 rounded-2xl bg-gradient-to-br backdrop-blur-md group",
+                        theme.cardBgGradient,
+                        theme.cardBorderClass,
+                        theme.cardGlowClass
+                      )}
+                    >
+                      {/* Top Metallic Sheen Bar */}
+                      <div
+                        className={cn(
+                          "absolute top-0 left-0 right-0 h-[3px] z-20 transition-all duration-300",
+                          theme.topSheenClass
+                        )}
+                      />
+
+                      {/* Ambient glowing radial orb for Gold, Silver, Bronze */}
+                      {theme.category === "gold" && (
+                        <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-amber-400/20 blur-2xl transition-all duration-500 group-hover:scale-125 group-hover:bg-amber-400/30" />
+                      )}
+                      {theme.category === "silver" && (
+                        <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-slate-300/20 blur-2xl transition-all duration-500 group-hover:scale-125 group-hover:bg-slate-300/30" />
+                      )}
+                      {theme.category === "bronze" && (
+                        <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-amber-700/20 blur-2xl transition-all duration-500 group-hover:scale-125 group-hover:bg-amber-600/30" />
+                      )}
+
+                      <CardContent className="p-5 sm:p-6 relative z-10">
+                        {/* Header: Year, Rank Badge & Scope Badge */}
+                        <div className="flex flex-wrap items-center justify-between gap-2 mb-3.5">
                           <div className="flex items-center gap-2">
-                            {getEventIcon(event)}
+                            <div
+                              className={cn(
+                                "flex h-8 w-8 items-center justify-center rounded-xl border shrink-0 transition-transform duration-300 group-hover:scale-110",
+                                theme.iconBgClass
+                              )}
+                            >
+                              {theme.category === "gold" ? (
+                                <Crown className="h-4 w-4 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.8)]" />
+                              ) : theme.category === "silver" ? (
+                                <Medal className="h-4 w-4 text-slate-300 dark:text-slate-200 drop-shadow-[0_0_6px_rgba(226,232,240,0.8)]" />
+                              ) : theme.category === "bronze" ? (
+                                <Award className="h-4 w-4 text-amber-500 drop-shadow-[0_0_6px_rgba(217,119,6,0.8)]" />
+                              ) : (
+                                <Trophy className="h-4 w-4 text-primary" />
+                              )}
+                            </div>
                             <span className="font-mono text-sm font-bold text-foreground">
                               {event.year}
                             </span>
                           </div>
 
-                          {getScopeBadge(event.scope)}
+                          <div className="flex flex-wrap items-center gap-1.5 shrink-0">
+                            {/* Rank Category Badge */}
+                            <span
+                              className={cn(
+                                "inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 font-mono text-[10px] sm:text-[11px] font-bold tracking-wider uppercase shadow-2xs",
+                                theme.badgeClass
+                              )}
+                            >
+                              {theme.category === "gold" && (
+                                <Sparkles className="h-3 w-3 animate-pulse text-amber-400" />
+                              )}
+                              {theme.badgeLabel}
+                            </span>
+
+                            {/* Scope Badge */}
+                            {getScopeBadge(event.scope)}
+                          </div>
                         </div>
 
                         {/* Event Title */}
-                        <h3 className="text-base sm:text-lg font-bold text-foreground leading-snug">
+                        <h3 className="text-base sm:text-lg font-bold text-foreground leading-snug tracking-tight">
                           {event.title}
                         </h3>
 
@@ -427,19 +614,26 @@ export const ScrollTimeline = ({
                         {/* Certificate Image Preview Fit */}
                         {event.certificateUrl && (
                           <div
-                            className="mt-3.5 relative group overflow-hidden rounded-xl border border-border/80 bg-background/50 transition-all duration-300 hover:border-primary/60 cursor-pointer shadow-xs"
+                            className={cn(
+                              "mt-4 relative group/cert overflow-hidden rounded-xl border bg-background/50 transition-all duration-300 cursor-pointer shadow-xs",
+                              theme.category === "gold"
+                                ? "border-amber-400/40 hover:border-amber-400/80 shadow-[0_0_15px_rgba(245,158,11,0.15)]"
+                                : theme.category === "silver"
+                                ? "border-slate-300/40 hover:border-slate-300/80 shadow-[0_0_15px_rgba(203,213,225,0.15)]"
+                                : "border-border/80 hover:border-primary/60"
+                            )}
                             onClick={() => setSelectedCert(event)}
                           >
                             <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] flex items-center justify-center p-1.5 bg-gradient-to-b from-surface/40 to-surface/80">
                               <img
                                 src={event.certificateUrl}
                                 alt={event.title}
-                                className="w-full h-full object-contain rounded-lg transition-transform duration-500 group-hover:scale-[1.02]"
+                                className="w-full h-full object-contain rounded-lg transition-transform duration-500 group-hover/cert:scale-[1.02]"
                                 loading="lazy"
                               />
                               {/* Hover Overlay Badge */}
-                              <div className="absolute inset-0 flex items-center justify-center bg-black/45 opacity-0 transition-opacity duration-300 group-hover:opacity-100 backdrop-blur-[2px] rounded-xl">
-                                <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/75 px-3.5 py-1.5 text-xs font-medium text-white shadow-lg">
+                              <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300 group-hover/cert:opacity-100 backdrop-blur-[2px] rounded-xl">
+                                <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/80 px-3.5 py-1.5 text-xs font-medium text-white shadow-lg">
                                   <Maximize2 className="h-3.5 w-3.5 text-primary" />
                                   Click to Inspect & Zoom
                                 </span>

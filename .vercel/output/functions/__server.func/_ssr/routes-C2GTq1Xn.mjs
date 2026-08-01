@@ -1,16 +1,17 @@
 import { o as __toESM } from "../_runtime.mjs";
 import { n as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { g as require_react_dom } from "../_libs/@tanstack/react-router+[...].mjs";
-import { C as ArrowUpRight, S as Award, _ as ChevronRight, a as Sun, b as Building2, c as Moon, d as Mail, f as LoaderCircle, g as Download, h as Github, i as Trophy, l as Medal, m as Instagram, n as ZoomIn, o as RotateCw, p as Linkedin, r as X, s as RotateCcw, t as ZoomOut, u as Maximize2, v as ChevronLeft, w as ArrowRight, x as Briefcase, y as Calendar } from "../_libs/lucide-react.mjs";
+import { C as Calendar, D as ArrowUpRight, E as Award, O as ArrowRight, S as ChevronLeft, T as Briefcase, _ as Github, a as Sun, b as Crown, c as RotateCcw, d as Medal, f as Maximize2, g as Instagram, h as Linkedin, i as Trophy, l as Phone, m as LoaderCircle, n as ZoomIn, o as Sparkles, p as Mail, r as X, s as RotateCw, t as ZoomOut, u as Moon, v as ExternalLink, w as Building2, x as ChevronRight, y as Download } from "../_libs/lucide-react.mjs";
 import { n as clsx, t as cva } from "../_libs/class-variance-authority+clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
 import { a as motion, i as useScroll, n as useTransform, o as AnimatePresence, r as useMotionValue, t as useSpring } from "../_libs/framer-motion.mjs";
 import { t as motion$1 } from "../_libs/motion.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-C-h08DBR.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-C2GTq1Xn.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var import_react_dom = require_react_dom();
 var dimas_formal_default = "/assets/dimas-formal-D5kYmjN1.png";
+var memoji_default = "/assets/memoji-DktfebgO.png";
 var logo_nav_default = "/assets/logo-nav-B4PF436_.png";
 var logo_nav_white_default = "/assets/logo-nav-white-BOVcUqNG.png";
 var ojk_logo_default = "/assets/ojk-logo-Cs-uygCR.jpg";
@@ -314,8 +315,8 @@ function InteractiveGridPattern({ width = 40, height = 40, squares = [24, 24], c
 	const [horizontal, vertical] = squares;
 	const [hoveredSquare, setHoveredSquare] = (0, import_react.useState)(null);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
-		width: width * horizontal,
-		height: height * vertical,
+		width: "100%",
+		height: "100%",
 		className: cn("absolute inset-0 h-full w-full border border-border/30", className),
 		...props,
 		children: Array.from({ length: horizontal * vertical }).map((_, index) => {
@@ -1187,7 +1188,11 @@ function CertificateModal({ isOpen, onClose, cert }) {
 	const [scale, setScale] = (0, import_react.useState)(1);
 	const [rotation, setRotation] = (0, import_react.useState)(0);
 	const [isDragging, setIsDragging] = (0, import_react.useState)(false);
+	const [mounted, setMounted] = (0, import_react.useState)(false);
 	const containerRef = (0, import_react.useRef)(null);
+	(0, import_react.useEffect)(() => {
+		setMounted(true);
+	}, []);
 	(0, import_react.useEffect)(() => {
 		if (isOpen) {
 			setScale(1);
@@ -1209,7 +1214,7 @@ function CertificateModal({ isOpen, onClose, cert }) {
 		window.addEventListener("keydown", handleKeyDown);
 		return () => window.removeEventListener("keydown", handleKeyDown);
 	}, [isOpen]);
-	if (!isOpen || !cert) return null;
+	if (!isOpen || !cert || !mounted) return null;
 	const handleZoomIn = () => {
 		setScale((prev) => Math.min(prev + .25, 3.5));
 	};
@@ -1228,16 +1233,16 @@ function CertificateModal({ isOpen, onClose, cert }) {
 		if (e.deltaY < 0) handleZoomIn();
 		else handleZoomOut();
 	};
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion$1.div, {
+	return (0, import_react_dom.createPortal)(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion$1.div, {
 		initial: { opacity: 0 },
 		animate: { opacity: 1 },
 		exit: { opacity: 0 },
 		transition: { duration: .2 },
-		className: "fixed inset-0 z-[10000] flex flex-col items-center justify-between bg-black/90 backdrop-blur-xl p-3 sm:p-6 select-none overflow-hidden",
+		className: "fixed inset-0 z-[500000] flex flex-col items-center justify-between bg-black/90 backdrop-blur-2xl p-4 sm:p-6 select-none overflow-hidden",
 		onClick: onClose,
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "relative z-20 flex w-full max-w-5xl items-center justify-between gap-3 rounded-2xl border border-white/15 bg-white/10 p-3 sm:p-4 text-white backdrop-blur-md shadow-2xl",
+				className: "relative z-20 flex w-full max-w-5xl items-center justify-between gap-3 rounded-2xl border border-white/20 bg-black/70 p-3 sm:p-4 text-white backdrop-blur-xl shadow-2xl mt-2 sm:mt-4",
 				onClick: (e) => e.stopPropagation(),
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "flex items-center gap-3 overflow-hidden",
@@ -1260,30 +1265,19 @@ function CertificateModal({ isOpen, onClose, cert }) {
 							children: cert.subtitle
 						})]
 					})]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 					className: "flex items-center gap-2 shrink-0",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-						href: cert.certificateUrl,
-						download: true,
-						target: "_blank",
-						rel: "noreferrer",
-						className: "inline-flex items-center gap-1.5 rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-xs font-medium text-white transition hover:bg-white/20 active:scale-95",
-						title: "Download Certificate",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Download, { className: "h-4 w-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "hidden sm:inline",
-							children: "Download"
-						})]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 						onClick: onClose,
-						className: "inline-flex h-9 w-9 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white transition hover:bg-red-500/30 hover:border-red-500/50 active:scale-95",
+						className: "inline-flex h-9 w-9 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white transition hover:bg-red-500/40 hover:border-red-500/60 active:scale-95 cursor-pointer",
 						title: "Close (Esc)",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { className: "h-5 w-5" })
-					})]
+					})
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				ref: containerRef,
-				className: "relative z-10 flex h-full w-full max-w-6xl flex-1 items-center justify-center overflow-hidden my-3",
+				className: "relative z-10 flex h-full w-full max-w-6xl flex-1 items-center justify-center overflow-hidden my-2 sm:my-4",
 				onWheel: handleWheel,
 				onClick: (e) => e.stopPropagation(),
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion$1.div, {
@@ -1301,24 +1295,24 @@ function CertificateModal({ isOpen, onClose, cert }) {
 						stiffness: 260,
 						damping: 25
 					},
-					className: cn("flex items-center justify-center max-h-[75vh] max-w-[90vw] transition-cursor", scale > 1 ? isDragging ? "cursor-grabbing" : "cursor-grab" : "cursor-default"),
+					className: cn("flex items-center justify-center max-h-[70vh] max-w-[90vw] transition-cursor", scale > 1 ? isDragging ? "cursor-grabbing" : "cursor-grab" : "cursor-default"),
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
 						src: cert.certificateUrl,
 						alt: cert.title,
-						className: "max-h-[75vh] max-w-[90vw] object-contain rounded-lg shadow-2xl border border-white/10",
-						style: { filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.5))" },
+						className: "max-h-[70vh] max-w-[90vw] object-contain rounded-lg shadow-2xl border border-white/10",
+						style: { filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.7))" },
 						draggable: false
 					})
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "relative z-20 flex items-center gap-2 sm:gap-3 rounded-full border border-white/20 bg-black/70 px-4 py-2 text-white backdrop-blur-xl shadow-2xl",
+				className: "relative z-20 flex items-center gap-2 sm:gap-3 rounded-full border border-white/20 bg-black/80 px-4 py-2 text-white backdrop-blur-xl shadow-2xl mb-2 sm:mb-4",
 				onClick: (e) => e.stopPropagation(),
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 						onClick: handleZoomOut,
 						disabled: scale <= .75,
-						className: "flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/20 disabled:opacity-40",
+						className: "flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/20 disabled:opacity-40 cursor-pointer",
 						title: "Zoom Out (-)",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ZoomOut, { className: "h-4 w-4" })
 					}),
@@ -1329,27 +1323,90 @@ function CertificateModal({ isOpen, onClose, cert }) {
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 						onClick: handleZoomIn,
 						disabled: scale >= 3.5,
-						className: "flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/20 disabled:opacity-40",
+						className: "flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/20 disabled:opacity-40 cursor-pointer",
 						title: "Zoom In (+)",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ZoomIn, { className: "h-4 w-4" })
 					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "h-4 w-[1px] bg-white/20 mx-1" }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "h-4 w-[1px] bg-white/20 my-auto" }),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 						onClick: handleRotate,
-						className: "flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/20",
+						className: "flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/20 cursor-pointer",
 						title: "Rotate 90°",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(RotateCw, { className: "h-4 w-4" })
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 						onClick: handleReset,
-						className: "flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/20",
-						title: "Reset Zoom (R)",
+						className: "flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/20 cursor-pointer",
+						title: "Reset Zoom & Rotation",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(RotateCcw, { className: "h-4 w-4" })
 					})
 				]
 			})
 		]
-	}) });
+	}) }), document.body);
+}
+function getRankTheme(title) {
+	const t = title.toLowerCase();
+	if (t.includes("1st place") || t.includes("gold medal") || t.includes("winner") || t.includes("juara 1")) return {
+		category: "gold",
+		badgeLabel: t.includes("gold") ? "Gold Medal" : "1st Place Winner",
+		badgeClass: "bg-amber-400/20 text-amber-500 dark:text-amber-300 border-amber-400/50 shadow-[0_0_12px_rgba(245,158,11,0.3)]",
+		cardBorderClass: "border-amber-400/60 dark:border-amber-400/50 hover:border-amber-400/90",
+		cardGlowClass: "shadow-[0_4px_25px_-4px_rgba(245,158,11,0.25)] hover:shadow-[0_8px_35px_rgba(245,158,11,0.45)] hover:scale-[1.015]",
+		cardBgGradient: "from-amber-500/15 via-card/95 to-amber-950/20",
+		topSheenClass: "bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.8)]",
+		iconBgClass: "bg-gradient-to-br from-amber-400/30 to-yellow-500/20 border-amber-400/50 shadow-[0_0_12px_rgba(245,158,11,0.35)]",
+		iconColorClass: "text-amber-500 dark:text-amber-300",
+		nodeBorderClass: "border-amber-400",
+		nodeBgClass: "bg-amber-400/20",
+		nodeDotBg: "bg-amber-400",
+		nodeGlow: "0 0 16px rgba(245,158,11,0.8)"
+	};
+	if (t.includes("2nd place") || t.includes("1st runner up") || t.includes("runner up") || t.includes("silver medal") || t.includes("juara 2")) return {
+		category: "silver",
+		badgeLabel: t.includes("silver") ? "Silver Medal" : "1st Runner Up",
+		badgeClass: "bg-slate-300/25 text-slate-700 dark:text-slate-200 border-slate-300/50 shadow-[0_0_12px_rgba(203,213,225,0.25)]",
+		cardBorderClass: "border-slate-300/60 dark:border-slate-400/50 hover:border-slate-300/90",
+		cardGlowClass: "shadow-[0_4px_25px_-4px_rgba(203,213,225,0.25)] hover:shadow-[0_8px_35px_rgba(203,213,225,0.45)] hover:scale-[1.015]",
+		cardBgGradient: "from-slate-300/15 via-card/95 to-slate-900/20",
+		topSheenClass: "bg-gradient-to-r from-slate-300 via-slate-100 to-slate-400 shadow-[0_0_12px_rgba(203,213,225,0.8)]",
+		iconBgClass: "bg-gradient-to-br from-slate-300/30 to-slate-400/20 border-slate-300/50 shadow-[0_0_12px_rgba(203,213,225,0.3)]",
+		iconColorClass: "text-slate-700 dark:text-slate-200",
+		nodeBorderClass: "border-slate-300",
+		nodeBgClass: "bg-slate-300/20",
+		nodeDotBg: "bg-slate-300",
+		nodeGlow: "0 0 16px rgba(203,213,225,0.8)"
+	};
+	if (t.includes("3rd place") || t.includes("2nd runner up") || t.includes("bronze medal") || t.includes("juara 3")) return {
+		category: "bronze",
+		badgeLabel: t.includes("bronze") ? "Bronze Medal" : "3rd Place",
+		badgeClass: "bg-amber-700/20 text-amber-600 dark:text-amber-400 border-amber-700/50 shadow-[0_0_12px_rgba(217,119,6,0.2)]",
+		cardBorderClass: "border-amber-700/60 dark:border-amber-600/50 hover:border-amber-600/90",
+		cardGlowClass: "shadow-[0_4px_25px_-4px_rgba(217,119,6,0.2)] hover:shadow-[0_8px_35px_rgba(217,119,6,0.4)] hover:scale-[1.015]",
+		cardBgGradient: "from-amber-700/15 via-card/95 to-orange-950/20",
+		topSheenClass: "bg-gradient-to-r from-amber-700 via-orange-500 to-amber-800 shadow-[0_0_12px_rgba(217,119,6,0.8)]",
+		iconBgClass: "bg-gradient-to-br from-amber-700/30 to-orange-600/20 border-amber-700/50 shadow-[0_0_12px_rgba(217,119,6,0.3)]",
+		iconColorClass: "text-amber-600 dark:text-amber-400",
+		nodeBorderClass: "border-amber-600",
+		nodeBgClass: "bg-amber-600/20",
+		nodeDotBg: "bg-amber-600",
+		nodeGlow: "0 0 16px rgba(217,119,6,0.8)"
+	};
+	return {
+		category: "other",
+		badgeLabel: "Finalist / Award",
+		badgeClass: "bg-primary/20 text-primary border-primary/40 shadow-[0_0_12px_rgba(59,130,246,0.2)]",
+		cardBorderClass: "border-primary/40 hover:border-primary/80",
+		cardGlowClass: "shadow-[0_4px_25px_-4px_rgba(59,130,246,0.2)] hover:shadow-[0_8px_35px_rgba(59,130,246,0.4)] hover:scale-[1.015]",
+		cardBgGradient: "from-primary/15 via-card/95 to-indigo-950/20",
+		topSheenClass: "bg-gradient-to-r from-blue-500 via-indigo-400 to-purple-500 shadow-[0_0_12px_rgba(59,130,246,0.8)]",
+		iconBgClass: "bg-gradient-to-br from-primary/30 to-accent/20 border-primary/50 shadow-[0_0_12px_rgba(59,130,246,0.3)]",
+		iconColorClass: "text-primary",
+		nodeBorderClass: "border-primary",
+		nodeBgClass: "bg-primary/20",
+		nodeDotBg: "bg-primary",
+		nodeGlow: "0 0 16px rgba(59,130,246,0.8)"
+	};
 }
 var DEFAULT_EVENTS = [
 	{
@@ -1362,7 +1419,7 @@ var DEFAULT_EVENTS = [
 		year: "2026",
 		scope: "International",
 		title: "1st Place — Dokter Data Infographic Competition",
-		subtitle: "Dokter Data"
+		subtitle: "Statistics Department Universitas Diponegoro"
 	},
 	{
 		year: "2025",
@@ -1438,7 +1495,7 @@ var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder
 				}
 			},
 			viewport: {
-				once: false,
+				once: true,
 				margin: "-40px"
 			}
 		};
@@ -1475,12 +1532,6 @@ var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder
 			className: cn("rounded-full border px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider shadow-2xs shrink-0", scope.toLowerCase().includes("international") ? "bg-primary/20 text-primary border-primary/30" : "bg-accent/20 text-accent-foreground border-accent/30"),
 			children: scope
 		});
-	};
-	const getEventIcon = (event) => {
-		if (event.icon) return event.icon;
-		if (event.scope?.toLowerCase().includes("international")) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trophy, { className: "h-4 w-4 text-primary shrink-0" });
-		else if (event.title.toLowerCase().includes("gold") || event.title.toLowerCase().includes("1st")) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Medal, { className: "h-4 w-4 text-amber-500 shrink-0" });
-		return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Award, { className: "h-4 w-4 text-secondary-1 shrink-0" });
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		ref: scrollRef,
@@ -1549,6 +1600,7 @@ var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder
 							children: events.map((event, index) => {
 								const yOffset = useTransform(smoothProgress, [0, 1], [parallaxIntensity * 60, -parallaxIntensity * 60]);
 								const isActive = index <= activeIndex;
+								const theme = getRankTheme(event.title);
 								return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 									ref: (el) => {
 										timelineRefs.current[index] = el;
@@ -1557,7 +1609,7 @@ var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 										className: cn("absolute top-6 lg:top-1/2 transform -translate-y-1/2 z-30", "left-4 lg:left-1/2 -translate-x-1/2"),
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion$1.div, {
-											className: cn("w-6 h-6 rounded-full border-2 bg-background flex items-center justify-center transition-colors duration-300", isActive ? "border-primary bg-primary/20 shadow-[0_0_10px_rgba(59,130,246,0.6)]" : "border-border bg-card"),
+											className: cn("w-6 h-6 rounded-full border-2 bg-background flex items-center justify-center transition-colors duration-300", isActive ? cn(theme.nodeBorderClass, theme.nodeBgClass) : "border-border bg-card"),
 											animate: isActive ? {
 												scale: [
 													1,
@@ -1565,9 +1617,9 @@ var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder
 													1
 												],
 												boxShadow: [
-													"0 0 0px rgba(59,130,246,0)",
-													"0 0 14px rgba(59,130,246,0.6)",
-													"0 0 0px rgba(59,130,246,0)"
+													"0 0 0px transparent",
+													theme.nodeGlow,
+													"0 0 0px transparent"
 												]
 											} : {},
 											transition: {
@@ -1576,7 +1628,7 @@ var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder
 												repeatDelay: 3,
 												ease: "easeInOut"
 											},
-											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: cn("w-2 h-2 rounded-full", isActive ? "bg-primary" : "bg-muted-foreground/40") })
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: cn("w-2 h-2 rounded-full transition-colors duration-300", isActive ? theme.nodeDotBg : "bg-muted-foreground/40") })
 										})
 									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion$1.div, {
 										className: cn(getCardClasses(index)),
@@ -1584,58 +1636,73 @@ var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder
 										initial: "initial",
 										whileInView: "whileInView",
 										viewport: {
-											once: false,
+											once: true,
 											margin: "-60px"
 										},
 										style: parallaxIntensity > 0 ? { y: yOffset } : void 0,
-										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
-											className: "bg-card/95 border-border/80 shadow-md backdrop-blur-md overflow-hidden",
-											children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-												className: "p-5 sm:p-6",
-												children: [
-													/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-														className: "flex items-center justify-between gap-3 mb-3",
-														children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-															className: "flex items-center gap-2",
-															children: [getEventIcon(event), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-																className: "font-mono text-sm font-bold text-foreground",
-																children: event.year
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
+											className: cn("relative overflow-hidden border-2 transition-all duration-500 rounded-2xl bg-gradient-to-br backdrop-blur-md group", theme.cardBgGradient, theme.cardBorderClass, theme.cardGlowClass),
+											children: [
+												/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: cn("absolute top-0 left-0 right-0 h-[3px] z-20 transition-all duration-300", theme.topSheenClass) }),
+												theme.category === "gold" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-amber-400/20 blur-2xl transition-all duration-500 group-hover:scale-125 group-hover:bg-amber-400/30" }),
+												theme.category === "silver" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-slate-300/20 blur-2xl transition-all duration-500 group-hover:scale-125 group-hover:bg-slate-300/30" }),
+												theme.category === "bronze" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-amber-700/20 blur-2xl transition-all duration-500 group-hover:scale-125 group-hover:bg-amber-600/30" }),
+												/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
+													className: "p-5 sm:p-6 relative z-10",
+													children: [
+														/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+															className: "flex flex-wrap items-center justify-between gap-2 mb-3.5",
+															children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+																className: "flex items-center gap-2",
+																children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+																	className: cn("flex h-8 w-8 items-center justify-center rounded-xl border shrink-0 transition-transform duration-300 group-hover:scale-110", theme.iconBgClass),
+																	children: theme.category === "gold" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Crown, { className: "h-4 w-4 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.8)]" }) : theme.category === "silver" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Medal, { className: "h-4 w-4 text-slate-300 dark:text-slate-200 drop-shadow-[0_0_6px_rgba(226,232,240,0.8)]" }) : theme.category === "bronze" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Award, { className: "h-4 w-4 text-amber-500 drop-shadow-[0_0_6px_rgba(217,119,6,0.8)]" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trophy, { className: "h-4 w-4 text-primary" })
+																}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+																	className: "font-mono text-sm font-bold text-foreground",
+																	children: event.year
+																})]
+															}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+																className: "flex flex-wrap items-center gap-1.5 shrink-0",
+																children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+																	className: cn("inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 font-mono text-[10px] sm:text-[11px] font-bold tracking-wider uppercase shadow-2xs", theme.badgeClass),
+																	children: [theme.category === "gold" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { className: "h-3 w-3 animate-pulse text-amber-400" }), theme.badgeLabel]
+																}), getScopeBadge(event.scope)]
 															})]
-														}), getScopeBadge(event.scope)]
-													}),
-													/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-														className: "text-base sm:text-lg font-bold text-foreground leading-snug",
-														children: event.title
-													}),
-													event.subtitle && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-														className: "mt-1 text-xs sm:text-sm font-medium text-muted-foreground",
-														children: event.subtitle
-													}),
-													event.description && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-														className: "mt-2 text-xs sm:text-sm text-muted-foreground/90 leading-relaxed",
-														children: event.description
-													}),
-													event.certificateUrl && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-														className: "mt-3.5 relative group overflow-hidden rounded-xl border border-border/80 bg-background/50 transition-all duration-300 hover:border-primary/60 cursor-pointer shadow-xs",
-														onClick: () => setSelectedCert(event),
-														children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-															className: "relative w-full aspect-[16/10] sm:aspect-[16/9] flex items-center justify-center p-1.5 bg-gradient-to-b from-surface/40 to-surface/80",
-															children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-																src: event.certificateUrl,
-																alt: event.title,
-																className: "w-full h-full object-contain rounded-lg transition-transform duration-500 group-hover:scale-[1.02]",
-																loading: "lazy"
-															}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-																className: "absolute inset-0 flex items-center justify-center bg-black/45 opacity-0 transition-opacity duration-300 group-hover:opacity-100 backdrop-blur-[2px] rounded-xl",
-																children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-																	className: "inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/75 px-3.5 py-1.5 text-xs font-medium text-white shadow-lg",
-																	children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Maximize2, { className: "h-3.5 w-3.5 text-primary" }), "Click to Inspect & Zoom"]
-																})
-															})]
+														}),
+														/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+															className: "text-base sm:text-lg font-bold text-foreground leading-snug tracking-tight",
+															children: event.title
+														}),
+														event.subtitle && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+															className: "mt-1 text-xs sm:text-sm font-medium text-muted-foreground",
+															children: event.subtitle
+														}),
+														event.description && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+															className: "mt-2 text-xs sm:text-sm text-muted-foreground/90 leading-relaxed",
+															children: event.description
+														}),
+														event.certificateUrl && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+															className: cn("mt-4 relative group/cert overflow-hidden rounded-xl border bg-background/50 transition-all duration-300 cursor-pointer shadow-xs", theme.category === "gold" ? "border-amber-400/40 hover:border-amber-400/80 shadow-[0_0_15px_rgba(245,158,11,0.15)]" : theme.category === "silver" ? "border-slate-300/40 hover:border-slate-300/80 shadow-[0_0_15px_rgba(203,213,225,0.15)]" : "border-border/80 hover:border-primary/60"),
+															onClick: () => setSelectedCert(event),
+															children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+																className: "relative w-full aspect-[16/10] sm:aspect-[16/9] flex items-center justify-center p-1.5 bg-gradient-to-b from-surface/40 to-surface/80",
+																children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+																	src: event.certificateUrl,
+																	alt: event.title,
+																	className: "w-full h-full object-contain rounded-lg transition-transform duration-500 group-hover/cert:scale-[1.02]",
+																	loading: "lazy"
+																}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+																	className: "absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300 group-hover/cert:opacity-100 backdrop-blur-[2px] rounded-xl",
+																	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+																		className: "inline-flex items-center gap-2 rounded-full border border-white/30 bg-black/80 px-3.5 py-1.5 text-xs font-medium text-white shadow-lg",
+																		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Maximize2, { className: "h-3.5 w-3.5 text-primary" }), "Click to Inspect & Zoom"]
+																	})
+																})]
+															})
 														})
-													})
-												]
-											})
+													]
+												})
+											]
 										})
 									})]
 								}, event.id || index);
@@ -1661,7 +1728,7 @@ var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder
 var CV_URL = "https://drive.google.com/file/d/1mzAsEG_2YFVSqtDOvY_E7tsW3vvR-Dw4/view?usp=sharing";
 var SOCIALS = {
 	instagram: "https://www.instagram.com/dwhyu.s_/",
-	linkedin: "https://www.linkedin.com/in/dimaswahyusaputra111/",
+	linkedin: "https://www.linkedin.com/in/dimaswsaputra/",
 	email: "dimswahyus@gmail.com",
 	github: "https://github.com/DimsWhyu",
 	phone: "+6281311211367"
@@ -1953,7 +2020,7 @@ var ACHIEVEMENTS = [
 		year: "2026",
 		scope: "International",
 		title: "1st Place — Dokter Data Infographic Competition",
-		subtitle: "Dokter Data Indonesia",
+		subtitle: "Statistics Department Universitas Diponegoro",
 		certificateUrl: _02_dokter_data_2026_default
 	},
 	{
@@ -2074,7 +2141,7 @@ function CustomCursor() {
 			dot.style.top = my + "px";
 		};
 		const onOver = (e) => {
-			const clickable = e.target?.closest("a, button, [role=\"button\"], input, textarea, select, label, .cursor-pointer");
+			const clickable = e.target?.closest("a, button, [role=\"button\"], input, textarea, select, label, .cursor-pointer, .cursor-grab, .cursor-grabbing");
 			if (clickable) {
 				currentTarget = clickable;
 				ring.classList.add("hover");
@@ -2598,10 +2665,6 @@ function Hero() {
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "reveal",
 					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-mono text-muted-foreground",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" }), "Open to Internship & Full-time roles"]
-						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
 							className: "mt-4 sm:mt-5 font-display text-3xl sm:text-5xl md:text-7xl font-semibold leading-[1.1] tracking-tight",
 							children: [
@@ -3028,22 +3091,64 @@ function Projects() {
 	});
 }
 function Achievements() {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Section, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 		id: "achievements",
-		eyebrow: "04 — Recognition",
-		title: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children: "Awards & achievements." }),
-		reveal: "reveal-rotate",
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollTimeline, {
-			events: ACHIEVEMENTS,
-			progressIndicator: true,
-			cardAlignment: "alternating",
-			cardVariant: "elevated",
-			revealAnimation: "slide"
-		})
+		className: "relative overflow-hidden py-14 md:py-24",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InteractiveGridPattern, {
+				className: "[mask-image:radial-gradient(ellipse_70%_65%_at_center,black_15%,transparent_85%)]",
+				width: 40,
+				height: 40,
+				squares: [50, 100],
+				squaresClassName: "hover:fill-primary/10 stroke-border/40"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute left-1/4 top-10 -z-10 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-primary/25 blur-3xl animate-blob" }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "absolute right-1/4 top-1/3 -z-10 h-[380px] w-[380px] translate-x-1/2 rounded-full bg-secondary-1/25 blur-3xl animate-blob",
+				style: { animationDelay: "-4s" }
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "absolute left-1/3 top-2/3 -z-10 h-[360px] w-[360px] -translate-x-1/2 rounded-full bg-accent/20 blur-3xl animate-blob",
+				style: { animationDelay: "-8s" }
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "absolute right-1/3 bottom-10 -z-10 h-[340px] w-[340px] translate-x-1/2 rounded-full bg-primary/20 blur-3xl animate-blob",
+				style: { animationDelay: "-12s" }
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "mx-auto max-w-6xl px-6 relative z-10",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "reveal reveal-rotate mb-8 md:mb-10 max-w-2xl",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "font-mono text-xs uppercase tracking-[0.2em] text-primary",
+						children: "04 — Recognition"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+						className: "mt-3 font-display text-3xl font-semibold md:text-5xl",
+						children: "Awards & achievements."
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollTimeline, {
+					events: ACHIEVEMENTS,
+					progressIndicator: true,
+					cardAlignment: "alternating",
+					cardVariant: "elevated",
+					revealAnimation: "slide"
+				})]
+			})
+		]
 	});
 }
 function Contact() {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Section, {
+	const [copied, setCopied] = (0, import_react.useState)(null);
+	const handleCopy = async (text, label) => {
+		try {
+			if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) await navigator.clipboard.writeText(text);
+		} catch (e) {
+			console.error(e);
+		}
+		setCopied(label);
+		setTimeout(() => setCopied(null), 2500);
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Section, {
 		id: "contact",
 		eyebrow: "05 — Contact",
 		title: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
@@ -3055,104 +3160,196 @@ function Contact() {
 			"."
 		] }),
 		reveal: "reveal-flip",
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "reveal reveal-flip grid gap-8 rounded-3xl border-2 border-border/90 bg-card p-6 sm:p-8 md:grid-cols-[1.2fr_1fr] md:p-12 shadow-xl",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "text-muted-foreground text-sm sm:text-base",
-					children: "I'm currently open to internships and entry-level roles in data analytics, data science, and business intelligence. Reach out — I usually reply within a day."
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "mt-8 space-y-3 font-mono text-sm",
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-							href: `mailto:${SOCIALS.email}`,
-							className: "flex items-center gap-3 text-foreground hover:text-primary break-all",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-muted-foreground shrink-0 font-semibold",
-									children: "email"
-								}),
-								"→",
-								" ",
-								SOCIALS.email
-							]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-							href: SOCIALS.linkedin,
-							target: "_blank",
-							rel: "noreferrer",
-							className: "flex items-center gap-3 text-foreground hover:text-primary break-all",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-muted-foreground shrink-0 font-semibold",
-								children: "linkedin"
-							}), "→ /in/dimaswahyusaputra111"]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-							href: SOCIALS.instagram,
-							target: "_blank",
-							rel: "noreferrer",
-							className: "flex items-center gap-3 text-foreground hover:text-primary break-all",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-muted-foreground shrink-0 font-semibold",
-								children: "instagram"
-							}), "→ @dwhyu.s_"]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-							href: `tel:${SOCIALS.phone}`,
-							className: "flex items-center gap-3 text-foreground hover:text-primary",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-muted-foreground shrink-0 font-semibold",
-								children: "phone"
-							}), "→ +62 813 1121 1367"]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex items-center gap-3",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-muted-foreground shrink-0 font-semibold",
-								children: "based"
-							}), "→ Surabaya, East Java"]
-						})
-					]
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "mt-6 flex flex-wrap items-center gap-3",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AnimatePresence, { children: copied && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion$1.div, {
+			initial: {
+				opacity: 0,
+				y: -20,
+				scale: .9
+			},
+			animate: {
+				opacity: 1,
+				y: 0,
+				scale: 1
+			},
+			exit: {
+				opacity: 0,
+				y: -20,
+				scale: .9
+			},
+			className: "fixed bottom-6 right-6 z-[100000] flex items-center gap-2.5 rounded-2xl border border-primary/40 bg-card/95 px-4 py-3 font-mono text-xs font-semibold text-foreground shadow-2xl backdrop-blur-xl",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "flex h-2 w-2 rounded-full bg-emerald-500 animate-ping" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
+				"Copied ",
+				copied,
+				" to clipboard"
+			] })]
+		}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "reveal reveal-flip grid gap-8 rounded-3xl border-2 border-border/90 bg-card/90 p-6 sm:p-8 lg:grid-cols-12 md:p-10 shadow-2xl backdrop-blur-xl relative overflow-hidden items-center",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "lg:col-span-7 flex flex-col justify-between space-y-6",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+						className: "text-2xl sm:text-3xl font-bold tracking-tight text-foreground",
+						children: "Dimas Wahyu Saputra"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+						className: "mt-2 text-sm text-muted-foreground leading-relaxed",
+						children: [
+							"Data Science Student at ITS • Analytics, BI Dashboards & Predictive Modeling. Based in ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "font-semibold text-foreground",
+								children: "Surabaya, East Java"
+							}),
+							"."
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "mt-6 grid gap-2.5 font-mono text-xs",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "group flex items-center justify-between gap-2 rounded-xl border border-border/70 bg-background/60 p-3 transition hover:border-primary/50 hover:bg-background/90",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center gap-2.5 min-w-0",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10 text-primary border border-primary/20 shrink-0",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { className: "h-3.5 w-3.5" })
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "truncate",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+											className: "text-[10px] text-muted-foreground font-semibold uppercase",
+											children: "Email"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+											href: `mailto:${SOCIALS.email}`,
+											className: "text-foreground hover:text-primary transition font-medium truncate block",
+											children: SOCIALS.email
+										})]
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+									onClick: () => handleCopy(SOCIALS.email, "Email"),
+									className: "rounded-lg border border-border bg-card px-2.5 py-1 text-[11px] font-semibold text-muted-foreground hover:text-foreground hover:border-primary/50 transition active:scale-95 shrink-0 cursor-pointer",
+									title: "Copy email",
+									children: "Copy"
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "group flex items-center justify-between gap-2 rounded-xl border border-border/70 bg-background/60 p-3 transition hover:border-primary/50 hover:bg-background/90",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center gap-2.5 min-w-0",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "flex h-7 w-7 items-center justify-center rounded-lg bg-[#0a66c2]/15 text-[#0a66c2] dark:text-[#388bfd] border border-[#0a66c2]/30 shrink-0",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Linkedin, { className: "h-3.5 w-3.5" })
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "truncate",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+											className: "text-[10px] text-muted-foreground font-semibold uppercase",
+											children: "LinkedIn"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+											href: SOCIALS.linkedin,
+											target: "_blank",
+											rel: "noreferrer",
+											className: "text-foreground hover:text-primary transition font-medium truncate block",
+											children: "/in/dimaswsaputra"
+										})]
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+									href: SOCIALS.linkedin,
+									target: "_blank",
+									rel: "noreferrer",
+									className: "inline-flex items-center gap-1 rounded-lg border border-border bg-card px-2.5 py-1 text-[11px] font-semibold text-muted-foreground hover:text-foreground hover:border-primary/50 transition active:scale-95 shrink-0",
+									children: ["Visit ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExternalLink, { className: "h-3 w-3" })]
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "group flex items-center justify-between gap-2 rounded-xl border border-border/70 bg-background/60 p-3 transition hover:border-primary/50 hover:bg-background/90",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center gap-2.5 min-w-0",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 shrink-0",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Phone, { className: "h-3.5 w-3.5" })
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "truncate",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+											className: "text-[10px] text-muted-foreground font-semibold uppercase",
+											children: "Phone / WhatsApp"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+											href: "https://wa.me/6281311211367",
+											target: "_blank",
+											rel: "noreferrer",
+											className: "text-foreground hover:text-primary transition font-medium truncate block",
+											children: "+62 813 1121 1367"
+										})]
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+									href: "https://wa.me/6281311211367?text=Hi%20Dimas,%20I%20saw%20your%20portfolio!",
+									target: "_blank",
+									rel: "noreferrer",
+									className: "rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 transition active:scale-95 shrink-0",
+									children: "Chat WA"
+								})]
+							})
+						]
+					})
+				] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "pt-4 border-t border-border/60 flex flex-wrap items-center justify-between gap-3",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
 						href: CV_URL,
 						target: "_blank",
 						rel: "noreferrer",
-						className: "inline-flex items-center gap-2 rounded-full bg-[#0066cc] hover:bg-[#0071e3] px-4 py-2 text-sm font-medium text-white transition hover:scale-[1.03] active:scale-95 shadow-sm",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
-							width: "14",
-							height: "14",
-							viewBox: "0 0 24 24",
-							fill: "none",
-							stroke: "currentColor",
-							strokeWidth: "2.4",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" })
-						}), "Download CV"]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SocialIcons, { size: 18 })]
+						className: "inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-xs font-bold text-primary-foreground shadow-lg transition hover:bg-primary/90 hover:scale-[1.02] active:scale-95",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Download, { className: "h-4 w-4" }), "Download Resume (CV)"]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-center gap-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: SOCIALS.github,
+							target: "_blank",
+							rel: "noreferrer",
+							className: "flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-card text-foreground transition hover:border-primary hover:text-primary active:scale-95",
+							title: "GitHub",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Github, { className: "h-4 w-4" })
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: SOCIALS.instagram,
+							target: "_blank",
+							rel: "noreferrer",
+							className: "flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-card text-foreground transition hover:border-primary hover:text-primary active:scale-95",
+							title: "Instagram",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Instagram, { className: "h-4 w-4" })
+						})]
+					})]
+				})]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "lg:col-span-5 flex items-center justify-center relative p-4",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(motion$1.div, {
+					className: "relative flex items-center justify-center",
+					initial: {
+						scale: .9,
+						opacity: 0
+					},
+					whileInView: {
+						scale: 1,
+						opacity: 1
+					},
+					viewport: { once: true },
+					transition: {
+						duration: .6,
+						ease: "easeOut"
+					},
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute inset-0 rounded-full bg-gradient-to-tr from-primary/15 via-accent/15 to-secondary-1/15 blur-3xl scale-110 pointer-events-none" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(motion$1.img, {
+						src: memoji_default,
+						alt: "Dimas Waving Memoji",
+						className: "w-full max-w-[260px] sm:max-w-[300px] md:max-w-[320px] h-auto object-contain relative z-10 drop-shadow-2xl pointer-events-none",
+						animate: { y: [
+							0,
+							-8,
+							0
+						] },
+						transition: {
+							duration: 4,
+							repeat: Infinity,
+							ease: "easeInOut"
+						}
+					})]
 				})
-			] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-				href: `mailto:${SOCIALS.email}?subject=Opportunity for Dimas`,
-				className: "group relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-secondary-1 to-accent p-8 text-primary-foreground transition hover:scale-[1.02]",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "font-mono text-xs uppercase tracking-widest opacity-80",
-						children: "Start a conversation"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "mt-3 font-display text-3xl font-semibold leading-tight",
-						children: "Say hi →"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "mt-6 text-sm opacity-90",
-						children: "For collaborations, internships, freelance dashboards, or just to talk about data."
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute -bottom-12 -right-12 h-40 w-40 rounded-full bg-white/20 blur-2xl transition group-hover:bg-white/40" })
-				]
 			})]
-		})
+		})]
 	});
 }
 function Footer() {

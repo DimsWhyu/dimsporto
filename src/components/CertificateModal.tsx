@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 import {
   X,
@@ -8,7 +9,6 @@ import {
   ZoomOut,
   RotateCcw,
   RotateCw,
-  Download,
   Trophy,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -29,7 +29,12 @@ export function CertificateModal({ isOpen, onClose, cert }: CertificateModalProp
   const [scale, setScale] = useState(1);
   const [rotation, setRotation] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Reset controls state when cert changes or opens
   useEffect(() => {
@@ -65,7 +70,7 @@ export function CertificateModal({ isOpen, onClose, cert }: CertificateModalProp
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
 
-  if (!isOpen || !cert) return null;
+  if (!isOpen || !cert || !mounted) return null;
 
   const handleZoomIn = () => {
     setScale((prev) => Math.min(prev + 0.25, 3.5));
@@ -93,19 +98,19 @@ export function CertificateModal({ isOpen, onClose, cert }: CertificateModalProp
     }
   };
 
-  return (
+  return createPortal(
     <AnimatePresence>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
-        className="fixed inset-0 z-[10000] flex flex-col items-center justify-between bg-black/90 backdrop-blur-xl p-3 sm:p-6 select-none overflow-hidden"
+        className="fixed inset-0 z-[500000] flex flex-col items-center justify-between bg-black/90 backdrop-blur-2xl p-4 sm:p-6 select-none overflow-hidden"
         onClick={onClose}
       >
         {/* Header Bar */}
         <div
-          className="relative z-20 flex w-full max-w-5xl items-center justify-between gap-3 rounded-2xl border border-white/15 bg-white/10 p-3 sm:p-4 text-white backdrop-blur-md shadow-2xl"
+          className="relative z-20 flex w-full max-w-5xl items-center justify-between gap-3 rounded-2xl border border-white/20 bg-black/70 p-3 sm:p-4 text-white backdrop-blur-xl shadow-2xl mt-2 sm:mt-4"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex items-center gap-3 overflow-hidden">
@@ -129,22 +134,11 @@ export function CertificateModal({ isOpen, onClose, cert }: CertificateModalProp
             </div>
           </div>
 
-          {/* Action Buttons */}
+          {/* Close Button */}
           <div className="flex items-center gap-2 shrink-0">
-            <a
-              href={cert.certificateUrl}
-              download
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-xs font-medium text-white transition hover:bg-white/20 active:scale-95"
-              title="Download Certificate"
-            >
-              <Download className="h-4 w-4" />
-              <span className="hidden sm:inline">Download</span>
-            </a>
             <button
               onClick={onClose}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white transition hover:bg-red-500/30 hover:border-red-500/50 active:scale-95"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white transition hover:bg-red-500/40 hover:border-red-500/60 active:scale-95 cursor-pointer"
               title="Close (Esc)"
             >
               <X className="h-5 w-5" />
@@ -155,7 +149,7 @@ export function CertificateModal({ isOpen, onClose, cert }: CertificateModalProp
         {/* Certificate Display Area */}
         <div
           ref={containerRef}
-          className="relative z-10 flex h-full w-full max-w-6xl flex-1 items-center justify-center overflow-hidden my-3"
+          className="relative z-10 flex h-full w-full max-w-6xl flex-1 items-center justify-center overflow-hidden my-2 sm:my-4"
           onWheel={handleWheel}
           onClick={(e) => e.stopPropagation()}
         >
@@ -171,16 +165,16 @@ export function CertificateModal({ isOpen, onClose, cert }: CertificateModalProp
             }}
             transition={{ type: "spring", stiffness: 260, damping: 25 }}
             className={cn(
-              "flex items-center justify-center max-h-[75vh] max-w-[90vw] transition-cursor",
+              "flex items-center justify-center max-h-[70vh] max-w-[90vw] transition-cursor",
               scale > 1 ? (isDragging ? "cursor-grabbing" : "cursor-grab") : "cursor-default"
             )}
           >
             <img
               src={cert.certificateUrl}
               alt={cert.title}
-              className="max-h-[75vh] max-w-[90vw] object-contain rounded-lg shadow-2xl border border-white/10"
+              className="max-h-[70vh] max-w-[90vw] object-contain rounded-lg shadow-2xl border border-white/10"
               style={{
-                filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.5))",
+                filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.7))",
               }}
               draggable={false}
             />
@@ -189,13 +183,13 @@ export function CertificateModal({ isOpen, onClose, cert }: CertificateModalProp
 
         {/* Floating Zoom Controls Toolbar */}
         <div
-          className="relative z-20 flex items-center gap-2 sm:gap-3 rounded-full border border-white/20 bg-black/70 px-4 py-2 text-white backdrop-blur-xl shadow-2xl"
+          className="relative z-20 flex items-center gap-2 sm:gap-3 rounded-full border border-white/20 bg-black/80 px-4 py-2 text-white backdrop-blur-xl shadow-2xl mb-2 sm:mb-4"
           onClick={(e) => e.stopPropagation()}
         >
           <button
             onClick={handleZoomOut}
             disabled={scale <= 0.75}
-            className="flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/20 disabled:opacity-40"
+            className="flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/20 disabled:opacity-40 cursor-pointer"
             title="Zoom Out (-)"
           >
             <ZoomOut className="h-4 w-4" />
@@ -206,31 +200,29 @@ export function CertificateModal({ isOpen, onClose, cert }: CertificateModalProp
           <button
             onClick={handleZoomIn}
             disabled={scale >= 3.5}
-            className="flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/20 disabled:opacity-40"
+            className="flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/20 disabled:opacity-40 cursor-pointer"
             title="Zoom In (+)"
           >
             <ZoomIn className="h-4 w-4" />
           </button>
-
-          <div className="h-4 w-[1px] bg-white/20 mx-1" />
-
+          <div className="h-4 w-[1px] bg-white/20 my-auto" />
           <button
             onClick={handleRotate}
-            className="flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/20"
+            className="flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/20 cursor-pointer"
             title="Rotate 90°"
           >
             <RotateCw className="h-4 w-4" />
           </button>
-
           <button
             onClick={handleReset}
-            className="flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/20"
-            title="Reset Zoom (R)"
+            className="flex h-8 w-8 items-center justify-center rounded-full transition hover:bg-white/20 cursor-pointer"
+            title="Reset Zoom & Rotation"
           >
             <RotateCcw className="h-4 w-4" />
           </button>
         </div>
       </motion.div>
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

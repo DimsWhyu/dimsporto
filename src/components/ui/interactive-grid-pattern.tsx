@@ -40,8 +40,8 @@ export function InteractiveGridPattern({
 
   return (
     <svg
-      width={width * horizontal}
-      height={height * vertical}
+      width="100%"
+      height="100%"
       className={cn("absolute inset-0 h-full w-full border border-border/30", className)}
       {...props}
     >
