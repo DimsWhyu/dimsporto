@@ -6,7 +6,7 @@ import { n as clsx, t as cva } from "../_libs/class-variance-authority+clsx.mjs"
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
 import { a as motion, i as useScroll, n as useTransform, o as AnimatePresence, r as useMotionValue, t as useSpring } from "../_libs/framer-motion.mjs";
 import { t as motion$1 } from "../_libs/motion.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-RO-3BUab.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-CnjBuqI2.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var import_react_dom = require_react_dom();
@@ -1744,7 +1744,7 @@ var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder
 		]
 	});
 };
-var CV_URL = "https://drive.google.com/file/d/1mzAsEG_2YFVSqtDOvY_E7tsW3vvR-Dw4/view?usp=sharing";
+var CV_URL = "https://drive.google.com/file/d/1lxk3Cmf6FSVnzJxalyI5UBrMTdNbM2Lb/view?usp=sharing";
 var SOCIALS = {
 	instagram: "https://www.instagram.com/dwhyu.s_/",
 	linkedin: "https://www.linkedin.com/in/dimaswsaputra/",
