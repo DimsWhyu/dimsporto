@@ -58,14 +58,8 @@ export function InitialLoader({ onComplete }: { onComplete?: () => void }) {
           <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-secondary-1/20 blur-3xl animate-blob animation-delay-2000 pointer-events-none" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-accent/15 blur-3xl animate-pulse-glow pointer-events-none" />
 
-          {/* Header */}
-          <div className="relative z-10 w-full flex items-center justify-between font-mono text-xs text-muted-foreground uppercase tracking-widest">
-            <div className="flex items-center gap-2">
-              <span className="inline-block h-2 w-2 rounded-full bg-primary animate-ping" />
-              <span className="font-bold text-foreground">Dimas Portfolio 2026</span>
-            </div>
-            <span className="hidden sm:inline font-semibold">ITS / Data Science</span>
-          </div>
+          {/* Top Spacer */}
+          <div className="relative z-10 h-6 w-full" />
 
           {/* Center Shell — Instant text swap without blur or per-word transition */}
           <div className="relative z-10 flex flex-col items-center justify-center my-auto w-full max-w-5xl px-4 py-8">

@@ -6,7 +6,7 @@ import { n as clsx, t as cva } from "../_libs/class-variance-authority+clsx.mjs"
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
 import { a as motion, i as useScroll, n as useTransform, o as AnimatePresence, r as useMotionValue, t as useSpring } from "../_libs/framer-motion.mjs";
 import { t as motion$1 } from "../_libs/motion.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-CnjBuqI2.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-C-TYvFMe.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var import_react_dom = require_react_dom();
@@ -538,19 +538,7 @@ function InitialLoader({ onComplete }) {
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary/25 blur-3xl animate-blob pointer-events-none" }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-secondary-1/20 blur-3xl animate-blob animation-delay-2000 pointer-events-none" }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-accent/15 blur-3xl animate-pulse-glow pointer-events-none" }),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "relative z-10 w-full flex items-center justify-between font-mono text-xs text-muted-foreground uppercase tracking-widest",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "flex items-center gap-2",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "inline-block h-2 w-2 rounded-full bg-primary animate-ping" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						className: "font-bold text-foreground",
-						children: "Dimas Portfolio 2026"
-					})]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					className: "hidden sm:inline font-semibold",
-					children: "ITS / Data Science"
-				})]
-			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "relative z-10 h-6 w-full" }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "relative z-10 flex flex-col items-center justify-center my-auto w-full max-w-5xl px-4 py-8",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
@@ -1474,28 +1462,32 @@ var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder
 		activeIndex
 	]);
 	const getCardVariants = (index) => {
-		const baseDelay = animationOrder === "simultaneous" ? 0 : animationOrder === "staggered" ? index % 3 * .15 : .1;
+		const baseDelay = animationOrder === "simultaneous" ? 0 : animationOrder === "staggered" ? index % 3 * .12 : Math.min(index * .1, .4);
+		const isLeft = cardAlignment === "left" || cardAlignment === "alternating" && index % 2 === 0;
+		const sideX = isLeft ? -65 : 65;
 		const initialStates = {
 			fade: {
-				opacity: 0,
-				y: 30
+				x: sideX,
+				opacity: 0
 			},
 			slide: {
-				x: cardAlignment === "left" ? -50 : cardAlignment === "right" ? 50 : index % 2 === 0 ? -50 : 50,
+				x: sideX,
 				opacity: 0
 			},
 			scale: {
-				scale: .85,
-				opacity: 0
+				scale: .9,
+				opacity: 0,
+				x: sideX
 			},
 			flip: {
-				rotateY: 45,
-				opacity: 0
+				rotateY: isLeft ? -25 : 25,
+				opacity: 0,
+				x: sideX
 			},
 			none: { opacity: 1 }
 		};
 		return {
-			initial: initialStates[revealAnimation] || initialStates.fade,
+			initial: initialStates[revealAnimation] || initialStates.slide,
 			whileInView: {
 				opacity: 1,
 				y: 0,
@@ -1503,19 +1495,19 @@ var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder
 				scale: 1,
 				rotateY: 0,
 				transition: {
-					duration: .6,
+					duration: 1.15,
 					delay: baseDelay,
 					ease: [
-						.25,
-						.1,
-						.25,
+						.16,
+						1,
+						.3,
 						1
 					]
 				}
 			},
 			viewport: {
 				once: true,
-				margin: "-40px"
+				margin: "-60px"
 			}
 		};
 	};
@@ -1529,7 +1521,7 @@ var ScrollTimeline = ({ events = DEFAULT_EVENTS, title, subtitle, animationOrder
 		}
 	};
 	const getCardClasses = (index) => {
-		const baseClasses = "relative z-30 rounded-2xl transition-all duration-300";
+		const baseClasses = "relative z-30 rounded-2xl will-change-[transform,opacity]";
 		const variantClasses = {
 			default: "bg-card border border-border shadow-sm",
 			elevated: "bg-card/95 backdrop-blur-md border border-border/90 shadow-md hover:border-primary/50",
@@ -2752,7 +2744,7 @@ function Hero() {
 					className: "reveal text-center md:text-left flex flex-col items-center md:items-start order-2 md:order-1",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h1", {
-							className: "mt-2 sm:mt-4 font-display text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-extrabold leading-[1.15] md:leading-[1.1] tracking-tight text-center md:text-left",
+							className: "mt-2 sm:mt-4 font-display text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-semibold leading-[1.15] md:leading-[1.1] tracking-tight text-center md:text-left",
 							children: [
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 									className: "block",

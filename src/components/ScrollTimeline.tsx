@@ -250,29 +250,22 @@ export const ScrollTimeline = ({
       animationOrder === "simultaneous"
         ? 0
         : animationOrder === "staggered"
-        ? (index % 3) * 0.15
-        : 0.1;
+        ? (index % 3) * 0.12
+        : Math.min(index * 0.1, 0.4);
+
+    const isLeft = cardAlignment === "left" || (cardAlignment === "alternating" && index % 2 === 0);
+    const sideX = isLeft ? -65 : 65;
 
     const initialStates = {
-      fade: { opacity: 0, y: 30 },
-      slide: {
-        x:
-          cardAlignment === "left"
-            ? -50
-            : cardAlignment === "right"
-            ? 50
-            : index % 2 === 0
-            ? -50
-            : 50,
-        opacity: 0,
-      },
-      scale: { scale: 0.85, opacity: 0 },
-      flip: { rotateY: 45, opacity: 0 },
+      fade: { x: sideX, opacity: 0 },
+      slide: { x: sideX, opacity: 0 },
+      scale: { scale: 0.9, opacity: 0, x: sideX },
+      flip: { rotateY: isLeft ? -25 : 25, opacity: 0, x: sideX },
       none: { opacity: 1 },
     };
 
     return {
-      initial: initialStates[revealAnimation] || initialStates.fade,
+      initial: initialStates[revealAnimation] || initialStates.slide,
       whileInView: {
         opacity: 1,
         y: 0,
@@ -280,12 +273,12 @@ export const ScrollTimeline = ({
         scale: 1,
         rotateY: 0,
         transition: {
-          duration: 0.6,
+          duration: 1.15,
           delay: baseDelay,
-          ease: [0.25, 0.1, 0.25, 1.0] as [number, number, number, number],
+          ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
         },
       },
-      viewport: { once: true, margin: "-40px" },
+      viewport: { once: true, margin: "-60px" },
     };
   };
 
@@ -311,7 +304,7 @@ export const ScrollTimeline = ({
   };
 
   const getCardClasses = (index: number) => {
-    const baseClasses = "relative z-30 rounded-2xl transition-all duration-300";
+    const baseClasses = "relative z-30 rounded-2xl will-change-[transform,opacity]";
     const variantClasses = {
       default: "bg-card border border-border shadow-sm",
       elevated: "bg-card/95 backdrop-blur-md border border-border/90 shadow-md hover:border-primary/50",

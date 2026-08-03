@@ -1005,7 +1005,7 @@ function Hero() {
 
         {/* Text & Headline (Order 2 on mobile, Order 1 on desktop) */}
         <div className="reveal text-center md:text-left flex flex-col items-center md:items-start order-2 md:order-1">
-          <h1 className="mt-2 sm:mt-4 font-display text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-extrabold leading-[1.15] md:leading-[1.1] tracking-tight text-center md:text-left">
+          <h1 className="mt-2 sm:mt-4 font-display text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-semibold leading-[1.15] md:leading-[1.1] tracking-tight text-center md:text-left">
             <span className="block">Turning complex</span>
             <span className="block">data into</span>
             <span className="block">
