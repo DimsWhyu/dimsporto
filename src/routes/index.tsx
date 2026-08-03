@@ -45,7 +45,7 @@ export const Route = createFileRoute("/")({
   component: Portfolio,
 });
 
-const CV_URL = "https://drive.google.com/file/d/1mzAsEG_2YFVSqtDOvY_E7tsW3vvR-Dw4/view?usp=sharing";
+const CV_URL = "https://drive.google.com/file/d/1lxk3Cmf6FSVnzJxalyI5UBrMTdNbM2Lb/view?usp=sharing";
 const SOCIALS = {
   instagram: "https://www.instagram.com/dwhyu.s_/",
   linkedin: "https://www.linkedin.com/in/dimaswsaputra/",
